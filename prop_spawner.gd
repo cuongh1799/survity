@@ -34,3 +34,15 @@ func _input(event):
 		for child in get_children():
 			child.queue_free()
 		spawn_props()
+		
+		
+# THIS IS FOR TUTORIAL
+func survival_days(food_stockpile:int, no_of_people:int) -> int:
+	var day_survive = 0
+	var food_consume = 2
+	while(food_stockpile > 0):
+		if(day_survive % 3 == 0):
+			food_consume += 1
+		food_stockpile -= food_consume * no_of_people
+	return food_consume
+	

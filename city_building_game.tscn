@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dogut1n2e11pp" path="res://grass_floor/Grass005_1K-PNG_Roughness.png" id="4_ujfux"]
 [ext_resource type="PackedScene" uid="uid://b40a54drh0qpt" path="res://tree_body.tscn" id="7_ujfux"]
 [ext_resource type="PackedScene" uid="uid://c0kdngbicedir" path="res://rock_body.tscn" id="8_q4dsv"]
+[ext_resource type="Script" uid="uid://cmsuoy4l105xa" path="res://player.gd" id="10_q4dsv"]
 [ext_resource type="Script" uid="uid://bip7kmkexo4w1" path="res://prop_spawner.gd" id="11_744bo"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3jp2t"]
@@ -39,6 +40,8 @@ sky_material = SubResource("ProceduralSkyMaterial_8nkht")
 background_mode = 2
 sky = SubResource("Sky_eafes")
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_744bo"]
+
 [node name="city_building_game" type="Node3D" unique_id=813188418]
 
 [node name="FloorBody" type="StaticBody3D" parent="." unique_id=798387928]
@@ -62,7 +65,7 @@ transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70
 current = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=872824058]
-transform = Transform3D(-0.9659258, 7.196708e-09, -0.25881916, -0.06698733, 0.9659259, 0.25000003, 0.25000006, 0.25881904, -0.93301266, 138, 74, 0)
+transform = Transform3D(-0.9659258, -1.4393417e-08, -0.25881913, -0.06698733, 0.9659259, 0.24999999, 0.25000006, 0.25881904, -0.9330127, 138, 132, 0)
 shadow_enabled = true
 
 [node name="TreeBody" parent="." unique_id=1758989700 instance=ExtResource("7_ujfux")]
@@ -81,5 +84,13 @@ color = Color(1, 1, 1, 0.13725491)
 script = ExtResource("11_744bo")
 tree_scene = ExtResource("7_ujfux")
 rock_scene = ExtResource("8_q4dsv")
-spawn_count = 15
-area_size = 100.0
+spawn_count = 30
+area_size = 120.0
+
+[node name="Player" type="StaticBody3D" parent="." unique_id=184628111]
+script = ExtResource("10_q4dsv")
+
+[node name="PlayerCollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=21931927]
+shape = SubResource("CapsuleShape3D_744bo")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="Player" unique_id=21373691]
