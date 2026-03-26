@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://caln1aqtymcxd"]
+
+[ext_resource type="Script" uid="uid://bswuvns8qh814" path="res://floor_mesh.gd" id="1_li574"]
+[ext_resource type="Texture2D" uid="uid://da1n500ocl0i0" path="res://grass_floor/Grass005_1K-PNG_Color.png" id="1_xclp7"]
+[ext_resource type="Script" uid="uid://dw70ucm5opsfo" path="res://camera_node.gd" id="2_3jp2t"]
+[ext_resource type="Texture2D" uid="uid://lgcgpsconi1r" path="res://grass_floor/Grass005_1K-PNG_AmbientOcclusion.png" id="2_rj7bk"]
+[ext_resource type="Texture2D" uid="uid://dtg4yfgjwyd0t" path="res://grass_floor/Grass005_1K-PNG_NormalDX.png" id="3_dwo8u"]
+[ext_resource type="Texture2D" uid="uid://dogut1n2e11pp" path="res://grass_floor/Grass005_1K-PNG_Roughness.png" id="4_ujfux"]
+[ext_resource type="PackedScene" uid="uid://b40a54drh0qpt" path="res://tree_body.tscn" id="7_ujfux"]
+[ext_resource type="PackedScene" uid="uid://c0kdngbicedir" path="res://rock_body.tscn" id="8_q4dsv"]
+[ext_resource type="Script" uid="uid://bip7kmkexo4w1" path="res://prop_spawner.gd" id="11_744bo"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3jp2t"]
+size = Vector3(300, 0.15, 300)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_744bo"]
+albedo_texture = ExtResource("1_xclp7")
+roughness_texture = ExtResource("4_ujfux")
+normal_enabled = true
+normal_texture = ExtResource("3_dwo8u")
+ao_enabled = true
+ao_texture = ExtResource("2_rj7bk")
+uv1_scale = Vector3(50, 50, 50)
+
+[sub_resource type="BoxMesh" id="BoxMesh_eafes"]
+material = SubResource("StandardMaterial3D_744bo")
+size = Vector3(300, 0.15, 300)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8nkht"]
+sky_top_color = Color(0.4745702, 0.7086191, 1, 1)
+sky_horizon_color = Color(0.6388699, 0.6592672, 0.6620119, 1)
+ground_bottom_color = Color(0.46776998, 0.66574764, 0.9489204, 1)
+ground_horizon_color = Color(0.93035746, 0.95358616, 0.9933272, 1)
+
+[sub_resource type="Sky" id="Sky_eafes"]
+sky_material = SubResource("ProceduralSkyMaterial_8nkht")
+
+[sub_resource type="Environment" id="Environment_tv723"]
+background_mode = 2
+sky = SubResource("Sky_eafes")
+
+[node name="city_building_game" type="Node3D" unique_id=813188418]
+
+[node name="FloorBody" type="StaticBody3D" parent="." unique_id=798387928]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="FloorShape" type="CollisionShape3D" parent="FloorBody" unique_id=740101560]
+shape = SubResource("BoxShape3D_3jp2t")
+
+[node name="FloorMesh" type="MeshInstance3D" parent="FloorBody" unique_id=1535284026]
+mesh = SubResource("BoxMesh_eafes")
+script = ExtResource("1_li574")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1991621675]
+environment = SubResource("Environment_tv723")
+
+[node name="CameraNode" type="Node3D" parent="." unique_id=1591830951]
+script = ExtResource("2_3jp2t")
+
+[node name="Camera3D" type="Camera3D" parent="CameraNode" unique_id=238635267]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 20, 20)
+current = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=872824058]
+transform = Transform3D(-0.9659258, 7.196708e-09, -0.25881916, -0.06698733, 0.9659259, 0.25000003, 0.25000006, 0.25881904, -0.93301266, 138, 74, 0)
+shadow_enabled = true
+
+[node name="TreeBody" parent="." unique_id=1758989700 instance=ExtResource("7_ujfux")]
+
+[node name="RockBody" parent="." unique_id=2143327880 instance=ExtResource("8_q4dsv")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=617266598]
+
+[node name="SelectionBox" type="ColorRect" parent="CanvasLayer" unique_id=1273919934]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(1, 1, 1, 0.13725491)
+
+[node name="PropSpawner" type="Node3D" parent="." unique_id=2133982471]
+script = ExtResource("11_744bo")
+tree_scene = ExtResource("7_ujfux")
+rock_scene = ExtResource("8_q4dsv")
+spawn_count = 15
+area_size = 100.0
