@@ -1,4 +1,5 @@
 extends StaticBody3D
+class_name RockClass
 
 @onready var mesh = $RockShape/stone_tallA2 # Adjust this to match your child mesh name
 

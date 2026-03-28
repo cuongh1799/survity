@@ -1,4 +1,5 @@
 extends StaticBody3D
+class_name TreeClass
 
 #@onready var mesh = $TreeShape/tree_oak2 # Adjust this to match your child mesh name
 
