@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dlqfcj8qvla0w" path="res://scripts/rock_body.gd" id="1_fxt4g"]
 [ext_resource type="PackedScene" uid="uid://dg7g5m1h0ojnx" path="res://stone_tallA.glb" id="2_fkh77"]
+[ext_resource type="PackedScene" uid="uid://bjjdl0bjcu341" path="res://scenes/selection_visual.tscn" id="3_xp1tb"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ujfux"]
 
@@ -12,4 +13,7 @@ script = ExtResource("1_fxt4g")
 shape = SubResource("BoxShape3D_ujfux")
 
 [node name="stone_tallA2" parent="RockShape" unique_id=883018316 instance=ExtResource("2_fkh77")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 23, 0, -12)
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+
+[node name="SelectionVisual" parent="." unique_id=407129122 instance=ExtResource("3_xp1tb")]
+transform = Transform3D(20, 0, 0, 0, 20.945, 0, 0, 0, 20, 0, 9, 0)
