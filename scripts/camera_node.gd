@@ -16,10 +16,13 @@ extends Node3D
 var dragging: bool = false
 var drag_start: Vector2 = Vector2.ZERO
 var drag_end: Vector2 = Vector2.ZERO
-var drag_threshold: float = 5.0 # Pixels moved before box appears
+var drag_threshold: float = 5.0 
+
+# This array keeps track of what is currently selected
+var selected_props: Array[Node3D] = []
 
 func _unhandled_input(event: InputEvent) -> void:
-	# 1. ZOOMING (Check this first so it doesn't conflict with clicks)
+	# 1. ZOOMING
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			camera.position.y = clamp(camera.position.y - zoom_speed, min_zoom, max_zoom)
@@ -35,57 +38,83 @@ func _unhandled_input(event: InputEvent) -> void:
 		var movement = Vector3(-event.relative.x, 0, -event.relative.y) * pan_speed
 		translate(movement)
 
-	# 3. SELECTION BOX (Left Click Drag)
+	# 3. SELECTION BOX (Left Click)
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:
+			clear_selection() # Clear old highlights when starting a new box
 			dragging = true
 			drag_start = event.position
 			drag_end = event.position
 		else:
-			# If we barely moved the mouse, treat it as a single click delete
+			# If we barely moved, it's a single click delete
 			if drag_start.distance_to(event.position) < drag_threshold:
 				raycast_delete(event.position)
-			#else:
-				#delete_selected_props()
+			else:
+				# Otherwise, finalize the box selection
+				confirm_selection()
 			
-			# Reset everything on release
 			dragging = false
 			selection_box.visible = false
-			selection_box.size = Vector2.ZERO
 
-	# 4. DRAWING THE BOX
+	# 4. DRAWING THE BOX (While dragging)
 	if event is InputEventMouseMotion and dragging:
 		drag_end = event.position
 		update_selection_box()
 
+	# 5. DELETE KEY (Pressing Delete on Keyboard)
+	if event is InputEventKey and event.pressed:
+		if event.keycode == KEY_DELETE:
+			delete_selected_props()
+
 func update_selection_box() -> void:
-	# Only show box if we've moved past the threshold
 	if drag_start.distance_to(drag_end) > drag_threshold:
 		selection_box.visible = true
+		# Calculate UI Rect
 		var pos = Vector2(min(drag_start.x, drag_end.x), min(drag_start.y, drag_end.y))
 		var size = (drag_start - drag_end).abs()
-		selection_box.position = pos
+		selection_box.global_position = pos
 		selection_box.size = size
 		
-		# Optional: Highlight items while dragging
+		# Live highlight while dragging
 		highlight_items_in_rect(Rect2(pos, size))
 
 func highlight_items_in_rect(rect: Rect2) -> void:
 	for prop in get_tree().get_nodes_in_group("props"):
 		if prop is Node3D:
+			# Don't highlight things behind the camera
+			if camera.is_position_behind(prop.global_position):
+				continue
+				
 			var screen_pos = camera.unproject_position(prop.global_position)
 			if rect.has_point(screen_pos):
 				if prop.has_method("set_highlight"): prop.set_highlight(true)
 			else:
 				if prop.has_method("set_highlight"): prop.set_highlight(false)
 
+func confirm_selection() -> void:
+	var rect = Rect2(selection_box.global_position, selection_box.size)
+	selected_props.clear()
+	
+	for prop in get_tree().get_nodes_in_group("props"):
+		if prop is Node3D:
+			if camera.is_position_behind(prop.global_position): continue
+			
+			var screen_pos = camera.unproject_position(prop.global_position)
+			if rect.has_point(screen_pos):
+				selected_props.append(prop)
+				if prop.has_method("set_highlight"): prop.set_highlight(true)
+
+func clear_selection() -> void:
+	for prop in selected_props:
+		if is_instance_valid(prop) and prop.has_method("set_highlight"):
+			prop.set_highlight(false)
+	selected_props.clear()
+
 func delete_selected_props() -> void:
-	var rect = Rect2(selection_box.position, selection_box.size)
-	#for prop in get_tree().get_nodes_in_group("props"):
-		#if prop is Node3D:
-			#var screen_pos = camera.unproject_position(prop.global_position)
-			#if rect.has_point(screen_pos):
-				#prop.queue_free()
+	for prop in selected_props:
+		if is_instance_valid(prop):
+			prop.queue_free()
+	selected_props.clear()
 
 func raycast_delete(mouse_pos: Vector2) -> void:
 	var ray_length = 1000
@@ -97,5 +126,6 @@ func raycast_delete(mouse_pos: Vector2) -> void:
 	
 	if result:
 		var hit_object = result.collider
-		if hit_object.is_in_group("props"):
+		# Check the object itself or its owner for the group
+		if hit_object.is_in_group("props") or hit_object.get_owner().is_in_group("props"):
 			hit_object.queue_free()
