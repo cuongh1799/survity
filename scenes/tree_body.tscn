@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://b40a54drh0qpt"]
 
-[ext_resource type="Script" uid="uid://bs55sjs22imqt" path="res://tree_body.gd" id="1_71mr4"]
+[ext_resource type="Script" uid="uid://6c5ubcbjwvtu" path="res://scripts/tree_body.gd" id="1_wrr8w"]
 [ext_resource type="PackedScene" uid="uid://bl6dwgku2hlq5" path="res://tree_oak.glb" id="2_550vs"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_dwo8u"]
 
 [node name="TreeBody" type="StaticBody3D" unique_id=1758989700 groups=["props"]]
-script = ExtResource("1_71mr4")
+script = ExtResource("1_wrr8w")
 
 [node name="TreeShape" type="CollisionShape3D" parent="." unique_id=183238762]
 shape = SubResource("CylinderShape3D_dwo8u")

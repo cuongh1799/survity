@@ -1,16 +1,15 @@
-[gd_scene format=3 uid="uid://cff6jmaiu6llg"]
+[gd_scene format=3 uid="uid://caln1aqtymcxd"]
 
-[ext_resource type="Script" uid="uid://cvc0nat3hrtdb" path="res://scripts/camera_node.gd" id="1_744bo"]
+[ext_resource type="Script" uid="uid://cvc0nat3hrtdb" path="res://scripts/camera_node.gd" id="1_15bo5"]
 [ext_resource type="Texture2D" uid="uid://da1n500ocl0i0" path="res://grass_floor/Grass005_1K-PNG_Color.png" id="1_xclp7"]
+[ext_resource type="Script" uid="uid://c2yvc6pfy7w05" path="res://scripts/game_camera.gd" id="2_35k36"]
 [ext_resource type="Texture2D" uid="uid://lgcgpsconi1r" path="res://grass_floor/Grass005_1K-PNG_AmbientOcclusion.png" id="2_rj7bk"]
-[ext_resource type="Script" uid="uid://38mkp5tlww8m" path="res://scripts/prop_spawner.gd" id="2_t26vk"]
 [ext_resource type="Texture2D" uid="uid://dtg4yfgjwyd0t" path="res://grass_floor/Grass005_1K-PNG_NormalDX.png" id="3_dwo8u"]
+[ext_resource type="Script" uid="uid://38mkp5tlww8m" path="res://scripts/prop_spawner.gd" id="3_jrpe6"]
 [ext_resource type="Texture2D" uid="uid://dogut1n2e11pp" path="res://grass_floor/Grass005_1K-PNG_Roughness.png" id="4_ujfux"]
-[ext_resource type="Script" uid="uid://dbxqd0slm882q" path="res://scripts/player.gd" id="5_cytlk"]
-[ext_resource type="PackedScene" path="res://tree_body.tscn" id="7_ujfux"]
-[ext_resource type="PackedScene" path="res://rock_body.tscn" id="8_q4dsv"]
-[ext_resource type="Script" uid="uid://dtvpsrplqjnt0" path="res://scripts/floor_mesh.gd" id="11_lkavs"]
-[ext_resource type="PackedScene" path="res://click_indicator.tscn" id="11_t26vk"]
+[ext_resource type="Script" uid="uid://dtvpsrplqjnt0" path="res://scripts/floor_mesh.gd" id="5_4uwmp"]
+[ext_resource type="PackedScene" uid="uid://b40a54drh0qpt" path="res://scenes/tree_body.tscn" id="7_ujfux"]
+[ext_resource type="PackedScene" uid="uid://c0kdngbicedir" path="res://scenes/rock_body.tscn" id="8_q4dsv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8nkht"]
 sky_top_color = Color(0.4745702, 0.7086191, 1, 1)
@@ -25,18 +24,6 @@ sky_material = SubResource("ProceduralSkyMaterial_8nkht")
 background_mode = 2
 sky = SubResource("Sky_eafes")
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_744bo"]
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_744bo"]
-height = 1.0
-
-[sub_resource type="NavigationMesh" id="NavigationMesh_744bo"]
-vertices = PackedVector3Array(-149.5, -0.57500005, -149.5, -149.5, -0.57500005, 149.5, 149.5, -0.57500005, 149.5, 149.5, -0.57500005, -149.5)
-polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_3jp2t"]
-size = Vector3(300, 0.15, 300)
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_744bo"]
 albedo_texture = ExtResource("1_xclp7")
 roughness_texture = ExtResource("4_ujfux")
@@ -50,17 +37,21 @@ uv1_scale = Vector3(50, 50, 50)
 material = SubResource("StandardMaterial3D_744bo")
 size = Vector3(300, 0.15, 300)
 
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_jegvk"]
+data = PackedVector3Array(-150, 0.074999996, 150, 150, 0.074999996, 150, -150, -0.074999996, 150, 150, 0.074999996, 150, 150, -0.074999996, 150, -150, -0.074999996, 150, 150, 0.074999996, -150, -150, 0.074999996, -150, 150, -0.074999996, -150, -150, 0.074999996, -150, -150, -0.074999996, -150, 150, -0.074999996, -150, 150, 0.074999996, 150, 150, 0.074999996, -150, 150, -0.074999996, 150, 150, 0.074999996, -150, 150, -0.074999996, -150, 150, -0.074999996, 150, -150, 0.074999996, -150, -150, 0.074999996, 150, -150, -0.074999996, -150, -150, 0.074999996, 150, -150, -0.074999996, 150, -150, -0.074999996, -150, 150, 0.074999996, 150, -150, 0.074999996, 150, 150, 0.074999996, -150, -150, 0.074999996, 150, -150, 0.074999996, -150, 150, 0.074999996, -150, -150, -0.074999996, 150, 150, -0.074999996, 150, -150, -0.074999996, -150, 150, -0.074999996, 150, 150, -0.074999996, -150, -150, -0.074999996, -150)
+
 [node name="city_building_game" type="Node3D" unique_id=813188418]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1991621675]
 environment = SubResource("Environment_tv723")
 
 [node name="CameraNode" type="Node3D" parent="." unique_id=1591830951]
-script = ExtResource("1_744bo")
+script = ExtResource("1_15bo5")
 
 [node name="Camera3D" type="Camera3D" parent="CameraNode" unique_id=238635267]
 transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 20, 20)
 current = true
+script = ExtResource("2_35k36")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=872824058]
 transform = Transform3D(-0.9659258, -1.4393417e-08, -0.25881913, -0.06698733, 0.9659259, 0.24999999, 0.25000006, 0.25881904, -0.9330127, 138, 132, 0)
@@ -75,37 +66,16 @@ offset_bottom = 40.0
 color = Color(1, 1, 1, 0.13725491)
 
 [node name="PropSpawner" type="Node3D" parent="." unique_id=2133982471]
-script = ExtResource("2_t26vk")
+script = ExtResource("3_jrpe6")
 tree_scene = ExtResource("7_ujfux")
 rock_scene = ExtResource("8_q4dsv")
-spawn_count = 0
-area_size = 99.355
 
-[node name="Player" type="CharacterBody3D" parent="." unique_id=1957180781]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70, 0.8, -27)
-wall_min_slide_angle = 0.0
-script = ExtResource("5_cytlk")
-speed = 15.0
-click_effect_scene = ExtResource("11_t26vk")
-
-[node name="PlayerCollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=21931927]
-shape = SubResource("CapsuleShape3D_744bo")
-
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="Player" unique_id=21373691]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=1882405600]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -8, 10, 0)
-mesh = SubResource("CylinderMesh_744bo")
-
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1644817921]
-navigation_mesh = SubResource("NavigationMesh_744bo")
-
-[node name="FloorBody" type="StaticBody3D" parent="NavigationRegion3D" unique_id=798387928]
+[node name="FloorBody" type="StaticBody3D" parent="." unique_id=798387928]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 
-[node name="FloorShape" type="CollisionShape3D" parent="NavigationRegion3D/FloorBody" unique_id=740101560]
-shape = SubResource("BoxShape3D_3jp2t")
-
-[node name="FloorMesh" type="MeshInstance3D" parent="NavigationRegion3D/FloorBody" unique_id=1535284026]
+[node name="FloorMesh" type="MeshInstance3D" parent="FloorBody" unique_id=1535284026]
 mesh = SubResource("BoxMesh_eafes")
-script = ExtResource("11_lkavs")
+script = ExtResource("5_4uwmp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FloorBody" unique_id=500204701]
+shape = SubResource("ConcavePolygonShape3D_jegvk")

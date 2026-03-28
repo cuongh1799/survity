@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://c0kdngbicedir"]
 
-[ext_resource type="Script" uid="uid://b12nd1lkqb3m" path="res://rock_body.gd" id="1_4g4xr"]
+[ext_resource type="Script" uid="uid://dlqfcj8qvla0w" path="res://scripts/rock_body.gd" id="1_fxt4g"]
 [ext_resource type="PackedScene" uid="uid://dg7g5m1h0ojnx" path="res://stone_tallA.glb" id="2_fkh77"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ujfux"]
 
 [node name="RockBody" type="StaticBody3D" unique_id=2143327880 groups=["props"]]
-script = ExtResource("1_4g4xr")
+script = ExtResource("1_fxt4g")
 
 [node name="RockShape" type="CollisionShape3D" parent="." unique_id=522760286]
 shape = SubResource("BoxShape3D_ujfux")
