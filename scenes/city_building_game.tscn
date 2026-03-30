@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://c2yvc6pfy7w05" path="res://scripts/game_camera.gd" id="2_35k36"]
 [ext_resource type="Texture2D" uid="uid://lgcgpsconi1r" path="res://grass_floor/Grass005_1K-PNG_AmbientOcclusion.png" id="2_rj7bk"]
 [ext_resource type="Texture2D" uid="uid://dtg4yfgjwyd0t" path="res://grass_floor/Grass005_1K-PNG_NormalDX.png" id="3_dwo8u"]
+[ext_resource type="Script" uid="uid://egus0nlclyhs" path="res://scenes/shop_ui.gd" id="3_gpoqn"]
 [ext_resource type="Script" uid="uid://38mkp5tlww8m" path="res://scripts/prop_spawner.gd" id="3_jrpe6"]
 [ext_resource type="Texture2D" uid="uid://dogut1n2e11pp" path="res://grass_floor/Grass005_1K-PNG_Roughness.png" id="4_ujfux"]
 [ext_resource type="Script" uid="uid://dtvpsrplqjnt0" path="res://scripts/floor_mesh.gd" id="5_4uwmp"]
@@ -32,6 +33,9 @@ font_size = 30
 
 [sub_resource type="LabelSettings" id="LabelSettings_mnokt"]
 font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_rsucf"]
+font_size = 50
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_744bo"]
 albedo_texture = ExtResource("1_xclp7")
@@ -103,6 +107,47 @@ offset_bottom = 131.0
 text = "Budget: $0"
 label_settings = SubResource("LabelSettings_mnokt")
 
+[node name="ShopUI" type="Control" parent="CanvasLayer" unique_id=1151587594]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 5.0
+offset_top = 776.0
+offset_right = 405.0
+offset_bottom = 1076.0
+script = ExtResource("3_gpoqn")
+
+[node name="ShopButton" type="Button" parent="CanvasLayer/ShopUI" unique_id=1839595508]
+layout_mode = 0
+offset_right = 400.0
+offset_bottom = 300.0
+
+[node name="ShopLabel" type="Label" parent="CanvasLayer/ShopUI" unique_id=1092992470]
+layout_mode = 0
+offset_right = 179.0
+offset_bottom = 95.0
+text = "SHOP"
+label_settings = SubResource("LabelSettings_rsucf")
+
+[node name="ShopPanel" type="Panel" parent="CanvasLayer/ShopUI" unique_id=783887283]
+layout_mode = 0
+offset_left = 389.0
+offset_top = -604.0
+offset_right = 1630.0
+offset_bottom = 67.0
+
+[node name="CloseShopButton" type="Button" parent="CanvasLayer/ShopUI/ShopPanel" unique_id=1998175648]
+layout_mode = 0
+offset_left = 1123.0
+offset_top = 3.0
+offset_right = 1235.0
+offset_bottom = 84.0
+
+[node name="Label" type="Label" parent="CanvasLayer/ShopUI/ShopPanel/CloseShopButton" unique_id=2045288711]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "CLOSE"
+
 [node name="PropSpawner" type="Node3D" parent="." unique_id=2133982471]
 script = ExtResource("3_jrpe6")
 tree_scene = ExtResource("7_ujfux")
@@ -119,3 +164,6 @@ script = ExtResource("5_4uwmp")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FloorBody" unique_id=500204701]
 shape = SubResource("ConcavePolygonShape3D_jegvk")
+
+[connection signal="pressed" from="CanvasLayer/ShopUI/ShopButton" to="CanvasLayer/ShopUI" method="_on_shop_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/ShopUI/ShopPanel/CloseShopButton" to="CanvasLayer/ShopUI" method="_on_close_shop_button_pressed"]
