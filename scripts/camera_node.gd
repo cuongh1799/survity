@@ -10,16 +10,24 @@ extends Node3D
 @export var selection_box_path: NodePath
 @export var selection_label_path: NodePath
 @export var removal_label_path: NodePath
+@export var budget_label_path: NodePath
+
+@export_group("Player Info")
+@export var player_budget: float = 1000.0
 
 @onready var camera = $Camera3D
 @onready var selection_box = get_node(selection_box_path)
 @onready var selection_label = get_node(selection_label_path)
 @onready var removal_label = get_node(removal_label_path)
+@onready var budget_label = get_node(budget_label_path)
 
 var dragging: bool = false
 var drag_start: Vector2 = Vector2.ZERO
 var drag_threshold: float = 5.0
 var selected_props: Array[Node3D] = []
+
+func _ready() -> void:
+	update_budget_ui()
 
 func _unhandled_input(event: InputEvent) -> void:
 	# 1. Zoom Logic
@@ -53,8 +61,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and dragging:
 		update_selection_box(event.position)
 
-	# 5. Delete Action
-	if event.is_action_pressed("ui_text_delete") or (event is InputEventKey and event.keycode == KEY_DELETE):
+	# 5. Delete Action (Delete Key)
+	if event.is_action_pressed("ui_text_delete") or (event is InputEventKey and event.is_pressed() and event.keycode == KEY_DELETE):
 		delete_selected_props()
 
 func update_selection_box(drag_end: Vector2) -> void:
@@ -90,11 +98,7 @@ func confirm_selection() -> void:
 func calculate_stats(list: Array[Node3D]) -> void:
 	var price = 0
 	for prop in list:
-		# Using if/elif is safer and avoids the match constant error
-		if prop is TreeClass:
-			price += 2
-		elif prop is RockClass:
-			price += 1
+		price += get_prop_cost(prop)
 	
 	if selection_label: 
 		selection_label.text = "Selected: " + str(list.size())
@@ -108,10 +112,17 @@ func clear_selection() -> void:
 	calculate_stats([])
 
 func delete_selected_props() -> void:
+	var total_cost = 0.0
+	
 	for prop in selected_props:
-		if is_instance_valid(prop): prop.queue_free()
+		if is_instance_valid(prop):
+			total_cost += get_prop_cost(prop)
+			prop.queue_free()
+	
+	player_budget -= total_cost
 	selected_props.clear()
 	calculate_stats([])
+	update_budget_ui()
 
 func raycast_delete(mouse_pos: Vector2) -> void:
 	var from = camera.project_ray_origin(mouse_pos)
@@ -119,5 +130,24 @@ func raycast_delete(mouse_pos: Vector2) -> void:
 	var query = PhysicsRayQueryParameters3D.create(from, to)
 	var result = get_world_3d().direct_space_state.intersect_ray(query)
 	
-	if result and (result.collider.is_in_group("props") or result.collider.get_owner().is_in_group("props")):
-		result.collider.queue_free()
+	if result:
+		var target = result.collider
+		# Check if collider or owner is in 'props' group
+		if not target.is_in_group("props") and target.get_owner() and target.get_owner().is_in_group("props"):
+			target = target.get_owner()
+			
+		if target.is_in_group("props"):
+			player_budget -= get_prop_cost(target)
+			target.queue_free()
+			update_budget_ui()
+
+func get_prop_cost(prop: Node3D) -> float:
+	if prop is TreeClass:
+		return 2.0
+	elif prop is RockClass:
+		return 1.0
+	return 0.0
+
+func update_budget_ui() -> void:
+	if budget_label:
+		budget_label.text = "Budget: $" + str(player_budget)

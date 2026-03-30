@@ -30,6 +30,9 @@ font_size = 30
 [sub_resource type="LabelSettings" id="LabelSettings_gpoqn"]
 font_size = 30
 
+[sub_resource type="LabelSettings" id="LabelSettings_mnokt"]
+font_size = 30
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_744bo"]
 albedo_texture = ExtResource("1_xclp7")
 roughness_texture = ExtResource("4_ujfux")
@@ -56,6 +59,7 @@ script = ExtResource("1_15bo5")
 selection_box_path = NodePath("../CanvasLayer/SelectionBox")
 selection_label_path = NodePath("../CanvasLayer/SelectionCount")
 removal_label_path = NodePath("../CanvasLayer/RemovalCost")
+budget_label_path = NodePath("../CanvasLayer/BudgetLabel")
 
 [node name="Camera3D" type="Camera3D" parent="CameraNode" unique_id=238635267]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.8660253, 0, -0.8660253, 0.5, 0, 20, 20)
@@ -87,9 +91,17 @@ offset_left = 7.0
 offset_top = 51.0
 offset_right = 260.0
 offset_bottom = 105.0
-text = "Removal Cost: 0
+text = "Removal Cost: $0
 "
 label_settings = SubResource("LabelSettings_gpoqn")
+
+[node name="BudgetLabel" type="Label" parent="CanvasLayer" unique_id=1883416583]
+offset_left = 12.0
+offset_top = 108.0
+offset_right = 76.0
+offset_bottom = 131.0
+text = "Budget: $0"
+label_settings = SubResource("LabelSettings_mnokt")
 
 [node name="PropSpawner" type="Node3D" parent="." unique_id=2133982471]
 script = ExtResource("3_jrpe6")
