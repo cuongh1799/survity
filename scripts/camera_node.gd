@@ -4,7 +4,7 @@ extends Node3D
 @export var pan_speed: float = 0.05
 @export var zoom_speed: float = 2.0
 @export var min_zoom: float = 5.0
-@export var max_zoom: float = 100.0
+@export var max_zoom: float = 300.0
 
 @export_group("UI Nodes")
 @export var selection_box_path: NodePath
@@ -146,6 +146,8 @@ func get_prop_cost(prop: Node3D) -> float:
 		return 2.0
 	elif prop is RockClass:
 		return 1.0
+	elif prop is TreeClass2:
+		return 2.0
 	return 0.0
 
 func update_budget_ui() -> void:
