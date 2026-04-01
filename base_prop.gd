@@ -44,26 +44,6 @@ func _ready():
 	
 	if selection_visual:
 		selection_visual.visible = false
-		# We wait until the end of the frame to make sure the mesh is fully loaded
-# 		setup_selection_box.call_deferred()
-
-# func setup_selection_box():
-# 	# Safety check: if there is no mesh, we can't calculate a box
-# 	if not mesh_instance or not mesh_instance.mesh:
-# 		return
-		
-# 	# 1. Get the AABB (The total rectangular area the mesh occupies)
-# 	var aabb: AABB = mesh_instance.get_aabb()
-	
-# 	# 2. Scale the SelectionVisual to match the AABB size
-# 	# We multiply by 1.02 to give it a tiny bit of "breathing room" 
-# 	# so the yellow lines don't touch the leaves directly.
-# 	selection_visual.scale = aabb.size * 1.02
-	
-# 	# 3. Align the SelectionVisual to the center of that volume
-# 	# This fixes the "floating" issue by moving the box from the floor (0,0,0)
-# 	# to the actual physical center of the tree/object.
-# 	selection_visual.position = mesh_instance.position + aabb.get_center()
 
 func set_highlight(active: bool):
 	if selection_visual:

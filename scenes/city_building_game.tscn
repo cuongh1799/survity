@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cvc0nat3hrtdb" path="res://scripts/camera_node.gd" id="1_15bo5"]
 [ext_resource type="Texture2D" uid="uid://da1n500ocl0i0" path="res://grass_floor/Grass005_1K-PNG_Color.png" id="1_xclp7"]
 [ext_resource type="Script" uid="uid://c2yvc6pfy7w05" path="res://scripts/game_camera.gd" id="2_35k36"]
+[ext_resource type="PackedScene" uid="uid://d2j2l5iyunhne" path="res://scenes/building_scene.tscn" id="2_mnokt"]
 [ext_resource type="Texture2D" uid="uid://lgcgpsconi1r" path="res://grass_floor/Grass005_1K-PNG_AmbientOcclusion.png" id="2_rj7bk"]
 [ext_resource type="Texture2D" uid="uid://dtg4yfgjwyd0t" path="res://grass_floor/Grass005_1K-PNG_NormalDX.png" id="3_dwo8u"]
 [ext_resource type="Script" uid="uid://egus0nlclyhs" path="res://scenes/shop_ui.gd" id="3_gpoqn"]
@@ -50,8 +51,8 @@ uv1_scale = Vector3(50, 50, 50)
 material = SubResource("StandardMaterial3D_744bo")
 size = Vector3(1000, 0.15, 1000)
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_jegvk"]
-data = PackedVector3Array(-150, 0.074999996, 150, 150, 0.074999996, 150, -150, -0.074999996, 150, 150, 0.074999996, 150, 150, -0.074999996, 150, -150, -0.074999996, 150, 150, 0.074999996, -150, -150, 0.074999996, -150, 150, -0.074999996, -150, -150, 0.074999996, -150, -150, -0.074999996, -150, 150, -0.074999996, -150, 150, 0.074999996, 150, 150, 0.074999996, -150, 150, -0.074999996, 150, 150, 0.074999996, -150, 150, -0.074999996, -150, 150, -0.074999996, 150, -150, 0.074999996, -150, -150, 0.074999996, 150, -150, -0.074999996, -150, -150, 0.074999996, 150, -150, -0.074999996, 150, -150, -0.074999996, -150, 150, 0.074999996, 150, -150, 0.074999996, 150, 150, 0.074999996, -150, -150, 0.074999996, 150, -150, 0.074999996, -150, 150, 0.074999996, -150, -150, -0.074999996, 150, 150, -0.074999996, 150, -150, -0.074999996, -150, 150, -0.074999996, 150, 150, -0.074999996, -150, -150, -0.074999996, -150)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_gpoqn"]
+points = PackedVector3Array(507.9365, 7.8615084, 507.9365, -507.9365, -8.011508, -507.9365, -507.9365, 7.8615084, -507.9365, 507.9365, -8.011508, -507.9365, -507.9365, -8.011508, 507.9365, -507.9365, 7.8615084, 507.9365, 507.9365, 7.8615084, -507.9365, 507.9365, -8.011508, 507.9365)
 
 [node name="city_building_game" type="Node3D" unique_id=813188418]
 
@@ -64,6 +65,8 @@ selection_box_path = NodePath("../CanvasLayer/SelectionBox")
 selection_label_path = NodePath("../CanvasLayer/SelectionCount")
 removal_label_path = NodePath("../CanvasLayer/RemovalCost")
 budget_label_path = NodePath("../CanvasLayer/BudgetLabel")
+coords_label_path = NodePath("../CanvasLayer/CoordsLabel")
+test_spawn = ExtResource("2_mnokt")
 
 [node name="Camera3D" type="Camera3D" parent="CameraNode" unique_id=238635267]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.8660253, 0, -0.8660253, 0.5, 0, 20, 20)
@@ -151,6 +154,15 @@ offset_right = 40.0
 offset_bottom = 23.0
 text = "CLOSE"
 
+[node name="CoordsLabel" type="Label" parent="CanvasLayer" unique_id=1306763300]
+offset_left = 1433.0
+offset_top = 6.0
+offset_right = 1595.0
+offset_bottom = 82.0
+text = "X: 
+Y:
+Z:"
+
 [node name="PropSpawner" type="Node3D" parent="." unique_id=2133982471]
 script = ExtResource("3_jrpe6")
 tree_scenes = Array[PackedScene]([ExtResource("5_gpoqn")])
@@ -164,8 +176,8 @@ area_size = 300.0
 mesh = SubResource("BoxMesh_eafes")
 script = ExtResource("5_4uwmp")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="FloorBody" unique_id=500204701]
-shape = SubResource("ConcavePolygonShape3D_jegvk")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FloorBody" unique_id=1306689345]
+shape = SubResource("ConvexPolygonShape3D_gpoqn")
 
 [connection signal="pressed" from="CanvasLayer/ShopUI/ShopButton" to="CanvasLayer/ShopUI" method="_on_shop_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/ShopUI/ShopPanel/CloseShopButton" to="CanvasLayer/ShopUI" method="_on_close_shop_button_pressed"]
