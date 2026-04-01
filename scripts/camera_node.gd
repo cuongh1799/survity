@@ -24,7 +24,7 @@ extends Node3D
 var dragging: bool = false
 var drag_start: Vector2 = Vector2.ZERO
 var drag_threshold: float = 5.0
-var selected_props: Array[Node3D] = []
+var selected_props: Array[Prop] = [] # Typed to our new class
 
 func _ready() -> void:
 	update_budget_ui()
@@ -75,9 +75,9 @@ func update_selection_box(drag_end: Vector2) -> void:
 		highlight_items_in_rect(Rect2(pos, size))
 
 func highlight_items_in_rect(rect: Rect2) -> void:
-	var current_hovered: Array[Node3D] = []
+	var current_hovered: Array[Prop] = []
 	for prop in get_tree().get_nodes_in_group("props"):
-		if prop is Node3D and not camera.is_position_behind(prop.global_position):
+		if prop is Prop and not camera.is_position_behind(prop.global_position):
 			var screen_pos = camera.unproject_position(prop.global_position)
 			var is_inside = rect.has_point(screen_pos)
 			prop.set_highlight(is_inside)
@@ -89,16 +89,16 @@ func confirm_selection() -> void:
 	selected_props.clear()
 	var rect = Rect2(selection_box.global_position, selection_box.size)
 	for prop in get_tree().get_nodes_in_group("props"):
-		if prop is Node3D and not camera.is_position_behind(prop.global_position):
+		if prop is Prop and not camera.is_position_behind(prop.global_position):
 			if rect.has_point(camera.unproject_position(prop.global_position)):
 				selected_props.append(prop)
 				prop.set_highlight(true)
 	calculate_stats(selected_props)
 
-func calculate_stats(list: Array[Node3D]) -> void:
-	var price = 0
+func calculate_stats(list: Array[Prop]) -> void:
+	var price = 0.0
 	for prop in list:
-		price += get_prop_cost(prop)
+		price += prop.cost
 	
 	if selection_label: 
 		selection_label.text = "Selected: " + str(list.size())
@@ -107,16 +107,16 @@ func calculate_stats(list: Array[Node3D]) -> void:
 
 func clear_selection() -> void:
 	for prop in selected_props:
-		if is_instance_valid(prop): prop.set_highlight(false)
+		if is_instance_valid(prop): 
+			prop.set_highlight(false)
 	selected_props.clear()
 	calculate_stats([])
 
 func delete_selected_props() -> void:
 	var total_cost = 0.0
-	
 	for prop in selected_props:
 		if is_instance_valid(prop):
-			total_cost += get_prop_cost(prop)
+			total_cost += prop.cost
 			prop.queue_free()
 	
 	player_budget -= total_cost
@@ -132,23 +132,13 @@ func raycast_delete(mouse_pos: Vector2) -> void:
 	
 	if result:
 		var target = result.collider
-		# Check if collider or owner is in 'props' group
-		if not target.is_in_group("props") and target.get_owner() and target.get_owner().is_in_group("props"):
-			target = target.get_owner()
-			
-		if target.is_in_group("props"):
-			player_budget -= get_prop_cost(target)
-			target.queue_free()
+		# Check if the object hit (or its parent) is a Prop
+		var prop_node = target if target is Prop else target.get_parent()
+		
+		if prop_node is Prop:
+			player_budget -= prop_node.cost
+			prop_node.queue_free()
 			update_budget_ui()
-
-func get_prop_cost(prop: Node3D) -> float:
-	if prop is TreeClass:
-		return 2.0
-	elif prop is RockClass:
-		return 1.0
-	elif prop is TreeClass2:
-		return 2.0
-	return 0.0
 
 func update_budget_ui() -> void:
 	if budget_label:

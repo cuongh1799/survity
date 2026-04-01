@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://duxak6wf4n284"]
+
+[ext_resource type="PackedScene" uid="uid://3jmo64dlvn5m" path="res://scenes/base_prop.tscn" id="1_c5bxk"]
+[ext_resource type="ArrayMesh" uid="uid://daroxu6igr5x1" path="res://tres/rock.res" id="2_nvplc"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_55c1o"]
+
+[node name="rockScene" unique_id=1629872540 instance=ExtResource("1_c5bxk")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+cost = 2.0
+
+[node name="MeshInstance3D" parent="." index="0" unique_id=1077949620]
+mesh = ExtResource("2_nvplc")
+
+[node name="CollisionShape3D" parent="." index="1" unique_id=1411538431]
+shape = SubResource("BoxShape3D_55c1o")
+
+[node name="SelectionVisual" parent="." index="2" unique_id=407129122]
+transform = Transform3D(1.085, 0, 0, 0, 1.302, 0, 0, 0, 1, 0, 0.6, 0)

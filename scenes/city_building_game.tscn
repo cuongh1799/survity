@@ -9,9 +9,8 @@
 [ext_resource type="Script" uid="uid://38mkp5tlww8m" path="res://scripts/prop_spawner.gd" id="3_jrpe6"]
 [ext_resource type="Texture2D" uid="uid://dogut1n2e11pp" path="res://grass_floor/Grass005_1K-PNG_Roughness.png" id="4_ujfux"]
 [ext_resource type="Script" uid="uid://dtvpsrplqjnt0" path="res://scripts/floor_mesh.gd" id="5_4uwmp"]
-[ext_resource type="PackedScene" uid="uid://b40a54drh0qpt" path="res://scenes/tree_body.tscn" id="7_ujfux"]
-[ext_resource type="PackedScene" uid="uid://c0kdngbicedir" path="res://scenes/rock_body.tscn" id="8_q4dsv"]
-[ext_resource type="PackedScene" uid="uid://be567hdyle2r7" path="res://scenes/tree_body_2.tscn" id="12_mnokt"]
+[ext_resource type="PackedScene" uid="uid://jkjc46o7w3vh" path="res://scenes/tree_scene.tscn" id="5_gpoqn"]
+[ext_resource type="PackedScene" uid="uid://duxak6wf4n284" path="res://scenes/rock_scene.tscn" id="5_jegvk"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8nkht"]
 sky_top_color = Color(0.4745702, 0.7086191, 1, 1)
@@ -119,13 +118,16 @@ script = ExtResource("3_gpoqn")
 
 [node name="ShopButton" type="Button" parent="CanvasLayer/ShopUI" unique_id=1839595508]
 layout_mode = 0
-offset_right = 400.0
-offset_bottom = 300.0
+offset_top = -58.0
+offset_right = 273.0
+offset_bottom = 170.0
 
 [node name="ShopLabel" type="Label" parent="CanvasLayer/ShopUI" unique_id=1092992470]
 layout_mode = 0
-offset_right = 179.0
-offset_bottom = 95.0
+offset_left = 49.0
+offset_top = 22.0
+offset_right = 228.0
+offset_bottom = 117.0
 text = "SHOP"
 label_settings = SubResource("LabelSettings_rsucf")
 
@@ -151,13 +153,12 @@ text = "CLOSE"
 
 [node name="PropSpawner" type="Node3D" parent="." unique_id=2133982471]
 script = ExtResource("3_jrpe6")
-tree_scenes = Array[PackedScene]([ExtResource("7_ujfux"), ExtResource("12_mnokt")])
-rock_scenes = Array[PackedScene]([ExtResource("8_q4dsv")])
+tree_scenes = Array[PackedScene]([ExtResource("5_gpoqn")])
+rock_scenes = Array[PackedScene]([ExtResource("5_jegvk")])
 spawn_count = 1000
-area_size = 500.0
+area_size = 300.0
 
 [node name="FloorBody" type="StaticBody3D" parent="." unique_id=798387928]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 
 [node name="FloorMesh" type="MeshInstance3D" parent="FloorBody" unique_id=1535284026]
 mesh = SubResource("BoxMesh_eafes")
@@ -165,9 +166,6 @@ script = ExtResource("5_4uwmp")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FloorBody" unique_id=500204701]
 shape = SubResource("ConcavePolygonShape3D_jegvk")
-
-[node name="TreeBody2" parent="." unique_id=1520021799 instance=ExtResource("12_mnokt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 6, -3)
 
 [connection signal="pressed" from="CanvasLayer/ShopUI/ShopButton" to="CanvasLayer/ShopUI" method="_on_shop_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/ShopUI/ShopPanel/CloseShopButton" to="CanvasLayer/ShopUI" method="_on_close_shop_button_pressed"]

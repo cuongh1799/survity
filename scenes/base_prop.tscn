@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://3jmo64dlvn5m"]
+
+[ext_resource type="Script" uid="uid://dxx3myxqs2ptu" path="res://base_prop.gd" id="1_qyvhm"]
+[ext_resource type="PackedScene" uid="uid://bjjdl0bjcu341" path="res://scenes/selection_visual.tscn" id="2_tqyau"]
+
+[node name="BaseProp" type="StaticBody3D" unique_id=1629872540]
+script = ExtResource("1_qyvhm")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1077949620]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1411538431]
+
+[node name="SelectionVisual" parent="." unique_id=407129122 instance=ExtResource("2_tqyau")]
