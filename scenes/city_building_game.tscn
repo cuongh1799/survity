@@ -9,8 +9,8 @@
 [ext_resource type="Script" uid="uid://38mkp5tlww8m" path="res://scripts/prop_spawner.gd" id="3_jrpe6"]
 [ext_resource type="Texture2D" uid="uid://dogut1n2e11pp" path="res://grass_floor/Grass005_1K-PNG_Roughness.png" id="4_ujfux"]
 [ext_resource type="Script" uid="uid://dtvpsrplqjnt0" path="res://scripts/floor_mesh.gd" id="5_4uwmp"]
-[ext_resource type="PackedScene" uid="uid://b40a54drh0qpt" path="res://scenes/tree_body.tscn" id="7_ujfux"]
-[ext_resource type="PackedScene" uid="uid://c0kdngbicedir" path="res://scenes/rock_body.tscn" id="8_q4dsv"]
+[ext_resource type="PackedScene" uid="uid://bflxk45jxlpr5" path="res://glb/tree_oak.glb" id="5_rsucf"]
+[ext_resource type="PackedScene" uid="uid://pbyx7xvxamiv" path="res://glb/stone_tallA.glb" id="7_yo1g0"]
 [ext_resource type="PackedScene" uid="uid://be567hdyle2r7" path="res://scenes/tree_body_2.tscn" id="12_mnokt"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8nkht"]
@@ -149,10 +149,10 @@ offset_right = 40.0
 offset_bottom = 23.0
 text = "CLOSE"
 
-[node name="PropSpawner" type="Node3D" parent="." unique_id=2133982471]
+[node name="PropSpawner" type="Node3D" parent="." unique_id=2133982471 groups=["props"]]
 script = ExtResource("3_jrpe6")
-tree_scenes = Array[PackedScene]([ExtResource("7_ujfux"), ExtResource("12_mnokt")])
-rock_scenes = Array[PackedScene]([ExtResource("8_q4dsv")])
+tree_scenes = Array[PackedScene]([ExtResource("5_rsucf")])
+rock_scenes = Array[PackedScene]([ExtResource("7_yo1g0")])
 spawn_count = 1000
 area_size = 500.0
 

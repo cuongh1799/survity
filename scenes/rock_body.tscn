@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c0kdngbicedir"]
 
 [ext_resource type="Script" uid="uid://dlqfcj8qvla0w" path="res://scripts/rock_body.gd" id="1_fxt4g"]
-[ext_resource type="PackedScene" uid="uid://dg7g5m1h0ojnx" path="res://stone_tallA.glb" id="2_fkh77"]
+[ext_resource type="PackedScene" uid="uid://xr6ens4ea8ac" path="res://tres/slabModel.res" id="2_fkh77"]
 [ext_resource type="PackedScene" uid="uid://bjjdl0bjcu341" path="res://scenes/selection_visual.tscn" id="3_xp1tb"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ujfux"]
