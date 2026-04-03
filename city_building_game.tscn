@@ -7,10 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://dtg4yfgjwyd0t" path="res://grass_floor/Grass005_1K-PNG_NormalDX.png" id="3_dwo8u"]
 [ext_resource type="Texture2D" uid="uid://dogut1n2e11pp" path="res://grass_floor/Grass005_1K-PNG_Roughness.png" id="4_ujfux"]
 [ext_resource type="Script" uid="uid://dbxqd0slm882q" path="res://scripts/player.gd" id="5_cytlk"]
-[ext_resource type="PackedScene" path="res://tree_body.tscn" id="7_ujfux"]
-[ext_resource type="PackedScene" path="res://rock_body.tscn" id="8_q4dsv"]
+[ext_resource type="PackedScene" uid="uid://d3m5og4o6cj5c" path="res://material.glb" id="7_ujfux"]
+[ext_resource type="PackedScene" uid="uid://d3m5og4o6cj5c" path="res://material.glb" id="8_q4dsv"]
 [ext_resource type="Script" uid="uid://dtvpsrplqjnt0" path="res://scripts/floor_mesh.gd" id="11_lkavs"]
-[ext_resource type="PackedScene" path="res://click_indicator.tscn" id="11_t26vk"]
+[ext_resource type="PackedScene" uid="uid://d3m5og4o6cj5c" path="res://material.glb" id="11_t26vk"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8nkht"]
 sky_top_color = Color(0.4745702, 0.7086191, 1, 1)
