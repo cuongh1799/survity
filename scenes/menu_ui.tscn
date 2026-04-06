@@ -59,6 +59,18 @@ shadow_color = Color(0.023371726, 0.02337179, 0.023371898, 1)
 shadow_size = 5
 shadow_offset = Vector2(1, 1)
 
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_b5e6c"]
+color = Color(0.9955804, 0.99558026, 0.99558026, 1)
+thickness = 8
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_tner2"]
+color = Color(0, 0.5411765, 0, 1)
+thickness = 8
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_3y6qt"]
+color = Color(1, 1, 1, 1)
+thickness = 8
+
 [node name="MainMenuUI" type="Control" unique_id=1027223419]
 layout_mode = 3
 anchors_preset = 0
@@ -67,6 +79,7 @@ offset_bottom = 671.0
 script = ExtResource("1_b5e6c")
 
 [node name="MainButton" type="VBoxContainer" parent="." unique_id=1620095063]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -136,7 +149,6 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="SettingMenu" type="Panel" parent="." unique_id=1697787048]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -177,10 +189,53 @@ grow_vertical = 0
 theme_override_colors/font_color = Color(0.023371726, 0.02337179, 0.023371898, 1)
 theme_override_colors/font_pressed_color = Color(0.023371726, 0.02337179, 0.023371898, 1)
 theme_override_colors/font_hover_color = Color(0.023371726, 0.02337179, 0.023371898, 1)
+theme_override_font_sizes/font_size = 25
 theme_override_styles/normal = SubResource("StyleBoxFlat_b5e6c")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_tner2")
 theme_override_styles/hover = SubResource("StyleBoxFlat_3y6qt")
 text = "Back"
+
+[node name="SoundLabel" type="Label" parent="SettingMenu" unique_id=366653728]
+layout_mode = 0
+offset_left = 71.0
+offset_top = 93.0
+offset_right = 231.0
+offset_bottom = 180.0
+theme_override_font_sizes/font_size = 30
+text = "Sound"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Sound" type="HSlider" parent="SettingMenu" unique_id=1214019711]
+layout_mode = 0
+offset_left = 364.0
+offset_top = 113.0
+offset_right = 583.0
+offset_bottom = 161.0
+theme_override_styles/slider = SubResource("StyleBoxLine_b5e6c")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_tner2")
+
+[node name="SFXLabel" type="Label" parent="SettingMenu" unique_id=1457446365]
+layout_mode = 0
+offset_left = 62.0
+offset_top = 169.0
+offset_right = 222.0
+offset_bottom = 256.0
+theme_override_font_sizes/font_size = 30
+text = "SFX"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="SFX" type="HSlider" parent="SettingMenu" unique_id=1740946223]
+layout_mode = 0
+offset_left = 367.0
+offset_top = 197.0
+offset_right = 586.0
+offset_bottom = 245.0
+theme_override_styles/slider = SubResource("StyleBoxLine_3y6qt")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_tner2")
 
 [connection signal="pressed" from="MainButton/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="MainButton/SettingButton" to="." method="_on_setting_button_pressed"]
