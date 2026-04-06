@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://7jh1htw0gome"]
 
 [ext_resource type="FontFile" uid="uid://rogh2rscifyd" path="res://assets/Fonts/GrapeSoda.ttf" id="1_86ygs"]
-[ext_resource type="Script" uid="uid://cmhyh5ud2fqq3" path="res://scenes/menu_ui.gd" id="1_b5e6c"]
+[ext_resource type="Script" uid="uid://cmhyh5ud2fqq3" path="res://scripts/menu_ui.gd" id="1_b5e6c"]
+[ext_resource type="AudioStream" uid="uid://ci2cix7up0uf3" path="res://assets/1Phantazia.wav" id="3_tner2"]
+[ext_resource type="Script" uid="uid://b7s6thos0o4tt" path="res://scripts/audio_control.gd" id="4_3y6qt"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wrgxk"]
 bg_color = Color(1, 1, 1, 1)
@@ -63,12 +65,20 @@ shadow_offset = Vector2(1, 1)
 color = Color(0.9955804, 0.99558026, 0.99558026, 1)
 thickness = 8
 
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_tner2"]
-color = Color(0, 0.5411765, 0, 1)
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_ld3xo"]
+color = Color(0, 0.83137256, 0, 1)
+thickness = 8
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_oa3d6"]
+color = Color(0, 0.5882353, 0, 1)
 thickness = 8
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_3y6qt"]
 color = Color(1, 1, 1, 1)
+thickness = 8
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_tner2"]
+color = Color(0, 0.5411765, 0, 1)
 thickness = 8
 
 [node name="MainMenuUI" type="Control" unique_id=1027223419]
@@ -207,14 +217,25 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="Sound" type="HSlider" parent="SettingMenu" unique_id=1214019711]
+[node name="1Phantazia" type="AudioStreamPlayer" parent="SettingMenu" unique_id=1766481845]
+stream = ExtResource("3_tner2")
+autoplay = true
+bus = &"Music"
+
+[node name="AudioControl" type="HSlider" parent="SettingMenu" unique_id=1214019711]
 layout_mode = 0
 offset_left = 364.0
 offset_top = 113.0
 offset_right = 583.0
 offset_bottom = 161.0
 theme_override_styles/slider = SubResource("StyleBoxLine_b5e6c")
-theme_override_styles/grabber_area = SubResource("StyleBoxLine_tner2")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_ld3xo")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_oa3d6")
+max_value = 1.0
+step = 0.05
+value = 1.0
+script = ExtResource("4_3y6qt")
+audio_bus_name = "Music"
 
 [node name="SFXLabel" type="Label" parent="SettingMenu" unique_id=1457446365]
 layout_mode = 0
@@ -241,3 +262,4 @@ theme_override_styles/grabber_area = SubResource("StyleBoxLine_tner2")
 [connection signal="pressed" from="MainButton/SettingButton" to="." method="_on_setting_button_pressed"]
 [connection signal="pressed" from="MainButton/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="pressed" from="SettingMenu/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="value_changed" from="SettingMenu/AudioControl" to="SettingMenu/AudioControl" method="_on_value_changed"]
