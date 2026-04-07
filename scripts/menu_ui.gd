@@ -15,7 +15,7 @@ func _process(delta: float) -> void:
 
 #change the scene to main play menu
 func _on_start_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://city_building_game.tscn")
+	get_tree().change_scene_to_file("res://scenes/city_building_game.tscn")
 
 #change to the setting pannel and hide the main button
 func _on_setting_button_pressed() -> void:

@@ -1,10 +1,10 @@
-[gd_scene format=3 uid="uid://7jh1htw0gome"]
+[gd_scene format=3 uid="uid://bxmfhc1t3wp47"]
 
-[ext_resource type="FontFile" uid="uid://rogh2rscifyd" path="res://assets/Fonts/GrapeSoda.ttf" id="1_86ygs"]
-[ext_resource type="Script" uid="uid://cmhyh5ud2fqq3" path="res://scripts/menu_ui.gd" id="1_b5e6c"]
-[ext_resource type="AudioStream" uid="uid://ci2cix7up0uf3" path="res://assets/1Phantazia.wav" id="3_tner2"]
-[ext_resource type="Script" uid="uid://b7s6thos0o4tt" path="res://scripts/audio_control.gd" id="4_3y6qt"]
-[ext_resource type="Script" uid="uid://28jfyclnx5g" path="res://scripts/sfx_control.gd" id="5_ld3xo"]
+[ext_resource type="FontFile" uid="uid://rogh2rscifyd" path="res://assets/fonts/GrapeSoda.ttf" id="1_86ygs"]
+[ext_resource type="Script" path="res://scripts/menu_ui.gd" id="1_b5e6c"]
+[ext_resource type="AudioStream" uid="uid://ci2cix7up0uf3" path="res://assets/music/1Phantazia.wav" id="3_tner2"]
+[ext_resource type="Script" path="res://scripts/audio_control.gd" id="4_3y6qt"]
+[ext_resource type="Script" path="res://scripts/sfx_control.gd" id="5_ld3xo"]
 [ext_resource type="Script" uid="uid://dgfdgul5easgh" path="res://scripts/check_button.gd" id="6_oa3d6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wrgxk"]
@@ -234,7 +234,6 @@ autowrap_mode = 2
 [node name="1Phantazia" type="AudioStreamPlayer" parent="SettingMenu" unique_id=1766481845]
 stream = ExtResource("3_tner2")
 autoplay = true
-bus = &"Music"
 
 [node name="AudioControl" type="HSlider" parent="SettingMenu" unique_id=1214019711]
 layout_mode = 0

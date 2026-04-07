@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://38mkp5tlww8m" path="res://scripts/prop_spawner.gd" id="3_jrpe6"]
 [ext_resource type="Texture2D" uid="uid://dogut1n2e11pp" path="res://grass_floor/Grass005_1K-PNG_Roughness.png" id="4_ujfux"]
 [ext_resource type="Script" uid="uid://dtvpsrplqjnt0" path="res://scripts/floor_mesh.gd" id="5_4uwmp"]
-[ext_resource type="PackedScene" uid="uid://d3m5og4o6cj5c" path="res://material.glb" id="5_gpoqn"]
+[ext_resource type="PackedScene" uid="uid://bflxk45jxlpr5" path="res://glb/tree_oak.glb" id="5_gpoqn"]
 [ext_resource type="PackedScene" uid="uid://be567hdyle2r7" path="res://scenes/tree_body_2.tscn" id="12_mnokt"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8nkht"]
