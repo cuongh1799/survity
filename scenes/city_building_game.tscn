@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://cvc0nat3hrtdb" path="res://scripts/camera_node.gd" id="1_15bo5"]
 [ext_resource type="Texture2D" uid="uid://da1n500ocl0i0" path="res://grass_floor/Grass005_1K-PNG_Color.png" id="1_xclp7"]
-[ext_resource type="Script" uid="uid://c2yvc6pfy7w05" path="res://scripts/game_camera.gd" id="2_35k36"]
 [ext_resource type="Texture2D" uid="uid://lgcgpsconi1r" path="res://grass_floor/Grass005_1K-PNG_AmbientOcclusion.png" id="2_rj7bk"]
 [ext_resource type="Texture2D" uid="uid://dtg4yfgjwyd0t" path="res://grass_floor/Grass005_1K-PNG_NormalDX.png" id="3_dwo8u"]
 [ext_resource type="Script" uid="uid://egus0nlclyhs" path="res://scenes/shop_ui.gd" id="3_gpoqn"]
@@ -68,7 +67,6 @@ budget_label_path = NodePath("../CanvasLayer/BudgetLabel")
 [node name="Camera3D" type="Camera3D" parent="CameraNode" unique_id=238635267]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.8660253, 0, -0.8660253, 0.5, 0, 20, 20)
 current = true
-script = ExtResource("2_35k36")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=872824058]
 transform = Transform3D(-0.9659258, -1.4393417e-08, -0.25881913, -0.06698733, 0.9659259, 0.24999999, 0.25000006, 0.25881904, -0.9330127, 138, 132, 0)
