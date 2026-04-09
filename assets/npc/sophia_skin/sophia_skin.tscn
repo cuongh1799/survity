@@ -1,8 +1,16 @@
+<<<<<<< Updated upstream
 [gd_scene format=3 uid="uid://prh35jb6tjtd"]
 
 [ext_resource type="Script" uid="uid://3dt3fhdgvw5h" path="res://assets/npc/sophia_skin/sophia_skin.gd" id="1_0nqko"]
 [ext_resource type="PackedScene" uid="uid://16iu10wxub40" path="res://assets/npc/sophia_skin/model/sophia.glb" id="1_e4pev"]
 [ext_resource type="Material" uid="uid://dye01l0ct4fby" path="res://assets/npc/sophia_skin/model/materials/eye_mat_override.tres" id="4_mms51"]
+=======
+[gd_scene format=3 uid="uid://bxcn8m11v1ydm"]
+
+[ext_resource type="Script" path="res://assets/npc/sophia_skin/sophia_skin.gd" id="1_0nqko"]
+[ext_resource type="PackedScene" path="res://assets/npc/sophia_skin/model/sophia.glb" id="1_e4pev"]
+[ext_resource type="Material" path="res://assets/npc/sophia_skin/model/materials/eye_mat_override.tres" id="4_mms51"]
+>>>>>>> Stashed changes
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vapre"]
 animation = &"EdgeGrab"
@@ -139,6 +147,7 @@ script = ExtResource("1_0nqko")
 
 [node name="sophia" parent="." unique_id=1475429649 instance=ExtResource("1_e4pev")]
 
+<<<<<<< Updated upstream
 [node name="Skeleton3D" parent="sophia/rig" parent_id_path=PackedInt32Array(1475429649, 81508679) index="0" unique_id=917303362]
 bones/0/position = Vector3(-0.012173209, 0.496288, -0.008685274)
 bones/0/rotation = Quaternion(0.12647596, -0.04223758, -0.01448763, 0.9909642)
@@ -183,6 +192,52 @@ bones/27/position = Vector3(-1.0005895e-07, 0.06411955, -5.122263e-09)
 bones/27/rotation = Quaternion(1.5563149e-08, -0.0017189456, -1.4858258e-09, 0.9999985)
 bones/28/position = Vector3(2.5463677e-08, 0.06411971, 1.7002112e-08)
 bones/28/rotation = Quaternion(-0.0691248, -0.0015995656, 0.05186903, 0.9962575)
+=======
+[node name="Skeleton3D" parent="sophia/rig" parent_id_path=PackedInt32Array(1475429649, 1776360663) index="0" unique_id=1659410252]
+bones/0/position = Vector3(0.02093294, 0.4962676, -0.008608026)
+bones/0/rotation = Quaternion(0.12623756, 0.07602449, 0.0009030857, 0.98908216)
+bones/1/rotation = Quaternion(-0.0644765, 2.4167748e-09, -4.122523e-09, 0.99791926)
+bones/1/scale = Vector3(1, 1, 1)
+bones/2/rotation = Quaternion(-0.07743091, 0.01799577, -0.00025180285, 0.99683535)
+bones/3/rotation = Quaternion(-0.001641474, 0.053858522, 0.0012326553, 0.9985465)
+bones/4/rotation = Quaternion(0.14767818, -0.03570487, 0.0040581995, 0.9883825)
+bones/5/rotation = Quaternion(-0.11464784, -1.0599841e-09, 1.4507046e-08, 0.9934063)
+bones/6/rotation = Quaternion(-0.015831616, -0.035930444, 0.0005692489, 0.9992287)
+bones/6/scale = Vector3(1, 1, 1)
+bones/7/rotation = Quaternion(0.9905648, 0.11448737, -0.0071452977, -0.074986085)
+bones/7/scale = Vector3(1, 1, 1)
+bones/8/rotation = Quaternion(0.9905909, -0.114261866, -0.010131032, 0.07464121)
+bones/8/scale = Vector3(1, 1, 1)
+bones/9/rotation = Quaternion(0.8413055, 0.050797112, -0.032434918, 0.5371898)
+bones/10/rotation = Quaternion(0.40954676, -0.015667036, 0.034868624, 0.91148794)
+bones/11/rotation = Quaternion(0.8059787, 0.1935137, -0.24117106, 0.50476474)
+bones/11/scale = Vector3(1, 1, 1)
+bones/12/rotation = Quaternion(0.40909275, -0.027290847, 0.037757035, 0.91130286)
+bones/13/rotation = Quaternion(0.8234068, -0.095133156, 0.17868614, 0.5301153)
+bones/13/scale = Vector3(1, 1, 1)
+bones/14/rotation = Quaternion(0.40998206, -0.0040426017, 0.03197444, 0.911524)
+bones/15/rotation = Quaternion(-0.3586594, -0.042337097, -0.27901325, 0.889788)
+bones/15/scale = Vector3(1, 1, 1)
+bones/16/rotation = Quaternion(-3.8852184e-09, 1.3368036e-07, -0.024513498, 0.99969953)
+bones/17/rotation = Quaternion(-0.33334935, 0.13895044, 0.5120458, 0.779346)
+bones/17/scale = Vector3(1, 1, 1)
+bones/18/rotation = Quaternion(1.45745975e-08, -9.552342e-08, -0.024513703, 0.9996995)
+bones/19/rotation = Quaternion(-0.4104992, 0.027674526, 0.09689137, 0.9062763)
+bones/20/rotation = Quaternion(-1.6212132e-07, -3.4897212e-08, -0.02451362, 0.99969953)
+bones/21/rotation = Quaternion(-0.40238214, 0.085814185, 0.15503101, 0.89815927)
+bones/22/rotation = Quaternion(-2.3392577e-07, 2.5336217e-08, -0.02451358, 0.99969953)
+bones/23/rotation = Quaternion(-0.57975745, -0.38261652, -0.39648923, 0.6002351)
+bones/24/rotation = Quaternion(-0.2753507, 0.6448391, -0.44687435, 0.5555788)
+bones/24/scale = Vector3(1, 1, 1)
+bones/25/position = Vector3(-2.8434439e-08, 0.06935179, 7.450578e-09)
+bones/25/rotation = Quaternion(1.0464983e-08, 0.00081832526, 1.5689199e-07, 0.99999976)
+bones/26/position = Vector3(-3.30328e-08, 0.06935183, -7.2529183e-09)
+bones/26/rotation = Quaternion(0.28014508, 0.00080668204, -0.00017959045, 0.9599574)
+bones/27/position = Vector3(-1.0005895e-07, 0.06411955, -5.122263e-09)
+bones/27/rotation = Quaternion(-1.79049e-08, 0.000902595, 1.3220046e-07, 0.99999964)
+bones/28/position = Vector3(2.5463677e-08, 0.06411971, 1.7002112e-08)
+bones/28/rotation = Quaternion(0.06175355, 0.001809013, 0.05184295, 0.9967425)
+>>>>>>> Stashed changes
 bones/28/scale = Vector3(1, 1, 1)
 bones/29/rotation = Quaternion(0.152207, 0.687514, 0.0919657, 0.70406)
 bones/29/scale = Vector3(1, 1, 1)
@@ -213,6 +268,7 @@ bones/46/rotation = Quaternion(0.5104949, 1.106529e-05, 4.876845e-05, 0.85988086
 bones/46/scale = Vector3(1, 1, 1)
 bones/47/rotation = Quaternion(0.514301, -3.908084e-05, -7.179821e-05, 0.8576098)
 bones/48/rotation = Quaternion(-0.579758, 0.382616, 0.396489, 0.600235)
+<<<<<<< Updated upstream
 bones/49/rotation = Quaternion(-0.21564062, -0.63120574, 0.50172293, 0.5507746)
 bones/49/scale = Vector3(1, 1, 1)
 bones/50/position = Vector3(6.545451e-08, 0.0693517, 1.1175876e-08)
@@ -223,6 +279,18 @@ bones/52/position = Vector3(3.4691762e-08, 0.064119704, -9.4529234e-08)
 bones/52/rotation = Quaternion(1.4217048e-11, -0.0017186399, -2.125322e-08, 0.9999985)
 bones/53/position = Vector3(4.3119677e-08, 0.06411977, -9.508382e-08)
 bones/53/rotation = Quaternion(0.06400867, -0.0018678388, -0.051842384, 0.99660015)
+=======
+bones/49/rotation = Quaternion(-0.2702398, -0.6437526, 0.45197865, 0.5552193)
+bones/49/scale = Vector3(1, 1, 1)
+bones/50/position = Vector3(6.545451e-08, 0.0693517, 1.1175876e-08)
+bones/50/rotation = Quaternion(2.6863761e-08, 0.00081827753, 4.4612104e-08, 0.99999976)
+bones/51/position = Vector3(6.3970134e-08, 0.06935181, 2.1280567e-08)
+bones/51/rotation = Quaternion(0.26582083, 0.00081829034, -0.00022748357, 0.9640221)
+bones/52/position = Vector3(3.4691762e-08, 0.064119704, -9.4529234e-08)
+bones/52/rotation = Quaternion(-1.5244832e-07, 0.00090276, 4.2995616e-08, 0.99999964)
+bones/53/position = Vector3(4.3119677e-08, 0.06411977, -9.508382e-08)
+bones/53/rotation = Quaternion(-0.06687029, 0.0015406926, -0.051868718, 0.9964114)
+>>>>>>> Stashed changes
 bones/53/scale = Vector3(1, 1, 1)
 bones/55/position = Vector3(-0.007881446, 0.1267775, 0.022745017)
 bones/55/rotation = Quaternion(0.6349347, 0.08099386, 0.12939136, 0.7573347)
@@ -266,6 +334,7 @@ bones/77/rotation = Quaternion(-0.030678887, 1.957515e-08, 9.258379e-10, 0.99952
 bones/78/rotation = Quaternion(-0.03010153, -9.416816e-09, 5.131731e-09, 0.99954695)
 bones/79/rotation = Quaternion(-0.152455, -0.79333, -0.285504, 0.515628)
 bones/80/rotation = Quaternion(-0.152455, 0.79333, 0.285504, 0.515628)
+<<<<<<< Updated upstream
 bones/81/rotation = Quaternion(0.95561665, 0.14812003, -0.06198632, 0.24701206)
 bones/81/scale = Vector3(1, 1, 0.999999)
 bones/82/position = Vector3(4.0262864e-09, 0.09425194, -2.7339116e-08)
@@ -296,6 +365,38 @@ bones/92/rotation = Quaternion(-1.8139672e-05, 0.948342, -0.31724998, 5.3562353e
 bones/92/scale = Vector3(1, 1, 1)
 
 [node name="Sophia" parent="sophia/rig/Skeleton3D" index="0" unique_id=136279526]
+=======
+bones/81/rotation = Quaternion(0.9768784, 0.050066564, -0.04631968, 0.20262383)
+bones/81/scale = Vector3(1, 1, 0.999999)
+bones/82/position = Vector3(4.0262864e-09, 0.09425194, -2.7339116e-08)
+bones/82/rotation = Quaternion(-4.047396e-08, -0.06153717, 5.020975e-09, 0.9981048)
+bones/83/position = Vector3(1.5889889e-08, 0.09425195, 1.3329547e-08)
+bones/83/rotation = Quaternion(0.18786065, -0.061800186, 0.011844701, 0.980178)
+bones/84/position = Vector3(1.751695e-09, 0.09256122, 1.0277262e-08)
+bones/84/rotation = Quaternion(2.0826663e-08, 0.00799303, 5.1772304e-08, 0.9999681)
+bones/85/position = Vector3(1.9390427e-08, 0.092561126, -2.2068775e-08)
+bones/85/rotation = Quaternion(-0.5421848, 0.043029606, 0.059288595, 0.83705974)
+bones/85/scale = Vector3(1, 1, 1)
+bones/86/position = Vector3(-2.6709067e-08, 0.22408424, 3.7787494e-08)
+bones/86/rotation = Quaternion(1.2971074e-05, 0.95272607, -0.30383098, -3.455797e-06)
+bones/86/scale = Vector3(1, 1, 1)
+bones/87/rotation = Quaternion(0.9569094, -0.15444599, 0.06302168, 0.2376956)
+bones/87/scale = Vector3(1, 1, 0.999999)
+bones/88/position = Vector3(-1.5956433e-08, 0.09473321, 5.933809e-10)
+bones/88/rotation = Quaternion(5.1877244e-08, 0.050421327, -7.4702186e-08, 0.99872804)
+bones/89/position = Vector3(-2.4356353e-08, 0.09473327, 2.3282933e-09)
+bones/89/rotation = Quaternion(0.32278347, 0.04939553, -0.016871605, 0.9450324)
+bones/90/position = Vector3(1.0783471e-08, 0.093051754, -1.301859e-08)
+bones/90/rotation = Quaternion(-4.798529e-08, 0.0782039, -5.5922023e-08, 0.99693745)
+bones/91/position = Vector3(-3.9171937e-09, 0.093051754, 1.0220447e-09)
+bones/91/rotation = Quaternion(-0.5360497, 0.043316748, -0.13591772, 0.8320462)
+bones/91/scale = Vector3(1, 1, 1)
+bones/92/position = Vector3(-1.144757e-08, 0.22408819, 3.4813496e-08)
+bones/92/rotation = Quaternion(-2.8213735e-05, 0.9326657, -0.36074197, 1.0227742e-05)
+bones/92/scale = Vector3(1, 1, 1)
+
+[node name="Sophia" parent="sophia/rig/Skeleton3D" index="0" unique_id=959552587]
+>>>>>>> Stashed changes
 lod_bias = 0.001
 surface_material_override/1 = ExtResource("4_mms51")
 surface_material_override/2 = ExtResource("4_mms51")
@@ -324,5 +425,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8260906, 0)
 shape = SubResource("CapsuleShape3D_1o7b1")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1249217443]
+<<<<<<< Updated upstream
+=======
+unique_name_in_owner = true
+navigation_layers = 2
+>>>>>>> Stashed changes
 
 [editable path="sophia"]
