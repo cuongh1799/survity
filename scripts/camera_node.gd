@@ -14,13 +14,11 @@ extends Node3D
 @export var coords_label_path: NodePath
 @export var button_top_down_path: NodePath
 
+
 @export_group("Spawning")
-@export var grid_size: float = 5.0
-@export var test_spawn: PackedScene:
-	set(value):
-		test_spawn = value
-		setup_ghost_preview() # Update ghost whenever the scene changes
-@export var spawn_parent_path: NodePath 
+@export var grid_size: float = 5.0 # Set this to 1.0 or 2.0 depending on your model size
+@export var test_spawn: PackedScene
+@export var spawn_parent_path: NodePath # Path to a Node3D where props should be spawned
 
 @export_group("Player Info")
 @export var player_budget: float = 1000.0
@@ -40,18 +38,11 @@ var drag_start: Vector2 = Vector2.ZERO
 var drag_threshold: float = 5.0
 var selected_props: Array[Prop] = [] 
 
-# Ghost Preview Variables
-var ghost_preview: Node3D = null
-var ghost_rotation: float = 0.0
-
 func _ready() -> void:
 	update_budget_ui()
+	# Default spawn parent to this node if not set
 	if not spawn_parent:
 		spawn_parent = self
-	setup_ghost_preview()
-
-func _process(_delta: float) -> void:
-	update_ghost_preview()
 
 func _unhandled_input(event: InputEvent) -> void:
 	# Zoom Logic
@@ -67,18 +58,16 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
 		translate(Vector3(-event.relative.x, 0, -event.relative.y) * pan_speed)
 
-	# Rotation Logic (Press R to rotate preview)
-	if event is InputEventKey and event.pressed and event.keycode == KEY_P:
-		ghost_rotation += 90.0
-
-	# Left Click Logic
+	# Left Click Logic (Selection vs. Spawning)
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:
 			clear_selection()
 			dragging = true
 			drag_start = event.position
 		else:
+			# If mouse didn't move much, it's a CLICK, not a DRAG
 			if drag_start.distance_to(event.position) < drag_threshold:
+				# If we have a scene to spawn, spawn it. Otherwise, try to delete.
 				if test_spawn:
 					spawn_object_at_mouse(event.position)
 				else:
@@ -89,88 +78,15 @@ func _unhandled_input(event: InputEvent) -> void:
 			dragging = false
 			selection_box.visible = false
 
+	# Mouse Motion Logic
 	if event is InputEventMouseMotion:
 		update_mouse_coords(event.position)
 		if dragging:
 			update_selection_box(event.position)
 
+	# Delete Action
 	if event.is_action_pressed("ui_text_delete") or (event is InputEventKey and event.is_pressed() and event.keycode == KEY_DELETE):
 		delete_selected_props()
-
-# --- GHOST PREVIEW LOGIC ---
-
-func setup_ghost_preview() -> void:
-	if ghost_preview:
-		ghost_preview.queue_free()
-	
-	if test_spawn:
-		ghost_preview = test_spawn.instantiate()
-		add_child(ghost_preview)
-		# Ensure ghost doesn't have collisions or it will break the raycast
-		recursive_cleanup_ghost(ghost_preview)
-		set_ghost_transparency(ghost_preview, 0.5)
-
-func update_ghost_preview() -> void:
-	if not ghost_preview: return
-	
-	var mouse_pos = get_viewport().get_mouse_position()
-	var from = camera.project_ray_origin(mouse_pos)
-	var to = from + camera.project_ray_normal(mouse_pos) * 10000
-	var query = PhysicsRayQueryParameters3D.create(from, to)
-	# IMPORTANT: Exclude the ghost itself from raycasting if you didn't disable collisions correctly
-	var result = get_world_3d().direct_space_state.intersect_ray(query)
-	
-	if result:
-		ghost_preview.visible = true
-		var current_grid_size = get_calculated_grid_size(ghost_preview)
-		
-		var snapped_x = round(result.position.x / current_grid_size) * current_grid_size
-		var snapped_z = round(result.position.z / current_grid_size) * current_grid_size
-		var final_pos = Vector3(snapped_x, 0, snapped_z)
-		
-		ghost_preview.global_position = final_pos
-		ghost_preview.rotation_degrees.y = ghost_rotation
-		
-		# Visual feedback if blocked
-		if is_grid_slot_occupied(final_pos, current_grid_size):
-			# You could swap materials here to a red "forbidden" shader
-			pass 
-	else:
-		ghost_preview.visible = false
-
-func recursive_cleanup_ghost(node: Node) -> void:
-	if node is CollisionShape3D or node is CollisionPolygon3D:
-		node.disabled = true
-	if node is PhysicsBody3D:
-		node.input_ray_pickable = false
-		node.collision_layer = 0
-		node.collision_mask = 0
-	for child in node.get_children():
-		recursive_cleanup_ghost(child)
-
-func set_ghost_transparency(node: Node, alpha: float) -> void:
-	if node is MeshInstance3D:
-		for i in range(node.get_surface_override_material_count() if node.get_surface_override_material_count() > 0 else node.mesh.get_surface_count()):
-			var mat = node.get_active_material(i)
-			if mat:
-				var ghost_mat = mat.duplicate()
-				ghost_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-				ghost_mat.albedo_color.a = alpha
-				node.set_surface_override_material(i, ghost_mat)
-	for child in node.get_children():
-		set_ghost_transparency(child, alpha)
-
-# --- SPAWNING LOGIC ---
-
-func get_calculated_grid_size(instance: Node3D) -> float:
-	var size = grid_size
-	if instance.has_node("MeshInstance3D"):
-		var mesh = instance.get_node("MeshInstance3D")
-		if mesh is MeshInstance3D and mesh.mesh:
-			var aabb = mesh.get_aabb()
-			size = max(max(aabb.size.x * mesh.scale.x, aabb.size.z * mesh.scale.z), 1.0)
-			size = ceil(size)
-	return size
 
 func spawn_object_at_mouse(mouse_pos: Vector2):
 	var from = camera.project_ray_origin(mouse_pos)
@@ -180,34 +96,54 @@ func spawn_object_at_mouse(mouse_pos: Vector2):
 	
 	if result and test_spawn:
 		var instance = test_spawn.instantiate()
-		var current_grid_size = get_calculated_grid_size(instance)
 		
+		var current_grid_size = grid_size
+		# Try to auto-scale grid size based on model limits
+		if instance.has_node("MeshInstance3D"):
+			var mesh = instance.get_node("MeshInstance3D")
+			if mesh is MeshInstance3D and mesh.mesh:
+				var aabb = mesh.get_aabb()
+				# Use max of X/Z dimension, default to at least 1.0 to avoid 0 div
+				var mesh_scale = mesh.scale
+				current_grid_size = max(max(aabb.size.x * mesh_scale.x, aabb.size.z * mesh_scale.z), 1.0)
+				# Snap the grid size to the nearest whole number to keep grid clean
+				current_grid_size = ceil(current_grid_size)
+				
+		# Calculate the Snapped Position
 		var snapped_x = round(result.position.x / current_grid_size) * current_grid_size
 		var snapped_z = round(result.position.z / current_grid_size) * current_grid_size
 		var final_pos = Vector3(snapped_x, 0, snapped_z)
 		
+		# THE ANTI-CLIPPING CHECK
+		# We check if this grid slot is already taken
 		if is_grid_slot_occupied(final_pos, current_grid_size):
 			print("Forbidden: Space already occupied!")
 			instance.free()
-			return 
+			return # STOP HERE - Don't spawn anything
 		
-		spawn_parent.add_child(instance)
+		# Spawn the object
+		get_tree().current_scene.add_child(instance)
+		
 		instance.global_position = final_pos
-		instance.rotation_degrees.y = ghost_rotation # Match the preview rotation
+		instance.rotation = Vector3.ZERO # Keep them straight like Endfield
 		
 		if instance is Prop:
 			player_budget -= instance.cost
 			update_budget_ui()
 
-func is_grid_slot_occupied(target_pos: Vector3, current_grid_size: float) -> bool:
+# New helper function to scan for nearby objects
+func is_grid_slot_occupied(target_pos: Vector3, current_grid_size: float = grid_size) -> bool:
+	# Look at every object in the "props" group
 	for prop in get_tree().get_nodes_in_group("props"):
 		if is_instance_valid(prop) and prop is Node3D:
+			# Calculate distance between the click and existing props
 			var distance = prop.global_position.distance_to(target_pos)
+			
+			# If distance is smaller than the grid size, they are overlapping
+			# We use current_grid_size * 0.9 to be safe with floating point math
 			if distance < (current_grid_size * 0.9):
 				return true
 	return false
-
-# --- UI & SELECTION LOGIC ---
 
 func update_mouse_coords(mouse_pos: Vector2) -> void:
 	if not coords_label: return
@@ -293,14 +229,20 @@ func update_budget_ui() -> void:
 	if budget_label: budget_label.text = "Budget: $" + str(player_budget)
 
 func toggle_top_down_mode() -> void:
-	if not top_down_mode:
+	# TOP DOWN MODE
+	if top_down_mode == false:
 		button_top_down.text = "MODE: TOP DOWN"
 		top_down_mode = true
+		print("Change from classic to top")
 		camera.rotation = Vector3(deg_to_rad(-90), 0, 0)
-	else:
+	# CLASSIC MODE
+	elif top_down_mode == true:
 		button_top_down.text = "MODE: CLASSIC"
 		top_down_mode = false
+		print("Change from top to classic")
 		camera.rotation = Vector3(deg_to_rad(-60), 0, 0)
+		
+
 
 func _on_close_inventory_button_pressed() -> void:
-	pass
+	pass # Replace with function body.

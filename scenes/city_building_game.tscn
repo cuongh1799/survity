@@ -12,6 +12,9 @@
 [ext_resource type="Script" uid="uid://dtvpsrplqjnt0" path="res://scripts/floor_mesh.gd" id="5_4uwmp"]
 [ext_resource type="PackedScene" uid="uid://jkjc46o7w3vh" path="res://scenes/tree_scene.tscn" id="5_gpoqn"]
 [ext_resource type="PackedScene" uid="uid://duxak6wf4n284" path="res://scenes/rock_scene.tscn" id="5_jegvk"]
+[ext_resource type="Script" uid="uid://cm3ttbnsbnvxj" path="res://scenes/inventory_UI.gd" id="5_rsucf"]
+[ext_resource type="PackedScene" uid="uid://m0ugwfs8lm1q" path="res://scenes/buildingb.tscn" id="5_yo1g0"]
+[ext_resource type="PackedScene" uid="uid://b2687vha7j4tf" path="res://scenes/shop_item_button.tscn" id="6_fx5qm"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8nkht"]
 sky_top_color = Color(0.4745702, 0.7086191, 1, 1)
@@ -66,10 +69,12 @@ selection_label_path = NodePath("../CanvasLayer/SelectionCount")
 removal_label_path = NodePath("../CanvasLayer/RemovalCost")
 budget_label_path = NodePath("../CanvasLayer/BudgetLabel")
 coords_label_path = NodePath("../CanvasLayer/CoordsLabel")
+button_top_down_path = NodePath("../CanvasLayer/TopViewButton")
+grid_size = 10.0
 test_spawn = ExtResource("2_mnokt")
 
 [node name="Camera3D" type="Camera3D" parent="CameraNode" unique_id=238635267]
-transform = Transform3D(1, 0, 0, 0, 0.5, 0.8660253, 0, -0.8660253, 0.5, 0, 20, 20)
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 20, 20)
 current = true
 script = ExtResource("2_35k36")
 
@@ -118,6 +123,9 @@ offset_top = 776.0
 offset_right = 405.0
 offset_bottom = 1076.0
 script = ExtResource("3_gpoqn")
+shop_items = Array[PackedScene]([ExtResource("2_mnokt"), ExtResource("5_yo1g0")])
+button_template = ExtResource("6_fx5qm")
+cameraPath = NodePath("../../CameraNode")
 
 [node name="ShopButton" type="Button" parent="CanvasLayer/ShopUI" unique_id=1839595508]
 layout_mode = 0
@@ -152,7 +160,63 @@ offset_bottom = 84.0
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
-text = "CLOSE"
+text = "CLOSE
+SHOP"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/ShopUI/ShopPanel" unique_id=1427477929]
+layout_mode = 0
+offset_right = 1120.0
+offset_bottom = 671.0
+
+[node name="ItemGrid" type="GridContainer" parent="CanvasLayer/ShopUI/ShopPanel/ScrollContainer" unique_id=504471404]
+layout_mode = 2
+columns = 3
+
+[node name="Inventory" type="Control" parent="CanvasLayer" unique_id=908550285]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1529.0
+offset_top = 791.0
+offset_right = 1929.0
+offset_bottom = 1091.0
+script = ExtResource("5_rsucf")
+
+[node name="InventoryButton" type="Button" parent="CanvasLayer/Inventory" unique_id=1857319218]
+layout_mode = 0
+offset_left = -197.0
+offset_top = -99.0
+offset_right = 76.0
+offset_bottom = 129.0
+
+[node name="Inventory" type="Label" parent="CanvasLayer/Inventory" unique_id=226156253]
+layout_mode = 0
+offset_left = -205.0
+offset_top = -43.0
+offset_right = 77.0
+offset_bottom = 52.0
+text = "INVENTORY"
+label_settings = SubResource("LabelSettings_rsucf")
+
+[node name="InventoryPanel" type="Panel" parent="CanvasLayer/Inventory" unique_id=953436822]
+layout_mode = 0
+offset_left = -1192.0
+offset_top = -661.0
+offset_right = 49.0
+offset_bottom = 10.0
+
+[node name="CloseInventoryButton" type="Button" parent="CanvasLayer/Inventory/InventoryPanel" unique_id=717079871]
+layout_mode = 0
+offset_left = 1123.0
+offset_top = 3.0
+offset_right = 1235.0
+offset_bottom = 84.0
+
+[node name="Label" type="Label" parent="CanvasLayer/Inventory/InventoryPanel/CloseInventoryButton" unique_id=1346617911]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "CLOSE 
+INVENTORY"
 
 [node name="CoordsLabel" type="Label" parent="CanvasLayer" unique_id=1306763300]
 offset_left = 1433.0
@@ -162,6 +226,13 @@ offset_bottom = 82.0
 text = "X: 
 Y:
 Z:"
+
+[node name="TopViewButton" type="Button" parent="CanvasLayer" unique_id=1021036834]
+offset_left = 801.0
+offset_top = 10.0
+offset_right = 960.0
+offset_bottom = 81.0
+text = "MODE: TOP DOWN"
 
 [node name="PropSpawner" type="Node3D" parent="." unique_id=2133982471]
 script = ExtResource("3_jrpe6")
@@ -181,3 +252,7 @@ shape = SubResource("ConvexPolygonShape3D_gpoqn")
 
 [connection signal="pressed" from="CanvasLayer/ShopUI/ShopButton" to="CanvasLayer/ShopUI" method="_on_shop_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/ShopUI/ShopPanel/CloseShopButton" to="CanvasLayer/ShopUI" method="_on_close_shop_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Inventory/InventoryButton" to="CanvasLayer/Inventory" method="_on_inventory_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Inventory/InventoryButton" to="CanvasLayer/Inventory" method="_on_shop_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Inventory/InventoryPanel/CloseInventoryButton" to="CanvasLayer/Inventory" method="_on_close_inventory_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/TopViewButton" to="CameraNode" method="toggle_top_down_mode"]

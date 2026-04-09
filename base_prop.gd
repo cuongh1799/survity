@@ -35,6 +35,7 @@ class_name Prop
 
 @export var cost: float = 10.0
 @export var profitPerSecond: float = 0
+@export var attraction: float = 0
 
 @onready var selection_visual = $SelectionVisual
 @onready var mesh_instance = $MeshInstance3D
