@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://dtvpsrplqjnt0" path="res://scripts/floor_mesh.gd" id="5_4uwmp"]
 [ext_resource type="PackedScene" uid="uid://jkjc46o7w3vh" path="res://scenes/tree_scene.tscn" id="5_gpoqn"]
 [ext_resource type="PackedScene" uid="uid://duxak6wf4n284" path="res://scenes/rock_scene.tscn" id="5_jegvk"]
+[ext_resource type="PackedScene" uid="uid://d1dthoixcrw0c" path="res://scenes/main_menu.tscn" id="5_rsucf"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8nkht"]
 sky_top_color = Color(0.4745702, 0.7086191, 1, 1)
@@ -55,6 +56,8 @@ size = Vector3(1000, 0.15, 1000)
 points = PackedVector3Array(507.9365, 7.8615084, 507.9365, -507.9365, -8.011508, -507.9365, -507.9365, 7.8615084, -507.9365, 507.9365, -8.011508, -507.9365, -507.9365, -8.011508, 507.9365, -507.9365, 7.8615084, 507.9365, 507.9365, 7.8615084, -507.9365, 507.9365, -8.011508, 507.9365)
 
 [node name="city_building_game" type="Node3D" unique_id=813188418]
+
+[node name="Main_menu" parent="." unique_id=258386567 instance=ExtResource("5_rsucf")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1991621675]
 environment = SubResource("Environment_tv723")
