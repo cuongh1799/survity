@@ -38,7 +38,16 @@ var drag_start: Vector2 = Vector2.ZERO
 var drag_threshold: float = 5.0
 var selected_props: Array[Prop] = [] 
 
+var ghost_instance: Node3D = null
+var current_ghost_scene: PackedScene = null
+var invalid_material: StandardMaterial3D
+
 func _ready() -> void:
+	invalid_material = StandardMaterial3D.new()
+	invalid_material.albedo_color = Color(1.0, 0.0, 0.0, 0.5)
+	invalid_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	invalid_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	
 	update_budget_ui()
 	# Default spawn parent to this node if not set
 	if not spawn_parent:
@@ -83,6 +92,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		update_mouse_coords(event.position)
 		if dragging:
 			update_selection_box(event.position)
+			
+		if test_spawn:
+			update_ghost_preview(event.position)
+		elif ghost_instance:
+			ghost_instance.queue_free()
+			ghost_instance = null
+			current_ghost_scene = null
 
 	# Delete Action
 	if event.is_action_pressed("ui_text_delete") or (event is InputEventKey and event.is_pressed() and event.keycode == KEY_DELETE):
@@ -246,3 +262,69 @@ func toggle_top_down_mode() -> void:
 
 func _on_close_inventory_button_pressed() -> void:
 	pass # Replace with function body.
+
+func update_ghost_preview(mouse_pos: Vector2) -> void:
+	# Keep ghost updated if the test_spawn scene changes
+	if current_ghost_scene != test_spawn:
+		if ghost_instance:
+			ghost_instance.queue_free()
+		ghost_instance = test_spawn.instantiate()
+		
+		# Add to the current scene so it displays correctly, but outside of 'props'
+		add_child(ghost_instance)
+		current_ghost_scene = test_spawn
+		make_ghost_recursive(ghost_instance)
+		
+	var from = camera.project_ray_origin(mouse_pos)
+	var to = from + camera.project_ray_normal(mouse_pos) * 10000
+	var query = PhysicsRayQueryParameters3D.create(from, to)
+	# Exclude layer or mask if you use one, but the ghost has collisions disabled so it shouldn't block
+	var result = get_world_3d().direct_space_state.intersect_ray(query)
+	
+	if result:
+		ghost_instance.visible = true
+		
+		var current_grid_size = grid_size
+		if ghost_instance.has_node("MeshInstance3D"):
+			var mesh = ghost_instance.get_node("MeshInstance3D")
+			if mesh is MeshInstance3D and mesh.mesh:
+				var aabb = mesh.get_aabb()
+				var mesh_scale = mesh.scale
+				current_grid_size = max(max(aabb.size.x * mesh_scale.x, aabb.size.z * mesh_scale.z), 1.0)
+				current_grid_size = ceil(current_grid_size)
+				
+		var snapped_x = round(result.position.x / current_grid_size) * current_grid_size
+		var snapped_z = round(result.position.z / current_grid_size) * current_grid_size
+		var final_pos = Vector3(snapped_x, 0, snapped_z)
+		
+		ghost_instance.global_position = final_pos
+		ghost_instance.rotation = Vector3.ZERO
+		
+		var is_occupied = is_grid_slot_occupied(final_pos, current_grid_size)
+		set_ghost_color(ghost_instance, not is_occupied)
+	else:
+		ghost_instance.visible = false
+
+func make_ghost_recursive(node: Node) -> void:
+	if node.is_in_group("props"):
+		node.remove_from_group("props")
+		
+	if node is CollisionObject3D:
+		node.collision_layer = 0
+		node.collision_mask = 0
+		node.process_mode = Node.PROCESS_MODE_DISABLED
+	elif node is MeshInstance3D:
+		node.transparency = 0.5
+		
+	for child in node.get_children():
+		make_ghost_recursive(child)
+
+func set_ghost_color(node: Node, is_valid: bool) -> void:
+	if node is MeshInstance3D:
+		if is_valid:
+			node.material_overlay = null
+		else:
+			node.material_overlay = invalid_material
+	for child in node.get_children():
+		set_ghost_color(child, is_valid)
+
