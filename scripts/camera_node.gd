@@ -147,6 +147,12 @@ func spawn_object_at_mouse(mouse_pos: Vector2):
 			player_budget -= instance.cost
 			update_budget_ui()
 
+		test_spawn = null
+		if ghost_instance:
+			ghost_instance.queue_free()
+			ghost_instance = null
+		current_ghost_scene = null
+
 # New helper function to scan for nearby objects
 func is_grid_slot_occupied(target_pos: Vector3, current_grid_size: float = grid_size) -> bool:
 	# Look at every object in the "props" group
@@ -327,4 +333,3 @@ func set_ghost_color(node: Node, is_valid: bool) -> void:
 			node.material_overlay = invalid_material
 	for child in node.get_children():
 		set_ghost_color(child, is_valid)
-
