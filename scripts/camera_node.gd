@@ -217,8 +217,11 @@ func delete_selected_props() -> void:
 	for prop in selected_props:
 		if is_instance_valid(prop):
 			total_cost += prop.cost
-			prop.queue_free()
-	PlayerManager.budget += total_cost # Refund the cost
+			if prop.has_method("harvest"):
+				prop.harvest()
+			else:
+				prop.queue_free()
+	PlayerManager.budget -= total_cost # Refund the cost
 	selected_props.clear()
 	calculate_stats([])
 	update_budget_ui()
@@ -233,7 +236,10 @@ func raycast_delete(mouse_pos: Vector2) -> void:
 		var prop_node = target if target is Prop else target.get_parent()
 		if prop_node is Prop:
 			PlayerManager.budget += prop_node.cost # Refund the cost
-			prop_node.queue_free()
+			if prop_node.has_method("harvest"):
+				prop_node.harvest()
+			else:
+				prop_node.queue_free()
 			update_budget_ui()
 
 func update_budget_ui() -> void:

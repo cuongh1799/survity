@@ -2,11 +2,25 @@ extends Node3D
 
 # ---- Player Stats ----
 var inventory: Dictionary = {
+	# Basic Resources (Early Game)
 	"wood": 0,
 	"stone": 0,
-	"food": 0
+	"food": 0,
+	"water": 0,
+	
+	# Refined Resources (Mid Game)
+	"iron": 0,
+	"gold": 0,
+	"bricks": 0,
+	"planks": 0,
+	
+	# Advanced Resources (Late Game)
+	"tools": 0,
+	"glass": 0,
+	"concrete": 0,
+	"electricity": 0
 }
-var budget: int = 1000
+var budget: int = 100
 var total_city_attraction: int = 0
 
 # ---- Time Tracking ----

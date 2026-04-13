@@ -17,7 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://m0ugwfs8lm1q" path="res://scenes/buildingb.tscn" id="5_yo1g0"]
 [ext_resource type="PackedScene" uid="uid://csnrbpa18gf0j" path="res://scenes/buildingc.tscn" id="6_fx5qm"]
 [ext_resource type="PackedScene" uid="uid://b2687vha7j4tf" path="res://scenes/shop_item_button.tscn" id="7_gx5h2"]
-[ext_resource type="Script" path="res://scripts/player_manager.gd" id="17_ci7b6"]
+[ext_resource type="Script" uid="uid://3w2qj10xjxlf" path="res://scripts/player_manager.gd" id="17_ci7b6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8nkht"]
 sky_top_color = Color(0.4745702, 0.7086191, 1, 1)
@@ -31,6 +31,9 @@ sky_material = SubResource("ProceduralSkyMaterial_8nkht")
 [sub_resource type="Environment" id="Environment_tv723"]
 background_mode = 2
 sky = SubResource("Sky_eafes")
+
+[sub_resource type="LabelSettings" id="LabelSettings_t8xqk"]
+font_size = 30
 
 [sub_resource type="LabelSettings" id="LabelSettings_jegvk"]
 font_size = 30
@@ -67,14 +70,7 @@ environment = SubResource("Environment_tv723")
 
 [node name="CameraNode" type="Node3D" parent="." unique_id=1591830951]
 script = ExtResource("1_15bo5")
-selection_box_path = NodePath("../CanvasLayer/SelectionBox")
-selection_label_path = NodePath("../CanvasLayer/BudgetUI/SelectionCount")
-removal_label_path = NodePath("../CanvasLayer/BudgetUI/RemovalCost")
-budget_label_path = NodePath("../CanvasLayer/BudgetUI/BudgetLabel")
-coords_label_path = NodePath("../CanvasLayer/CoordsLabel")
-button_top_down_path = NodePath("../CanvasLayer/TopViewButton")
 grid_size = 10.0
-game_manager_path = NodePath("../GameManager")
 
 [node name="Camera3D" type="Camera3D" parent="CameraNode" unique_id=238635267]
 transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 20, 20)
@@ -93,7 +89,15 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("3_t8xqk")
-game_manager_path = NodePath("../../GameManager")
+
+[node name="TimeLabel" type="Label" parent="CanvasLayer/BudgetUI" unique_id=1185102169]
+layout_mode = 0
+offset_left = 459.0
+offset_top = 10.0
+offset_right = 571.0
+offset_bottom = 52.0
+text = "DAY: 0"
+label_settings = SubResource("LabelSettings_t8xqk")
 
 [node name="SelectionCount" type="Label" parent="CanvasLayer/BudgetUI" unique_id=914295955]
 layout_mode = 0
