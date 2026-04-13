@@ -8,14 +8,16 @@
 [ext_resource type="Texture2D" uid="uid://dtg4yfgjwyd0t" path="res://grass_floor/Grass005_1K-PNG_NormalDX.png" id="3_dwo8u"]
 [ext_resource type="Script" uid="uid://egus0nlclyhs" path="res://scenes/shop_ui.gd" id="3_gpoqn"]
 [ext_resource type="Script" uid="uid://38mkp5tlww8m" path="res://scripts/prop_spawner.gd" id="3_jrpe6"]
+[ext_resource type="Script" uid="uid://b8kcrjjy7qt03" path="res://scenes/budget_ui.gd" id="3_t8xqk"]
 [ext_resource type="Texture2D" uid="uid://dogut1n2e11pp" path="res://grass_floor/Grass005_1K-PNG_Roughness.png" id="4_ujfux"]
 [ext_resource type="Script" uid="uid://dtvpsrplqjnt0" path="res://scripts/floor_mesh.gd" id="5_4uwmp"]
 [ext_resource type="PackedScene" uid="uid://jkjc46o7w3vh" path="res://scenes/tree_scene.tscn" id="5_gpoqn"]
 [ext_resource type="PackedScene" uid="uid://duxak6wf4n284" path="res://scenes/rock_scene.tscn" id="5_jegvk"]
-[ext_resource type="Script" path="res://scenes/inventory_UI.gd" id="5_rsucf"]
-[ext_resource type="PackedScene" path="res://scenes/buildingb.tscn" id="5_yo1g0"]
+[ext_resource type="Script" uid="uid://cm3ttbnsbnvxj" path="res://scenes/inventory_UI.gd" id="5_rsucf"]
+[ext_resource type="PackedScene" uid="uid://m0ugwfs8lm1q" path="res://scenes/buildingb.tscn" id="5_yo1g0"]
 [ext_resource type="PackedScene" uid="uid://csnrbpa18gf0j" path="res://scenes/buildingc.tscn" id="6_fx5qm"]
-[ext_resource type="PackedScene" path="res://scenes/shop_item_button.tscn" id="7_gx5h2"]
+[ext_resource type="PackedScene" uid="uid://b2687vha7j4tf" path="res://scenes/shop_item_button.tscn" id="7_gx5h2"]
+[ext_resource type="Script" path="res://scripts/player_manager.gd" id="17_ci7b6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8nkht"]
 sky_top_color = Color(0.4745702, 0.7086191, 1, 1)
@@ -66,12 +68,13 @@ environment = SubResource("Environment_tv723")
 [node name="CameraNode" type="Node3D" parent="." unique_id=1591830951]
 script = ExtResource("1_15bo5")
 selection_box_path = NodePath("../CanvasLayer/SelectionBox")
-selection_label_path = NodePath("../CanvasLayer/SelectionCount")
-removal_label_path = NodePath("../CanvasLayer/RemovalCost")
-budget_label_path = NodePath("../CanvasLayer/BudgetLabel")
+selection_label_path = NodePath("../CanvasLayer/BudgetUI/SelectionCount")
+removal_label_path = NodePath("../CanvasLayer/BudgetUI/RemovalCost")
+budget_label_path = NodePath("../CanvasLayer/BudgetUI/BudgetLabel")
 coords_label_path = NodePath("../CanvasLayer/CoordsLabel")
 button_top_down_path = NodePath("../CanvasLayer/TopViewButton")
 grid_size = 10.0
+game_manager_path = NodePath("../GameManager")
 
 [node name="Camera3D" type="Camera3D" parent="CameraNode" unique_id=238635267]
 transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 20, 20)
@@ -84,36 +87,47 @@ shadow_enabled = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=617266598]
 
+[node name="BudgetUI" type="Control" parent="CanvasLayer" unique_id=1184198994]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_t8xqk")
+game_manager_path = NodePath("../../GameManager")
+
+[node name="SelectionCount" type="Label" parent="CanvasLayer/BudgetUI" unique_id=914295955]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 87.0
+text = "Object selected: 0
+"
+label_settings = SubResource("LabelSettings_jegvk")
+
+[node name="RemovalCost" type="Label" parent="CanvasLayer/BudgetUI" unique_id=979098327]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 51.0
+offset_right = 260.0
+offset_bottom = 138.0
+text = "Removal Cost: $0
+"
+label_settings = SubResource("LabelSettings_gpoqn")
+
+[node name="BudgetLabel" type="Label" parent="CanvasLayer/BudgetUI" unique_id=1883416583]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 108.0
+offset_right = 166.0
+offset_bottom = 150.0
+text = "Budget: $0"
+label_settings = SubResource("LabelSettings_mnokt")
+
 [node name="SelectionBox" type="ColorRect" parent="CanvasLayer" unique_id=1273919934]
 visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
 color = Color(1, 1, 1, 0.13725491)
-
-[node name="SelectionCount" type="Label" parent="CanvasLayer" unique_id=914295955]
-offset_right = 168.0
-offset_bottom = 34.0
-text = "Object selected: 0
-"
-label_settings = SubResource("LabelSettings_jegvk")
-
-[node name="RemovalCost" type="Label" parent="CanvasLayer" unique_id=979098327]
-offset_left = 7.0
-offset_top = 51.0
-offset_right = 260.0
-offset_bottom = 105.0
-text = "Removal Cost: $0
-"
-label_settings = SubResource("LabelSettings_gpoqn")
-
-[node name="BudgetLabel" type="Label" parent="CanvasLayer" unique_id=1883416583]
-offset_left = 12.0
-offset_top = 108.0
-offset_right = 76.0
-offset_bottom = 131.0
-text = "Budget: $0"
-label_settings = SubResource("LabelSettings_mnokt")
 
 [node name="ShopUI" type="Control" parent="CanvasLayer" unique_id=1151587594]
 layout_mode = 3
@@ -249,6 +263,9 @@ script = ExtResource("5_4uwmp")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FloorBody" unique_id=1306689345]
 shape = SubResource("ConvexPolygonShape3D_gpoqn")
+
+[node name="GameManager" type="Node3D" parent="." unique_id=1597852282]
+script = ExtResource("17_ci7b6")
 
 [connection signal="pressed" from="CanvasLayer/ShopUI/ShopButton" to="CanvasLayer/ShopUI" method="_on_shop_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/ShopUI/ShopPanel/CloseShopButton" to="CanvasLayer/ShopUI" method="_on_close_shop_button_pressed"]

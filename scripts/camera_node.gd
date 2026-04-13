@@ -6,31 +6,20 @@ extends Node3D
 @export var min_zoom: float = 5.0
 @export var max_zoom: float = 300.0
 
-@export_group("UI Nodes")
-@export var selection_box_path: NodePath
-@export var selection_label_path: NodePath
-@export var removal_label_path: NodePath
-@export var budget_label_path: NodePath
-@export var coords_label_path: NodePath
-@export var button_top_down_path: NodePath
-
+# ==== UI Nodes (Auto-linked via Relative Paths) ====
+@onready var selection_box: Control = get_node_or_null("../CanvasLayer/SelectionBox")
+@onready var selection_label: Label = get_node_or_null("../CanvasLayer/BudgetUI/SelectionCount")
+@onready var removal_label: Label = get_node_or_null("../CanvasLayer/BudgetUI/RemovalCost")
+@onready var budget_label: Label = get_node_or_null("../CanvasLayer/BudgetUI/BudgetLabel")
+@onready var coords_label: Label = get_node_or_null("../CanvasLayer/CoordsLabel")
+@onready var button_top_down: Button = get_node_or_null("../CanvasLayer/TopViewButton")
 
 @export_group("Spawning")
 @export var grid_size: float = 5.0 # Set this to 1.0 or 2.0 depending on your model size
 @export var test_spawn: PackedScene
-@export var spawn_parent_path: NodePath # Path to a Node3D where props should be spawned
-
-@export_group("Player Info")
-@export var player_budget: float = 1000.0
+@onready var spawn_parent: Node3D = get_node_or_null("../PropSpawner")
 
 @onready var camera = $Camera3D
-@onready var selection_box = get_node(selection_box_path)
-@onready var selection_label = get_node(selection_label_path)
-@onready var removal_label = get_node(removal_label_path)
-@onready var budget_label = get_node(budget_label_path)
-@onready var coords_label = get_node(coords_label_path)
-@onready var spawn_parent = get_node_or_null(spawn_parent_path)
-@onready var button_top_down = get_node_or_null(button_top_down_path)
 
 var top_down_mode: bool = false
 var dragging: bool = false
@@ -144,7 +133,7 @@ func spawn_object_at_mouse(mouse_pos: Vector2):
 		instance.rotation = Vector3.ZERO # Keep them straight like Endfield
 		
 		if instance is Prop:
-			player_budget -= instance.cost
+			PlayerManager.budget -= instance.cost
 			update_budget_ui()
 
 		test_spawn = null
@@ -229,7 +218,7 @@ func delete_selected_props() -> void:
 		if is_instance_valid(prop):
 			total_cost += prop.cost
 			prop.queue_free()
-	player_budget -= total_cost
+	PlayerManager.budget += total_cost # Refund the cost
 	selected_props.clear()
 	calculate_stats([])
 	update_budget_ui()
@@ -243,12 +232,13 @@ func raycast_delete(mouse_pos: Vector2) -> void:
 		var target = result.collider
 		var prop_node = target if target is Prop else target.get_parent()
 		if prop_node is Prop:
-			player_budget -= prop_node.cost
+			PlayerManager.budget += prop_node.cost # Refund the cost
 			prop_node.queue_free()
 			update_budget_ui()
 
 func update_budget_ui() -> void:
-	if budget_label: budget_label.text = "Budget: $" + str(player_budget)
+	if budget_label:
+		budget_label.text = "Budget: $" + str(PlayerManager.budget)
 
 func toggle_top_down_mode() -> void:
 	# TOP DOWN MODE
