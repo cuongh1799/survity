@@ -92,6 +92,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	# Delete Action
 	if event.is_action_pressed("ui_text_delete") or (event is InputEventKey and event.is_pressed() and event.keycode == KEY_DELETE):
 		delete_selected_props()
+		
+	# Collect Action (Enter)
+	if event.is_action_pressed("ui_accept") or (event is InputEventKey and event.is_pressed() and event.keycode == KEY_ENTER):
+		collect_selected_props()
 
 func spawn_object_at_mouse(mouse_pos: Vector2):
 	var from = camera.project_ray_origin(mouse_pos)
@@ -202,15 +206,43 @@ func confirm_selection() -> void:
 
 func calculate_stats(list: Array[Prop]) -> void:
 	var price = 0.0
-	for prop in list: price += prop.cost
+	var total_collect_money = 0.0
+	var collect_items = {}
+	
+	for prop in list:
+		price += prop.cost
+		if 'stored_budget' in prop:
+			total_collect_money += prop.stored_budget
+		if 'stored_items' in prop and prop.stored_items > 0 and prop.generate_item_type != "none":
+			if not collect_items.has(prop.generate_item_type):
+				collect_items[prop.generate_item_type] = 0
+			collect_items[prop.generate_item_type] += prop.stored_items
+
 	if selection_label: selection_label.text = "Selected: " + str(list.size())
-	if removal_label: removal_label.text = "Removal Cost: $" + str(price)
+	
+	var removal_text = "Removal Cost: $" + str(price)
+	if total_collect_money > 0 or collect_items.size() > 0:
+		removal_text += "\nCan Collect: "
+		if total_collect_money > 0:
+			removal_text += "$" + str(total_collect_money) + " "
+		for item in collect_items:
+			removal_text += str(collect_items[item]) + " " + item + " "
+			
+	if removal_label: removal_label.text = removal_text
 
 func clear_selection() -> void:
 	for prop in selected_props:
 		if is_instance_valid(prop): prop.set_highlight(false)
 	selected_props.clear()
 	calculate_stats([])
+
+func collect_selected_props() -> void:
+	for prop in selected_props:
+		if is_instance_valid(prop) and prop.has_method("collect"):
+			prop.collect()
+	
+	# Recalculate stats since items/budget have been collected
+	calculate_stats(selected_props)
 
 func delete_selected_props() -> void:
 	var total_cost = 0.0

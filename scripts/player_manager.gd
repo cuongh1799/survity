@@ -18,7 +18,8 @@ var inventory: Dictionary = {
 	"tools": 0,
 	"glass": 0,
 	"concrete": 0,
-	"electricity": 0
+	"electricity": 0,
+	"oil": 0
 }
 var budget: int = 100
 var total_city_attraction: int = 0

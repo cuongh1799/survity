@@ -119,10 +119,10 @@ label_settings = SubResource("LabelSettings_gpoqn")
 
 [node name="BudgetLabel" type="Label" parent="CanvasLayer/BudgetUI" unique_id=1883416583]
 layout_mode = 0
-offset_left = 12.0
-offset_top = 108.0
-offset_right = 166.0
-offset_bottom = 150.0
+offset_left = 23.0
+offset_top = 648.0
+offset_right = 207.0
+offset_bottom = 709.0
 text = "Budget: $0"
 label_settings = SubResource("LabelSettings_mnokt")
 
@@ -235,6 +235,16 @@ offset_right = 40.0
 offset_bottom = 23.0
 text = "CLOSE 
 INVENTORY"
+
+[node name="inventoryContainer" type="ScrollContainer" parent="CanvasLayer/Inventory/InventoryPanel" unique_id=1949705772]
+layout_mode = 0
+offset_right = 1114.0
+offset_bottom = 662.0
+
+[node name="ItemList" type="ItemList" parent="CanvasLayer/Inventory/InventoryPanel/inventoryContainer" unique_id=1573504955]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="CoordsLabel" type="Label" parent="CanvasLayer" unique_id=1306763300]
 offset_left = 1433.0
