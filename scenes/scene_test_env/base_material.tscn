@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://h1y6g6cfn8nb"]
+
+[ext_resource type="Script" uid="uid://c6cxtvge3cogy" path="res://scripts/test_env/base_material.gd" id="1_bqt2y"]
+[ext_resource type="ArrayMesh" uid="uid://dryitl8ndn16x" path="res://tres/logModel.res" id="2_13pyu"]
+
+[node name="BaseMaterial" type="StaticBody3D" unique_id=1282704052]
+script = ExtResource("1_bqt2y")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1256268716]
+mesh = ExtResource("2_13pyu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2052754639]
+
+[node name="SelectionVisual" type="MeshInstance3D" parent="." unique_id=1273872409]

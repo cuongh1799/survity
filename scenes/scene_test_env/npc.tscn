@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://cd6npayaa0iye"]
+
+[ext_resource type="Script" uid="uid://c62fvvaako5q0" path="res://scripts/npc.gd" id="1_abqhh"]
+[ext_resource type="PackedScene" uid="uid://prh35jb6tjtd" path="res://assets/npc/sophia_skin.tscn" id="2_abqhh"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7n8xq"]
+radius = 0.70166016
+height = 1.7657471
+
+[node name="Npc" type="CharacterBody3D" unique_id=856999809]
+script = ExtResource("1_abqhh")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1584966242]
+debug_enabled = true
+
+[node name="SophiaSkin" parent="." unique_id=1786942235 instance=ExtResource("2_abqhh")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=235119453]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.01839137, 0.85686004, -0.018238068)
+shape = SubResource("CapsuleShape3D_7n8xq")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1222793905]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.92260325, 2.8839154)
+
+[connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
