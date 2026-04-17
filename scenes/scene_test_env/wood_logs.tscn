@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://bq35hh3ffa8h3"]
 
-[ext_resource type="PackedScene" uid="uid://h1y6g6cfn8nb" path="res://scenes/test_env/base_material.tscn" id="1_fw8pb"]
-[ext_resource type="Script" uid="uid://dv6synldiuuhp" path="res://scripts/test_env/wood_logs.gd" id="2_f4snk"]
+[ext_resource type="PackedScene" uid="uid://h1y6g6cfn8nb" path="res://scenes/scene_test_env/base_material.tscn" id="1_fw8pb"]
+[ext_resource type="Script" uid="uid://dv6synldiuuhp" path="res://scripts/scripts_test_env/wood_logs.gd" id="2_f4snk"]
+[ext_resource type="ArrayMesh" uid="uid://dryitl8ndn16x" path="res://tres/logModel.res" id="3_dfr24"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_f4snk"]
 height = 1.8117676
@@ -9,18 +10,18 @@ radius = 0.2685547
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_e74sy"]
 
-[node name="Wood_logs" unique_id=1282704052 instance=ExtResource("1_fw8pb")]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+[node name="Wood_logs_scene" unique_id=1282704052 instance=ExtResource("1_fw8pb")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 2.3841858e-07, 0)
 script = ExtResource("2_f4snk")
 
-[node name="MeshInstance3D" parent="." index="0" unique_id=1256268716]
+[node name="MeshInstance3D" parent="." index="0" unique_id=969501028]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
+mesh = ExtResource("3_dfr24")
 
-[node name="CollisionShape3D" parent="." index="1" unique_id=2052754639]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.016174316, 0)
+[node name="CollisionShape3D" parent="." index="1" unique_id=1404920838]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0019739151, 0)
 shape = SubResource("CylinderShape3D_f4snk")
 
-[node name="SelectionVisual" parent="." index="2" unique_id=1273872409]
-transform = Transform3D(0.5, 0, 0, 0, 0.90000004, 0, 0, 0, 0.5, -0.23951416, -0.28857422, -0.5136719)
-visible = false
+[node name="SelectionVisual" parent="." index="2" unique_id=407129122]
+transform = Transform3D(0.5, 0, 0, 0, 0.90000004, 0, 0, 0, 0.5, 0, -9.536743e-08, 0)
 mesh = SubResource("CylinderMesh_e74sy")

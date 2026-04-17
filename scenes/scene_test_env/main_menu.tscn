@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://d1dthoixcrw0c"]
 
-[ext_resource type="Script" uid="uid://c315jum2s4jms" path="res://scripts/main_menu.gd" id="1_l6cm7"]
-[ext_resource type="AudioStream" uid="uid://phum7v4uk0gi" path="res://assets/sound/1Phantazia.wav" id="2_ekxnf"]
-[ext_resource type="FontFile" uid="uid://dfxfqh7m3hw0e" path="res://assets/font/GrapeSoda.ttf" id="2_wu84c"]
-[ext_resource type="Script" uid="uid://1v7ebbpt7jff" path="res://scripts/music_slider.gd" id="3_bqqt6"]
-[ext_resource type="Script" uid="uid://belpcnxl0ce40" path="res://scripts/sfx_slider.gd" id="5_8ln24"]
+[ext_resource type="Script" uid="uid://c315jum2s4jms" path="res://scripts/scripts_test_env/main_menu.gd" id="1_l6cm7"]
+[ext_resource type="AudioStream" uid="uid://ci2cix7up0uf3" path="res://assets/1Phantazia.wav" id="2_ekxnf"]
+[ext_resource type="FontFile" uid="uid://bt44ju0wcfek3" path="res://assets/GrapeSoda.ttf" id="2_wu84c"]
+[ext_resource type="Script" uid="uid://1v7ebbpt7jff" path="res://scripts/scripts_test_env/music_slider.gd" id="3_bqqt6"]
+[ext_resource type="Script" uid="uid://belpcnxl0ce40" path="res://scripts/scripts_test_env/sfx_slider.gd" id="5_8ln24"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ekxnf"]
 bg_color = Color(1, 1, 1, 1)
@@ -45,18 +45,22 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -1843.0
+offset_bottom = -1018.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_l6cm7")
 
 [node name="Title" type="Label" parent="." unique_id=1108852163]
+visible = false
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -275.0
-offset_right = 275.0
-offset_bottom = 277.0
+offset_left = 576.5
+offset_top = 10.0
+offset_right = 1126.5
+offset_bottom = 310.0
 grow_horizontal = 2
 theme_override_fonts/font = ExtResource("2_wu84c")
 theme_override_font_sizes/font_size = 300
@@ -68,15 +72,11 @@ autowrap_mode = 2
 [node name="Main_button" type="VBoxContainer" parent="." unique_id=294202213]
 visible = false
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -319.9375
-offset_top = -190.0
-offset_right = 319.9375
-offset_bottom = 190.0
+anchors_preset = -1
+offset_left = 648.0
+offset_top = 377.0
+offset_right = 1287.875
+offset_bottom = 757.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 8
@@ -133,14 +133,10 @@ text = "Quit"
 visible = false
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.60700005
-anchor_right = 0.5
-anchor_bottom = 0.60700005
-offset_left = -501.0
-offset_top = -320.56006
-offset_right = 504.0
-offset_bottom = 320.43994
+offset_left = 417.0
+offset_top = 292.0
+offset_right = 1422.0
+offset_bottom = 933.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -200,16 +196,16 @@ text = "Back"
 metadata/_edit_use_anchors_ = true
 
 [node name="Option_Setting" type="Panel" parent="." unique_id=1874324230]
-layout_mode = 0
-offset_left = 529.0
-offset_top = 284.0
-offset_right = 1400.0
-offset_bottom = 946.0
+layout_mode = 1
+anchors_preset = -1
+offset_left = 499.0
+offset_top = 334.0
+offset_right = 1370.0
+offset_bottom = 996.0
 
 [node name="1Phantazia" type="AudioStreamPlayer" parent="Option_Setting" unique_id=1792463116]
 stream = ExtResource("2_ekxnf")
 autoplay = true
-bus = &"BackgroundMusic"
 
 [node name="BackButon" type="Button" parent="Option_Setting" unique_id=1802628687]
 layout_mode = 1
