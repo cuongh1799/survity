@@ -31,6 +31,32 @@ sky_material = SubResource("ProceduralSkyMaterial_8nkht")
 [sub_resource type="Environment" id="Environment_tv723"]
 background_mode = 2
 sky = SubResource("Sky_eafes")
+sky_custom_fov = 28.6
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.01
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_t8xqk"]
+lifetime_randomness = 0.5
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.0
+
+[sub_resource type="Curve" id="Curve_t8xqk"]
+_data = [Vector2(0, 0.51284796), 0.0, 0.0, 0, 0, Vector2(0.21643835, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n0v2f"]
+transparency = 1
+shading_mode = 0
+use_particle_trails = true
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_lecgy"]
+material = SubResource("StandardMaterial3D_n0v2f")
+custom_aabb = AABB(-10, -20, -10, 20, 20, 20)
+size = 0.5
+curve = SubResource("Curve_t8xqk")
 
 [sub_resource type="LabelSettings" id="LabelSettings_t8xqk"]
 font_size = 30
@@ -76,6 +102,13 @@ grid_size = 10.0
 transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 20, 20)
 current = true
 script = ExtResource("2_35k36")
+
+[node name="Rain" type="GPUParticles3D" parent="CameraNode" unique_id=216829632]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 82, 0)
+amount = 100
+trail_enabled = true
+process_material = SubResource("ParticleProcessMaterial_t8xqk")
+draw_pass_1 = SubResource("RibbonTrailMesh_lecgy")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=872824058]
 transform = Transform3D(-0.9659258, -1.4393417e-08, -0.25881913, -0.06698733, 0.9659259, 0.24999999, 0.25000006, 0.25881904, -0.9330127, 138, 132, 0)
