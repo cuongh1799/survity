@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://caln1aqtymcxd"]
 
-[ext_resource type="Script" uid="uid://cvc0nat3hrtdb" path="res://scripts/camera_node.gd" id="1_15bo5"]
+[ext_resource type="Script" path="res://scripts/camera_node.gd" id="1_15bo5"]
 [ext_resource type="Texture2D" uid="uid://da1n500ocl0i0" path="res://grass_floor/Grass005_1K-PNG_Color.png" id="1_xclp7"]
 [ext_resource type="Script" uid="uid://c2yvc6pfy7w05" path="res://scripts/game_camera.gd" id="2_35k36"]
 [ext_resource type="PackedScene" uid="uid://d2j2l5iyunhne" path="res://scenes/building_scene.tscn" id="2_mnokt"]
