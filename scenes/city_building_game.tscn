@@ -36,7 +36,7 @@ volumetric_fog_enabled = true
 volumetric_fog_density = 0.01
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_t8xqk"]
-lifetime_randomness = 0.5
+lifetime_randomness = 1.0
 emission_shape = 3
 emission_box_extents = Vector3(1, 1, 1)
 collision_mode = 1
@@ -44,7 +44,7 @@ collision_friction = 0.0
 collision_bounce = 0.0
 
 [sub_resource type="Curve" id="Curve_t8xqk"]
-_data = [Vector2(0, 0.51284796), 0.0, 0.0, 0, 0, Vector2(0.21643835, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.51284796), 0.0, 0.0, 0, 0, Vector2(0.20000002, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n0v2f"]
@@ -55,7 +55,8 @@ use_particle_trails = true
 [sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_lecgy"]
 material = SubResource("StandardMaterial3D_n0v2f")
 custom_aabb = AABB(-10, -20, -10, 20, 20, 20)
-size = 0.5
+size = 2.669
+section_length = 1.589
 curve = SubResource("Curve_t8xqk")
 
 [sub_resource type="LabelSettings" id="LabelSettings_t8xqk"]
@@ -104,8 +105,10 @@ current = true
 script = ExtResource("2_35k36")
 
 [node name="Rain" type="GPUParticles3D" parent="CameraNode" unique_id=216829632]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 82, 0)
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 48, 0)
 amount = 100
+lifetime = 25.0
+randomness = 1.0
 trail_enabled = true
 process_material = SubResource("ParticleProcessMaterial_t8xqk")
 draw_pass_1 = SubResource("RibbonTrailMesh_lecgy")
