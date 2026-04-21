@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://c4mg7l26e1byi"]
+
+[ext_resource type="PackedScene" uid="uid://3jmo64dlvn5m" path="res://scenes/base_prop.tscn" id="1_eg6ts"]
+[ext_resource type="PackedScene" uid="uid://1nj5kj2ugrgk" path="res://glb/collected_material/concrete/concrete_block_low_poly.glb" id="2_a0t4n"]
+[ext_resource type="Script" uid="uid://c1knnd5n0ydyc" path="res://scripts/scripts_test_env/concrete_scene.gd" id="2_w1yes"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w1yes"]
+size = Vector3(3.9143066, 5.201111, 10.109589)
+
+[node name="Concrete_scene" unique_id=1629872540 instance=ExtResource("1_eg6ts")]
+script = ExtResource("2_w1yes")
+
+[node name="Sketchfab_Scene" parent="MeshInstance3D" parent_id_path=PackedInt32Array(1077949620) index="0" unique_id=744779160 instance=ExtResource("2_a0t4n")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+
+[node name="CollisionShape3D" parent="." index="1" unique_id=1411538431]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.036993027, -0.04470682, 0.021995544)
+shape = SubResource("BoxShape3D_w1yes")

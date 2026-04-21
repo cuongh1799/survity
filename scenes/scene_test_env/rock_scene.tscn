@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://qg3et1emhvbc"]
+
+[ext_resource type="PackedScene" uid="uid://3jmo64dlvn5m" path="res://scenes/base_prop.tscn" id="1_eyytj"]
+[ext_resource type="Script" uid="uid://bn47jfjplsa8e" path="res://scripts/scripts_test_env/rock_scene.gd" id="2_0euxh"]
+[ext_resource type="PackedScene" uid="uid://mpoy4rlrmtpv" path="res://glb/collected_material/rock/s__rock_01_lowpoly.glb" id="3_u5it4"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_lwr0w"]
+radius = 2.7702522
+
+[node name="Rock_scene" unique_id=1629872540 instance=ExtResource("1_eyytj")]
+script = ExtResource("2_0euxh")
+
+[node name="MeshInstance3D" parent="." index="0" unique_id=1077949620]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+
+[node name="Sketchfab_Scene" parent="MeshInstance3D" index="0" unique_id=770734232 instance=ExtResource("3_u5it4")]
+
+[node name="CollisionShape3D" parent="." index="1" unique_id=1411538431]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.059575558, -0.12997484, 0.23930883)
+shape = SubResource("SphereShape3D_lwr0w")

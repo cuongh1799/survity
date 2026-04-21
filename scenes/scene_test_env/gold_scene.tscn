@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://cg0x1xfl0k0p1"]
+
+[ext_resource type="PackedScene" uid="uid://3jmo64dlvn5m" path="res://scenes/base_prop.tscn" id="1_oqgsj"]
+[ext_resource type="Script" uid="uid://cdmvkdp5me7rg" path="res://scripts/scripts_test_env/gold_scene.gd" id="2_1vq84"]
+[ext_resource type="PackedScene" uid="uid://wn45q8vuy0rg" path="res://glb/collected_material/gold/low-poly-gold-bar/source/model.glb" id="2_ylnet"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1vq84"]
+size = Vector3(10.451939, 2.0569153, 4.581421)
+
+[node name="Gold_scene" unique_id=1629872540 instance=ExtResource("1_oqgsj")]
+script = ExtResource("2_1vq84")
+
+[node name="model" parent="MeshInstance3D" parent_id_path=PackedInt32Array(1077949620) index="0" unique_id=538309695 instance=ExtResource("2_ylnet")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+
+[node name="CollisionShape3D" parent="." index="1" unique_id=1411538431]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.060304403, 0.06692839, -0.01230526)
+shape = SubResource("BoxShape3D_1vq84")
+
+[node name="SelectionVisual" parent="." index="2" unique_id=407129122]
+visible = true

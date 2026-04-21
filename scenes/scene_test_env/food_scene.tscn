@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://jls83y1tqvnq"]
+
+[ext_resource type="PackedScene" uid="uid://3jmo64dlvn5m" path="res://scenes/base_prop.tscn" id="1_qbebn"]
+[ext_resource type="PackedScene" uid="uid://beclmccp56tmk" path="res://glb/collected_material/fish/low_poly_fish.glb" id="2_jst8s"]
+[ext_resource type="Script" uid="uid://bxa4l78wffqyc" path="res://scripts/scripts_test_env/food_scene.gd" id="2_kaw4d"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kaw4d"]
+size = Vector3(412.88507, 175.55359, 50.377262)
+
+[node name="Food_scene" unique_id=1629872540 instance=ExtResource("1_qbebn")]
+script = ExtResource("2_kaw4d")
+
+[node name="Sketchfab_Scene" parent="MeshInstance3D" parent_id_path=PackedInt32Array(1077949620) index="0" unique_id=53797570 instance=ExtResource("2_jst8s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -110)
+
+[node name="CollisionShape3D" parent="." index="1" unique_id=1411538431]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.12132263, 22.045227, -2.085184)
+shape = SubResource("BoxShape3D_kaw4d")

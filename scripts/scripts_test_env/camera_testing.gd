@@ -1,18 +1,32 @@
 extends "res://scripts/camera_node.gd"
 
 @export var wood_logs_scene: PackedScene = preload("res://scenes/scene_test_env/wood_logs.tscn")
-@export var gas_barrel_scene: PackedScene = preload("res://scenes/scene_test_env/gas_barrel.tscn")
+@export var rock_scene: PackedScene = preload("res://scenes/scene_test_env/rock_scene.tscn")
+@export var food_scene: PackedScene = preload("res://scenes/scene_test_env/food_scene.tscn")
+#@export var water_scene: 
+#@export var gas_barrel_scene: PackedScene = preload("res://scenes/scene_test_env/gas_barrel.tscn")
+#@export var brick_scene: PackedScene = preload("res://scenes/scene_test_env/brick_scene.tscn")
+#@export var iron_scene: PackedScene = preload("res://scenes/scene_test_env/iron_scene.tscn")
+#@export var gold_scene: PackedScene = preload("res://scenes/scene_test_env/gold_scene.tscn")
+
 @onready var game_manager: Node3D = $"../GameManager"
 
 func _spawn_material_drop(prop: Prop) -> void:
 	var drop_scene: PackedScene = null
 	match prop.drop_type:
+		#basic
 		"wood":
 			drop_scene = wood_logs_scene
 			game_manager.inventory.wood += 10
-			
 		"stone":
-			drop_scene = gas_barrel_scene
+			drop_scene = rock_scene
+			game_manager.inventory.stone += 10
+		# how do we collect?
+		"food":
+			drop_scene = food_scene
+			game_manager.inventory.food += 10
+		"water":
+			drop_scene = rock_scene
 			game_manager.inventory.stone += 10
 		_:
 			return

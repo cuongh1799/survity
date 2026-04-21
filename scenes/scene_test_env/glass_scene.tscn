@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cx4odq56ikmk1"]
+
+[ext_resource type="PackedScene" uid="uid://3jmo64dlvn5m" path="res://scenes/base_prop.tscn" id="1_3ro8h"]
+[ext_resource type="Script" uid="uid://2jtakog3b0v" path="res://scripts/scripts_test_env/glass_scene.gd" id="2_ii1jo"]
+[ext_resource type="PackedScene" uid="uid://dx44w056bhypd" path="res://glb/collected_material/glass/glass_block_1.glb" id="3_pitbe"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_q04mv"]
+size = Vector3(2.7384338, 5.3196564, 5.36557)
+
+[node name="Glass_scene" unique_id=1629872540 instance=ExtResource("1_3ro8h")]
+script = ExtResource("2_ii1jo")
+
+[node name="Sketchfab_Scene" parent="MeshInstance3D" parent_id_path=PackedInt32Array(1077949620) index="0" unique_id=1545452497 instance=ExtResource("3_pitbe")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, 0, 0, 0)
+
+[node name="CollisionShape3D" parent="." index="1" unique_id=1411538431]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2915344e-05, 2.403829, 0.006906271)
+shape = SubResource("BoxShape3D_q04mv")

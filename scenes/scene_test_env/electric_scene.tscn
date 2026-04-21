@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://d144narxtwto2"]
+
+[ext_resource type="PackedScene" uid="uid://3jmo64dlvn5m" path="res://scenes/base_prop.tscn" id="1_iyygh"]
+[ext_resource type="Script" uid="uid://bd8up5r1qxl0l" path="res://scripts/scripts_test_env/electric_scene.gd" id="2_0hg8k"]
+[ext_resource type="PackedScene" uid="uid://d2iwi3ojcfn3j" path="res://glb/collected_material/electricity/electric_box_43.glb" id="2_8g6rt"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0hg8k"]
+size = Vector3(0.5709839, 1.1719971, 0.7186279)
+
+[node name="Electric_scene" unique_id=1629872540 instance=ExtResource("1_iyygh")]
+script = ExtResource("2_0hg8k")
+
+[node name="Sketchfab_Scene" parent="MeshInstance3D" parent_id_path=PackedInt32Array(1077949620) index="0" unique_id=1710172043 instance=ExtResource("2_8g6rt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.51398027, 0)
+
+[node name="CollisionShape3D" parent="." index="1" unique_id=1411538431]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00289917, 0.021484256, -0.14068604)
+shape = SubResource("BoxShape3D_0hg8k")
