@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://m0ugwfs8lm1q" path="res://scenes/buildingb.tscn" id="5_yo1g0"]
 [ext_resource type="PackedScene" uid="uid://csnrbpa18gf0j" path="res://scenes/buildingc.tscn" id="6_fx5qm"]
 [ext_resource type="PackedScene" uid="uid://b2687vha7j4tf" path="res://scenes/shop_item_button.tscn" id="7_gx5h2"]
+[ext_resource type="Script" uid="uid://cvukhiqib8ng4" path="res://scenes/toxic_bar.gd" id="10_n0v2f"]
 [ext_resource type="Script" uid="uid://3w2qj10xjxlf" path="res://scripts/player_manager.gd" id="17_ci7b6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8nkht"]
@@ -197,6 +198,7 @@ text = "SHOP"
 label_settings = SubResource("LabelSettings_rsucf")
 
 [node name="ShopPanel" type="Panel" parent="CanvasLayer/ShopUI" unique_id=783887283]
+visible = false
 layout_mode = 0
 offset_left = 326.0
 offset_top = -652.0
@@ -252,6 +254,7 @@ text = "INVENTORY"
 label_settings = SubResource("LabelSettings_rsucf")
 
 [node name="InventoryPanel" type="Panel" parent="CanvasLayer/Inventory" unique_id=953436822]
+visible = false
 layout_mode = 0
 offset_left = -1192.0
 offset_top = -661.0
@@ -297,6 +300,13 @@ offset_top = 10.0
 offset_right = 960.0
 offset_bottom = 81.0
 text = "MODE: TOP DOWN"
+
+[node name="ToxicBar" type="ProgressBar" parent="CanvasLayer" unique_id=1113197471]
+offset_left = 1341.0
+offset_top = 563.0
+offset_right = 1610.0
+offset_bottom = 647.0
+script = ExtResource("10_n0v2f")
 
 [node name="PropSpawner" type="Node3D" parent="." unique_id=2133982471]
 script = ExtResource("3_jrpe6")
