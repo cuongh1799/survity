@@ -3,16 +3,29 @@
 [ext_resource type="Script" uid="uid://cvc0nat3hrtdb" path="res://scripts/camera_node.gd" id="1_15bo5"]
 [ext_resource type="Texture2D" uid="uid://da1n500ocl0i0" path="res://grass_floor/Grass005_1K-PNG_Color.png" id="1_xclp7"]
 [ext_resource type="Script" uid="uid://c2yvc6pfy7w05" path="res://scripts/game_camera.gd" id="2_35k36"]
-[ext_resource type="PackedScene" uid="uid://d2j2l5iyunhne" path="res://scenes/building_scene.tscn" id="2_mnokt"]
 [ext_resource type="Texture2D" uid="uid://lgcgpsconi1r" path="res://grass_floor/Grass005_1K-PNG_AmbientOcclusion.png" id="2_rj7bk"]
 [ext_resource type="Texture2D" uid="uid://dtg4yfgjwyd0t" path="res://grass_floor/Grass005_1K-PNG_NormalDX.png" id="3_dwo8u"]
 [ext_resource type="Script" uid="uid://egus0nlclyhs" path="res://scenes/shop_ui.gd" id="3_gpoqn"]
 [ext_resource type="Script" uid="uid://38mkp5tlww8m" path="res://scripts/prop_spawner.gd" id="3_jrpe6"]
+[ext_resource type="Script" uid="uid://b8kcrjjy7qt03" path="res://scenes/budget_ui.gd" id="3_t8xqk"]
 [ext_resource type="Texture2D" uid="uid://dogut1n2e11pp" path="res://grass_floor/Grass005_1K-PNG_Roughness.png" id="4_ujfux"]
 [ext_resource type="Script" uid="uid://dtvpsrplqjnt0" path="res://scripts/floor_mesh.gd" id="5_4uwmp"]
 [ext_resource type="PackedScene" uid="uid://jkjc46o7w3vh" path="res://scenes/tree_scene.tscn" id="5_gpoqn"]
 [ext_resource type="PackedScene" uid="uid://duxak6wf4n284" path="res://scenes/rock_scene.tscn" id="5_jegvk"]
-[ext_resource type="PackedScene" uid="uid://d1dthoixcrw0c" path="res://scenes/main_menu.tscn" id="5_rsucf"]
+[ext_resource type="Script" uid="uid://cm3ttbnsbnvxj" path="res://scenes/inventory_UI.gd" id="5_rsucf"]
+[ext_resource type="PackedScene" uid="uid://brecipegrow01" path="res://scenes/recipe_row.tscn" id="7_gx5h2"]
+[ext_resource type="PackedScene" uid="uid://c8woodpile01" path="res://scenes/world_wood_pile.tscn" id="17_wp"]
+[ext_resource type="PackedScene" uid="uid://c8oilpuddle01" path="res://scenes/world_oil_puddle.tscn" id="18_op"]
+[ext_resource type="PackedScene" uid="uid://c8stream001" path="res://scenes/world_stream.tscn" id="19_st"]
+[ext_resource type="PackedScene" uid="uid://c8dirt001" path="res://scenes/world_dirt_mound.tscn" id="20_dm"]
+[ext_resource type="PackedScene" uid="uid://c8sand001" path="res://scenes/world_sand_pile.tscn" id="21_sp"]
+[ext_resource type="PackedScene" uid="uid://c8gold001" path="res://scenes/world_gold_ore.tscn" id="22_go"]
+[ext_resource type="PackedScene" uid="uid://c8silver01" path="res://scenes/world_silver_ore.tscn" id="23_so"]
+[ext_resource type="PackedScene" uid="uid://c8coal001" path="res://scenes/world_coal_ore.tscn" id="24_co"]
+[ext_resource type="Script" uid="uid://m50pon6nyvqb" path="res://scenes/mission_ui.gd" id="25_mui"]
+[ext_resource type="Script" uid="uid://bveteawcfsuxm" path="res://scripts/player_city.gd" id="26_pc"]
+[ext_resource type="PackedScene" path="res://scenes/minimap_ui.tscn" id="27_mm"]
+[ext_resource type="Script" uid="uid://cc303xn054oko" path="res://scripts/canvas_shortcuts.gd" id="28_sc"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8nkht"]
 sky_top_color = Color(0.4745702, 0.7086191, 1, 1)
@@ -27,6 +40,9 @@ sky_material = SubResource("ProceduralSkyMaterial_8nkht")
 background_mode = 2
 sky = SubResource("Sky_eafes")
 
+[sub_resource type="LabelSettings" id="LabelSettings_t8xqk"]
+font_size = 30
+
 [sub_resource type="LabelSettings" id="LabelSettings_jegvk"]
 font_size = 30
 
@@ -38,6 +54,18 @@ font_size = 30
 
 [sub_resource type="LabelSettings" id="LabelSettings_rsucf"]
 font_size = 50
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
+radius = 0.95
+height = 3.4
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_player"]
+radius = 0.95
+height = 3.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_player_red"]
+albedo_color = Color(0.9, 0.16, 0.12, 1)
+roughness = 0.42
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_744bo"]
 albedo_texture = ExtResource("1_xclp7")
@@ -52,27 +80,20 @@ uv1_scale = Vector3(50, 50, 50)
 material = SubResource("StandardMaterial3D_744bo")
 size = Vector3(1000, 0.15, 1000)
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_gpoqn"]
-points = PackedVector3Array(507.9365, 7.8615084, 507.9365, -507.9365, -8.011508, -507.9365, -507.9365, 7.8615084, -507.9365, 507.9365, -8.011508, -507.9365, -507.9365, -8.011508, 507.9365, -507.9365, 7.8615084, 507.9365, 507.9365, 7.8615084, -507.9365, 507.9365, -8.011508, 507.9365)
+[sub_resource type="BoxShape3D" id="BoxShape3D_floor"]
+size = Vector3(1000, 0.15, 1000)
 
 [node name="city_building_game" type="Node3D" unique_id=813188418]
-
-[node name="Main_menu" parent="." unique_id=258386567 instance=ExtResource("5_rsucf")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1991621675]
 environment = SubResource("Environment_tv723")
 
 [node name="CameraNode" type="Node3D" parent="." unique_id=1591830951]
 script = ExtResource("1_15bo5")
-selection_box_path = NodePath("../CanvasLayer/SelectionBox")
-selection_label_path = NodePath("../CanvasLayer/SelectionCount")
-removal_label_path = NodePath("../CanvasLayer/RemovalCost")
-budget_label_path = NodePath("../CanvasLayer/BudgetLabel")
-coords_label_path = NodePath("../CanvasLayer/CoordsLabel")
-test_spawn = ExtResource("2_mnokt")
+grid_size = 10.0
 
 [node name="Camera3D" type="Camera3D" parent="CameraNode" unique_id=238635267]
-transform = Transform3D(1, 0, 0, 0, 0.5, 0.8660253, 0, -0.8660253, 0.5, 0, 20, 20)
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 20, 20)
 current = true
 script = ExtResource("2_35k36")
 
@@ -82,6 +103,49 @@ shadow_enabled = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=617266598]
 
+[node name="BudgetUI" type="Control" parent="CanvasLayer" unique_id=1184198994]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_t8xqk")
+
+[node name="TimeLabel" type="Label" parent="CanvasLayer/BudgetUI" unique_id=1185102169]
+layout_mode = 0
+offset_left = 459.0
+offset_top = 10.0
+offset_right = 571.0
+offset_bottom = 52.0
+text = "DAY: 0"
+label_settings = SubResource("LabelSettings_t8xqk")
+
+[node name="SelectionCount" type="Label" parent="CanvasLayer/BudgetUI" unique_id=914295955]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 87.0
+text = "Object selected: 0
+"
+label_settings = SubResource("LabelSettings_jegvk")
+
+[node name="RemovalCost" type="Label" parent="CanvasLayer/BudgetUI" unique_id=979098327]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 51.0
+offset_right = 260.0
+offset_bottom = 138.0
+text = "Removal Cost: $0
+"
+label_settings = SubResource("LabelSettings_gpoqn")
+
+[node name="BudgetLabel" type="Label" parent="CanvasLayer/BudgetUI" unique_id=1883416583]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 108.0
+offset_right = 166.0
+offset_bottom = 150.0
+text = "Budget: $0"
+label_settings = SubResource("LabelSettings_mnokt")
+
 [node name="SelectionBox" type="ColorRect" parent="CanvasLayer" unique_id=1273919934]
 visible = false
 offset_right = 40.0
@@ -89,60 +153,75 @@ offset_bottom = 40.0
 mouse_filter = 2
 color = Color(1, 1, 1, 0.13725491)
 
-[node name="SelectionCount" type="Label" parent="CanvasLayer" unique_id=914295955]
-offset_right = 168.0
-offset_bottom = 34.0
-text = "Object selected: 0
-"
-label_settings = SubResource("LabelSettings_jegvk")
+[node name="MissionUI" type="Control" parent="CanvasLayer" unique_id=500000010]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 8.0
+offset_top = 168.0
+offset_right = 372.0
+offset_bottom = 460.0
+grow_horizontal = 0
+script = ExtResource("25_mui")
 
-[node name="RemovalCost" type="Label" parent="CanvasLayer" unique_id=979098327]
-offset_left = 7.0
-offset_top = 51.0
-offset_right = 260.0
-offset_bottom = 105.0
-text = "Removal Cost: $0
-"
-label_settings = SubResource("LabelSettings_gpoqn")
+[node name="MissionText" type="RichTextLabel" parent="CanvasLayer/MissionUI" unique_id=500000012]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1589.0
+offset_top = -165.0
+offset_right = 1569.0
+offset_bottom = -185.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 15
+bbcode_enabled = true
+text = "Missions"
 
-[node name="BudgetLabel" type="Label" parent="CanvasLayer" unique_id=1883416583]
-offset_left = 12.0
-offset_top = 108.0
-offset_right = 76.0
-offset_bottom = 131.0
-text = "Budget: $0"
-label_settings = SubResource("LabelSettings_mnokt")
+[node name="MinimapUI" parent="CanvasLayer" unique_id=500000030 instance=ExtResource("27_mm")]
+offset_left = -256.0
+offset_top = 798.0
+offset_right = -32.0
+offset_bottom = 1022.0
+grow_vertical = 1
+
+[node name="CanvasShortcuts" type="Node" parent="CanvasLayer" unique_id=500000031]
+script = ExtResource("28_sc")
 
 [node name="ShopUI" type="Control" parent="CanvasLayer" unique_id=1151587594]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 5.0
-offset_top = 776.0
-offset_right = 405.0
-offset_bottom = 1076.0
+offset_left = 8.0
+offset_top = 840.0
+offset_right = 288.0
+offset_bottom = 940.0
 script = ExtResource("3_gpoqn")
+recipe_row_scene = ExtResource("7_gx5h2")
+cameraPath = NodePath("../../CameraNode")
 
 [node name="ShopButton" type="Button" parent="CanvasLayer/ShopUI" unique_id=1839595508]
 layout_mode = 0
-offset_top = -58.0
-offset_right = 273.0
-offset_bottom = 170.0
+offset_left = 13.0
+offset_top = 25.0
+offset_right = 397.0
+offset_bottom = 116.0
 
 [node name="ShopLabel" type="Label" parent="CanvasLayer/ShopUI" unique_id=1092992470]
 layout_mode = 0
-offset_left = 49.0
-offset_top = 22.0
-offset_right = 228.0
-offset_bottom = 117.0
-text = "SHOP"
+offset_left = 63.0
+offset_top = 34.0
+offset_right = 351.0
+offset_bottom = 129.0
+text = "CRAFT (R)"
 label_settings = SubResource("LabelSettings_rsucf")
 
 [node name="ShopPanel" type="Panel" parent="CanvasLayer/ShopUI" unique_id=783887283]
 layout_mode = 0
-offset_left = 326.0
-offset_top = -652.0
-offset_right = 1567.0
-offset_bottom = 19.0
+offset_left = 387.0
+offset_top = -673.0
+offset_right = 1628.0
+offset_bottom = -2.0
 
 [node name="CloseShopButton" type="Button" parent="CanvasLayer/ShopUI/ShopPanel" unique_id=1998175648]
 layout_mode = 0
@@ -155,7 +234,76 @@ offset_bottom = 84.0
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
-text = "CLOSE"
+text = "CLOSE
+SHOP"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/ShopUI/ShopPanel" unique_id=1427477929]
+layout_mode = 0
+offset_right = 1120.0
+offset_bottom = 671.0
+
+[node name="ItemGrid" type="GridContainer" parent="CanvasLayer/ShopUI/ShopPanel/ScrollContainer" unique_id=504471404]
+layout_mode = 2
+
+[node name="Inventory" type="Control" parent="CanvasLayer" unique_id=908550285]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 8.0
+offset_top = 948.0
+offset_right = 288.0
+offset_bottom = 1068.0
+script = ExtResource("5_rsucf")
+
+[node name="InventoryButton" type="Button" parent="CanvasLayer/Inventory" unique_id=1857319218]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 19.0
+offset_right = 423.0
+offset_bottom = 119.0
+
+[node name="Inventory" type="Label" parent="CanvasLayer/Inventory" unique_id=226156253]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 34.0
+offset_right = 390.0
+offset_bottom = 103.0
+text = "INVENTORY (T)"
+label_settings = SubResource("LabelSettings_rsucf")
+
+[node name="InventoryPanel" type="Panel" parent="CanvasLayer/Inventory" unique_id=953436822]
+layout_mode = 0
+offset_left = 408.0
+offset_top = -783.0
+offset_right = 1649.0
+offset_bottom = -112.0
+
+[node name="CloseInventoryButton" type="Button" parent="CanvasLayer/Inventory/InventoryPanel" unique_id=717079871]
+layout_mode = 0
+offset_left = 1123.0
+offset_top = 3.0
+offset_right = 1235.0
+offset_bottom = 84.0
+
+[node name="Label" type="Label" parent="CanvasLayer/Inventory/InventoryPanel/CloseInventoryButton" unique_id=1346617911]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "CLOSE 
+INVENTORY"
+
+[node name="InventoryScroll" type="ScrollContainer" parent="CanvasLayer/Inventory/InventoryPanel" unique_id=500000001]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 92.0
+offset_right = 1220.0
+offset_bottom = 640.0
+
+[node name="ResourceGrid" type="GridContainer" parent="CanvasLayer/Inventory/InventoryPanel/InventoryScroll" unique_id=500000002]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+columns = 5
 
 [node name="CoordsLabel" type="Label" parent="CanvasLayer" unique_id=1306763300]
 offset_left = 1433.0
@@ -166,21 +314,97 @@ text = "X:
 Y:
 Z:"
 
+[node name="TopViewButton" type="Button" parent="CanvasLayer" unique_id=1021036834]
+offset_left = 801.0
+offset_top = 10.0
+offset_right = 960.0
+offset_bottom = 81.0
+text = "MODE: TOP DOWN"
+
+[node name="HarvestButton" type="Button" parent="CanvasLayer" unique_id=500000020]
+visible = false
+z_index = 10
+offset_left = 8.0
+offset_top = 720.0
+offset_right = 300.0
+offset_bottom = 792.0
+theme_override_font_sizes/font_size = 26
+text = "HARVEST"
+
+[node name="InteractionPrompt" type="Control" parent="CanvasLayer" unique_id=500000050]
+visible = false
+z_index = 24
+layout_mode = 3
+anchors_preset = 0
+offset_left = 320.0
+offset_top = 860.0
+offset_right = 1600.0
+offset_bottom = 1040.0
+
+[node name="PromptLabel" type="Label" parent="CanvasLayer/InteractionPrompt" unique_id=500000051]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 180.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 28
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Player" type="CharacterBody3D" parent="." unique_id=500000040]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.075, 0)
+collision_layer = 2
+collision_mask = 129
+floor_snap_length = 0.35
+script = ExtResource("26_pc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=500000041]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+shape = SubResource("CapsuleShape3D_player")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=500000042]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+mesh = SubResource("CapsuleMesh_player")
+surface_material_override/0 = SubResource("StandardMaterial3D_player_red")
+
+[node name="HarvestWorldPrompt" type="Node3D" parent="." unique_id=500000060]
+visible = false
+groups = PackedStringArray("world_harvest_prompt")
+
+[node name="MaterialName" type="Label3D" parent="HarvestWorldPrompt" unique_id=500000061]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.72, 0)
+billboard = 1
+text = ""
+font_size = 64
+outline_size = 20
+outline_modulate = Color(0, 0, 0, 1)
+pixel_size = 0.03
+line_spacing = 10.0
+vertical_alignment = 0
+horizontal_alignment = 1
+render_priority = 120
+no_depth_test = true
+
 [node name="PropSpawner" type="Node3D" parent="." unique_id=2133982471]
 script = ExtResource("3_jrpe6")
 tree_scenes = Array[PackedScene]([ExtResource("5_gpoqn")])
 rock_scenes = Array[PackedScene]([ExtResource("5_jegvk")])
+world_resource_scenes = Array[PackedScene]([ExtResource("17_wp"), ExtResource("18_op"), ExtResource("19_st"), ExtResource("20_dm"), ExtResource("21_sp"), ExtResource("22_go"), ExtResource("23_so"), ExtResource("24_co")])
 spawn_count = 1000
 area_size = 300.0
 
 [node name="FloorBody" type="StaticBody3D" parent="." unique_id=798387928]
+collision_layer = 128
 
 [node name="FloorMesh" type="MeshInstance3D" parent="FloorBody" unique_id=1535284026]
 mesh = SubResource("BoxMesh_eafes")
 script = ExtResource("5_4uwmp")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FloorBody" unique_id=1306689345]
-shape = SubResource("ConvexPolygonShape3D_gpoqn")
+shape = SubResource("BoxShape3D_floor")
 
 [connection signal="pressed" from="CanvasLayer/ShopUI/ShopButton" to="CanvasLayer/ShopUI" method="_on_shop_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/ShopUI/ShopPanel/CloseShopButton" to="CanvasLayer/ShopUI" method="_on_close_shop_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Inventory/InventoryButton" to="CanvasLayer/Inventory" method="_on_inventory_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Inventory/InventoryPanel/CloseInventoryButton" to="CanvasLayer/Inventory" method="_on_close_inventory_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/TopViewButton" to="CameraNode" method="toggle_top_down_mode"]

@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://c8stream001"]
+
+[ext_resource type="PackedScene" uid="uid://3jmo64dlvn5m" path="res://scenes/base_prop.tscn" id="1_base"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m"]
+albedo_color = Color(0.2, 0.45, 0.75, 1)
+roughness = 0.2
+
+[sub_resource type="BoxMesh" id="BoxMesh_m"]
+size = Vector3(6, 0.1, 2)
+material = SubResource("StandardMaterial3D_m")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_m"]
+size = Vector3(6, 0.25, 2)
+
+[node name="world_stream" instance=ExtResource("1_base")]
+cost = 0.0
+drop_type = "water"
+drop_amount = 3
+
+[node name="MeshInstance3D" parent="." index="0"]
+mesh = SubResource("BoxMesh_m")
+
+[node name="CollisionShape3D" parent="." index="1"]
+shape = SubResource("BoxShape3D_m")
+
+[node name="SelectionVisual" parent="." index="2"]
+transform = Transform3D(6.2, 0, 0, 0, 0.3, 0, 0, 0, 2.2, 0, 0.12, 0)
