@@ -4,7 +4,7 @@ extends Node3D
 @export var pan_speed: float = 0.05
 @export var zoom_speed: float = 2.0
 @export var min_zoom: float = 5.0
-@export var max_zoom: float = 300.0
+@export var max_zoom: float = 30.0
 
 # ==== UI Nodes (Auto-linked via Relative Paths) ====
 @onready var selection_box: Control = get_node_or_null("../CanvasLayer/SelectionBox")
