@@ -3,6 +3,7 @@ extends Node3D
 # Use Arrays so you can drag multiple .tscn files in the Inspector
 @export var tree_scenes: Array[PackedScene] = []
 @export var rock_scenes: Array[PackedScene] = []
+@export var world_resource_scenes: Array[PackedScene] = []
 @export var spawn_count: int = 50
 @export var area_size: float = 40.0
 
@@ -11,7 +12,7 @@ func _ready():
 
 func spawn_props():
 	# Combine all scenes into one big list of possibilities
-	var all_possible_props = tree_scenes + rock_scenes
+	var all_possible_props = tree_scenes + rock_scenes + world_resource_scenes
 	
 	if all_possible_props.is_empty():
 		print("Warning: No scenes added to the PropSpawner arrays!")
@@ -39,9 +40,9 @@ func spawn_props():
 			# Force it into the "props" group
 			instance.add_to_group("props")
 
-# Press 'R' while playing to reset and spawn more
+# F3: reset and respawn props (R opens Craft)
 func _input(event):
-	if event is InputEventKey and event.pressed and event.keycode == KEY_R:
+	if event is InputEventKey and event.pressed and event.keycode == KEY_F3:
 		for child in get_children():
 			child.queue_free()
 		# Use 'call_deferred' to ensure old props are deleted before spawning new ones

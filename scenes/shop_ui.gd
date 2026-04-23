@@ -1,60 +1,77 @@
 extends Control
 
-@export var shop_items: Array[PackedScene] = []
-@export var button_template: PackedScene
+@export var recipe_row_scene: PackedScene
+@export var cameraPath: NodePath
 
 @onready var shop_panel = $ShopPanel
 @onready var shop_button = $ShopButton
 @onready var shop_label = $ShopLabel
 @onready var item_grid = $ShopPanel/ScrollContainer/ItemGrid
 
-@export var cameraPath: NodePath
-@onready var camera = get_node(cameraPath)
+var _camera: Node
 
-func _ready():
+
+func _ready() -> void:
+	_camera = get_node_or_null(cameraPath)
 	shop_panel.visible = false
-	populate_shop()
+	PlayerManager.inventory_changed.connect(_on_inventory_changed)
+	_populate_recipes()
 
-func populate_shop():
-	for scene in shop_items:
-		if scene:
-			# Temporarily instantiate to grab the "Prop" data (cost, name)
-			var temp_instance = scene.instantiate()
-			
-			if temp_instance is Prop:
-				var new_btn = button_template.instantiate()
-				item_grid.add_child(new_btn)
-				
-				# Format button text: "House ($10)"
-				var building_name = scene.resource_path.get_file().get_basename().capitalize()
-				new_btn.text = "%s ($%d)" % [building_name, temp_instance.cost]
-				
-				# Connect click signal
-				new_btn.pressed.connect(_on_item_selected.bind(scene))
-			
-			# Clean up the temporary instance
-			temp_instance.free()
 
-func _on_item_selected(item_scene: PackedScene):
-	if camera:
-		# Assign the building scene to the camera's @export variable
-		camera.test_spawn = item_scene
-		print("Camera test_spawn set to: ", item_scene.resource_path)
-	else:
-		push_error("ShopUI: Camera node not found! Check your cameraPath.")
+func _on_inventory_changed() -> void:
+	_refresh_all_rows()
 
-	# Optional: Close the shop after selecting an item
+
+func _populate_recipes() -> void:
+	if recipe_row_scene == null:
+		push_error("ShopUI: assign recipe_row_scene (recipe_row.tscn).")
+		return
+	for c in item_grid.get_children():
+		c.queue_free()
+	item_grid.columns = 1
+	for recipe in RecipeBook.get_recipes():
+		var row = recipe_row_scene.instantiate()
+		item_grid.add_child(row)
+		if row.has_method("setup"):
+			row.setup(recipe)
+		if row.has_signal("craft_requested"):
+			row.craft_requested.connect(_on_craft_requested)
+
+
+func _refresh_all_rows() -> void:
+	for row in item_grid.get_children():
+		if row.has_method("refresh_affordability"):
+			row.refresh_affordability()
+
+
+func _on_craft_requested(recipe: BuildingRecipe) -> void:
+	if _camera == null:
+		push_error("ShopUI: camera_path invalid.")
+		return
+	if not RecipeBook.try_begin_craft(recipe, _camera):
+		return
 	close_shop()
 
-func _on_shop_button_pressed():
+
+func _on_shop_button_pressed() -> void:
 	shop_panel.visible = true
 	shop_button.visible = false
 	shop_label.visible = false
+	_refresh_all_rows()
 
-func _on_close_shop_button_pressed():
+
+func _on_close_shop_button_pressed() -> void:
 	close_shop()
 
-func close_shop():
+
+func close_shop() -> void:
 	shop_panel.visible = false
 	shop_button.visible = true
 	shop_label.visible = true
+
+
+func toggle_shop_panel() -> void:
+	if shop_panel.visible:
+		close_shop()
+	else:
+		_on_shop_button_pressed()

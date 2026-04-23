@@ -13,10 +13,17 @@ extends Node3D
 @onready var budget_label: Label = get_node_or_null("../CanvasLayer/BudgetUI/BudgetLabel")
 @onready var coords_label: Label = get_node_or_null("../CanvasLayer/CoordsLabel")
 @onready var button_top_down: Button = get_node_or_null("../CanvasLayer/TopViewButton")
+@onready var harvest_button: Button = get_node_or_null("../CanvasLayer/HarvestButton")
+
+@export_group("Follow")
+@export var follow_player_path: NodePath = NodePath("../Player")
 
 @export_group("Spawning")
 @export var grid_size: float = 5.0 # Set this to 1.0 or 2.0 depending on your model size
 @export var test_spawn: PackedScene
+## After crafting from materials, next placed building skips budget (materials already spent).
+var skip_next_budget_deduction: bool = false
+var pending_craft_recipe: BuildingRecipe = null
 @onready var spawn_parent: Node3D = get_node_or_null("../PropSpawner")
 
 @onready var camera = $Camera3D
@@ -31,16 +38,30 @@ var ghost_instance: Node3D = null
 var current_ghost_scene: PackedScene = null
 var invalid_material: StandardMaterial3D
 
+var _follow_player: Node3D = null
+
+
 func _ready() -> void:
+	add_to_group("camera_controller")
 	invalid_material = StandardMaterial3D.new()
 	invalid_material.albedo_color = Color(1.0, 0.0, 0.0, 0.5)
 	invalid_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	invalid_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	
 	update_budget_ui()
-	# Default spawn parent to this node if not set
 	if not spawn_parent:
 		spawn_parent = self
+	if harvest_button:
+		harvest_button.visible = false
+		harvest_button.pressed.connect(_on_harvest_button_pressed)
+	_follow_player = get_node_or_null(follow_player_path) as Node3D
+
+
+func _process(delta: float) -> void:
+	if _follow_player and is_instance_valid(_follow_player):
+		var t := _follow_player.global_position
+		global_position.x = lerpf(global_position.x, t.x, 4.0 * delta)
+		global_position.z = lerpf(global_position.z, t.z, 4.0 * delta)
 
 func _unhandled_input(event: InputEvent) -> void:
 	# Zoom Logic
@@ -89,13 +110,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			ghost_instance = null
 			current_ghost_scene = null
 
-	# Delete Action
 	if event.is_action_pressed("ui_text_delete") or (event is InputEventKey and event.is_pressed() and event.keycode == KEY_DELETE):
-		delete_selected_props()
-		
-	# Collect Action (Enter)
-	if event.is_action_pressed("ui_accept") or (event is InputEventKey and event.is_pressed() and event.keycode == KEY_ENTER):
-		collect_selected_props()
+		harvest_selected_props()
 
 func spawn_object_at_mouse(mouse_pos: Vector2):
 	var from = camera.project_ray_origin(mouse_pos)
@@ -128,17 +144,27 @@ func spawn_object_at_mouse(mouse_pos: Vector2):
 		if is_grid_slot_occupied(final_pos, current_grid_size):
 			print("Forbidden: Space already occupied!")
 			instance.free()
-			return # STOP HERE - Don't spawn anything
+			_refund_pending_craft_if_any()
+			return
 		
-		# Spawn the object
 		get_tree().current_scene.add_child(instance)
 		
 		instance.global_position = final_pos
-		instance.rotation = Vector3.ZERO # Keep them straight like Endfield
+		instance.rotation = Vector3.ZERO
+		
+		var recipe_id := ""
+		if pending_craft_recipe:
+			recipe_id = pending_craft_recipe.id
+			pending_craft_recipe = null
 		
 		if instance is Prop:
-			PlayerManager.budget -= instance.cost
+			if skip_next_budget_deduction:
+				skip_next_budget_deduction = false
+			else:
+				PlayerManager.budget -= instance.cost
 			update_budget_ui()
+		
+		MissionManager.on_building_placed(recipe_id)
 
 		test_spawn = null
 		if ghost_instance:
@@ -203,60 +229,40 @@ func confirm_selection() -> void:
 				selected_props.append(prop)
 				prop.set_highlight(true)
 	calculate_stats(selected_props)
+	_update_harvest_button_visibility()
 
 func calculate_stats(list: Array[Prop]) -> void:
 	var price = 0.0
-	var total_collect_money = 0.0
-	var collect_items = {}
-	
-	for prop in list:
-		price += prop.cost
-		if 'stored_budget' in prop:
-			total_collect_money += prop.stored_budget
-		if 'stored_items' in prop and prop.stored_items > 0 and prop.generate_item_type != "none":
-			if not collect_items.has(prop.generate_item_type):
-				collect_items[prop.generate_item_type] = 0
-			collect_items[prop.generate_item_type] += prop.stored_items
-
+	for prop in list: price += prop.cost
 	if selection_label: selection_label.text = "Selected: " + str(list.size())
-	
-	var removal_text = "Removal Cost: $" + str(price)
-	if total_collect_money > 0 or collect_items.size() > 0:
-		removal_text += "\nCan Collect: "
-		if total_collect_money > 0:
-			removal_text += "$" + str(total_collect_money) + " "
-		for item in collect_items:
-			removal_text += str(collect_items[item]) + " " + item + " "
-			
-	if removal_label: removal_label.text = removal_text
+	if removal_label: removal_label.text = "Removal Cost: $" + str(price)
 
 func clear_selection() -> void:
 	for prop in selected_props:
 		if is_instance_valid(prop): prop.set_highlight(false)
 	selected_props.clear()
 	calculate_stats([])
+	if harvest_button:
+		harvest_button.visible = false
 
-func collect_selected_props() -> void:
-	for prop in selected_props:
-		if is_instance_valid(prop) and prop.has_method("collect"):
-			prop.collect()
-	
-	# Recalculate stats since items/budget have been collected
-	calculate_stats(selected_props)
-
-func delete_selected_props() -> void:
-	var total_cost = 0.0
-	for prop in selected_props:
+func harvest_selected_props() -> void:
+	for prop in selected_props.duplicate():
 		if is_instance_valid(prop):
-			total_cost += prop.cost
+			PlayerManager.budget += prop.cost
 			if prop.has_method("harvest"):
+				MissionManager.register_before_harvest(prop)
 				prop.harvest()
 			else:
 				prop.queue_free()
-	PlayerManager.budget -= total_cost # Refund the cost
 	selected_props.clear()
+	for p in get_tree().get_nodes_in_group("props"):
+		if p is Prop and is_instance_valid(p):
+			(p as Prop).set_highlight(false)
 	calculate_stats([])
 	update_budget_ui()
+	if harvest_button:
+		harvest_button.visible = false
+
 
 func raycast_delete(mouse_pos: Vector2) -> void:
 	var from = camera.project_ray_origin(mouse_pos)
@@ -267,8 +273,9 @@ func raycast_delete(mouse_pos: Vector2) -> void:
 		var target = result.collider
 		var prop_node = target if target is Prop else target.get_parent()
 		if prop_node is Prop:
-			PlayerManager.budget += prop_node.cost # Refund the cost
+			PlayerManager.budget += prop_node.cost
 			if prop_node.has_method("harvest"):
+				MissionManager.register_before_harvest(prop_node)
 				prop_node.harvest()
 			else:
 				prop_node.queue_free()
@@ -277,6 +284,27 @@ func raycast_delete(mouse_pos: Vector2) -> void:
 func update_budget_ui() -> void:
 	if budget_label:
 		budget_label.text = "Budget: $" + str(PlayerManager.budget)
+
+func begin_crafted_spawn(scene: PackedScene, recipe: BuildingRecipe = null) -> void:
+	skip_next_budget_deduction = recipe != null
+	test_spawn = scene
+	pending_craft_recipe = recipe
+
+
+func _refund_pending_craft_if_any() -> void:
+	if pending_craft_recipe:
+		PlayerManager.refund_ingredients(pending_craft_recipe.ingredients)
+		pending_craft_recipe = null
+
+
+func _update_harvest_button_visibility() -> void:
+	if harvest_button:
+		harvest_button.visible = selected_props.size() > 0
+
+
+func _on_harvest_button_pressed() -> void:
+	harvest_selected_props()
+
 
 func toggle_top_down_mode() -> void:
 	# TOP DOWN MODE

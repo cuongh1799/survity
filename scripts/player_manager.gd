@@ -1,42 +1,49 @@
-extends Node3D
+extends Node
+
+signal inventory_changed
 
 # ---- Player Stats ----
 var inventory: Dictionary = {
-	# Basic Resources (Early Game)
 	"wood": 0,
 	"stone": 0,
 	"food": 0,
 	"water": 0,
-	
-	# Refined Resources (Mid Game)
-	"iron": 0,
+	"oil": 0,
+	"dirt": 0,
+	"sand": 0,
 	"gold": 0,
+	"silver": 0,
+	"coal": 0,
+	"iron": 0,
 	"bricks": 0,
 	"planks": 0,
-	
-	# Advanced Resources (Late Game)
 	"tools": 0,
 	"glass": 0,
 	"concrete": 0,
 	"electricity": 0,
-	"oil": 0
 }
+
+const INVENTORY_UI_KEYS = [
+	"wood", "stone", "oil", "water", "dirt", "sand", "gold", "silver", "coal",
+	"food", "iron", "bricks", "planks", "tools", "glass", "concrete", "electricity",
+]
+
 var budget: int = 100
 var total_city_attraction: int = 0
 
 # ---- Time Tracking ----
-# 15 real-life minutes = 1 in-game day (900 seconds)
 const SECONDS_PER_DAY: float = 15.0 * 60.0
 var current_day: int = 1
 var day_timer: float = 0.0
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
 	pass
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
 func _process(delta: float) -> void:
 	_handle_time(delta)
+
 
 func _handle_time(delta: float) -> void:
 	day_timer += delta
@@ -45,6 +52,89 @@ func _handle_time(delta: float) -> void:
 		current_day += 1
 		_on_new_day()
 
+
 func _on_new_day() -> void:
 	print("A new day has started! Current Day: ", current_day)
-	# Add daily logic here (e.g., taxes, attraction events, upkeep)
+
+
+func has_ingredients(costs: Dictionary) -> bool:
+	for k in costs.keys():
+		var need := int(costs[k])
+		if need <= 0:
+			continue
+		var have := int(inventory.get(k, 0))
+		if have < need:
+			return false
+	return true
+
+
+func consume_ingredients(costs: Dictionary) -> bool:
+	if not has_ingredients(costs):
+		return false
+	for k in costs.keys():
+		var need := int(costs[k])
+		if need <= 0:
+			continue
+		inventory[k] = int(inventory.get(k, 0)) - need
+	inventory_changed.emit()
+	return true
+
+
+func add_to_inventory(key: String, amount: int) -> void:
+	if amount <= 0:
+		return
+	if not inventory.has(key):
+		inventory[key] = 0
+	inventory[key] = int(inventory[key]) + amount
+	inventory_changed.emit()
+
+
+func refund_ingredients(costs: Dictionary) -> void:
+	for k in costs.keys():
+		var amt := int(costs[k])
+		if amt <= 0:
+			continue
+		if not inventory.has(k):
+			inventory[k] = 0
+		inventory[k] = int(inventory.get(k, 0)) + amt
+	inventory_changed.emit()
+
+
+static func resource_display_name(key: String) -> String:
+	match key:
+		"wood":
+			return "Wood"
+		"stone":
+			return "Stone"
+		"oil":
+			return "Oil"
+		"water":
+			return "Water"
+		"dirt":
+			return "Dirt"
+		"sand":
+			return "Sand"
+		"gold":
+			return "Gold"
+		"silver":
+			return "Silver"
+		"coal":
+			return "Coal"
+		"food":
+			return "Food"
+		"iron":
+			return "Iron"
+		"bricks":
+			return "Bricks"
+		"planks":
+			return "Planks"
+		"tools":
+			return "Tools"
+		"glass":
+			return "Glass"
+		"concrete":
+			return "Concrete"
+		"electricity":
+			return "Electricity"
+		_:
+			return key.capitalize()
