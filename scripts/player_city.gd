@@ -65,10 +65,15 @@ func _physics_process(_delta: float) -> void:
 		if Input.is_key_pressed(KEY_D):
 			dir += r
 	dir.y = 0
+	
+	var current_speed := MOVE_SPEED
+	if Input.is_key_pressed(KEY_SHIFT):
+		current_speed *= 2.0
+		
 	if dir.length_squared() > 0.0001:
 		dir = dir.normalized()
-		velocity.x = dir.x * MOVE_SPEED
-		velocity.z = dir.z * MOVE_SPEED
+		velocity.x = dir.x * current_speed
+		velocity.z = dir.z * current_speed
 	else:
 		velocity.x = 0.0
 		velocity.z = 0.0

@@ -32,7 +32,7 @@ var budget: int = 100
 var total_city_attraction: int = 0
 
 # ---- Time Tracking ----
-const SECONDS_PER_DAY: float = 15.0 * 60.0
+const SECONDS_PER_DAY: float = 5 * 60.0
 var current_day: int = 1
 var day_timer: float = 0.0
 

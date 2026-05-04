@@ -13,12 +13,10 @@ func _process(delta: float) -> void:
                 budget_label.text = "Budget: $" + str(PlayerManager.budget)
                 
         if time_label:
-                # Calculate game time based on the day_timer (900 seconds = 24 hours)
-                var progress_ratio = PlayerManager.day_timer / PlayerManager.SECONDS_PER_DAY
-                var total_minutes = progress_ratio * 24.0 * 60.0
+                # Calculate game time to show MM:SS up to 5:00
+                var total_seconds = PlayerManager.day_timer
+                var mins = int(total_seconds) / 60
+                var secs = int(total_seconds) % 60
                 
-                var hours = int(total_minutes) / 60
-                var minutes = int(total_minutes) % 60
-                
-                # Format to "Day X - 08:30"
-                time_label.text = "Day %d - %02d:%02d" % [PlayerManager.current_day, hours, minutes]
+                # Format to "Day X - 05:00"
+                time_label.text = "Day %d - %02d:%02d" % [PlayerManager.current_day, mins, secs]
