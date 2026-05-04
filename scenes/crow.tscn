@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://cmu0x0qfr31nk"]
+
+[ext_resource type="Script" uid="uid://blggdod1sth7a" path="res://scenes/crowscript.gd" id="1_n3e2n"]
+[ext_resource type="Script" uid="uid://cgbn4s28bsbxu" path="res://scripts/crow.gd" id="1_wdbtq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n3e2n"]
+albedo_color = Color(0.24477637, 0.2447764, 0.24477637, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7p4co"]
+material = SubResource("StandardMaterial3D_n3e2n")
+
+[node name="Crow" type="Node3D" unique_id=1448299992]
+script = ExtResource("1_n3e2n")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=119296690]
+mesh = SubResource("BoxMesh_7p4co")

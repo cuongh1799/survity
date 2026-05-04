@@ -32,18 +32,47 @@ var budget: int = 100
 var total_city_attraction: int = 0
 
 # ---- Time Tracking ----
-const SECONDS_PER_DAY: float = 5 * 60.0
+const SECONDS_PER_DAY: float = 1 * 60.0
 var current_day: int = 1
 var day_timer: float = 0.0
+var current_weather: String = "clear"
+var _crow_spawn_timer: float = 0.0
 
+const WEATHERS = ["clear", "rain", "plague"]
 
 func _ready() -> void:
-	pass
-
+	call_deferred("_apply_weather")
 
 func _process(delta: float) -> void:
 	_handle_time(delta)
+	
+	if current_weather == "plague":
+		_crow_spawn_timer -= delta
+		if _crow_spawn_timer <= 0.0:
+			_crow_spawn_timer = randf_range(0.3, 1.5)
+			_spawn_single_plague_crow()
 
+func _spawn_single_plague_crow() -> void:
+	var tree := get_tree()
+	if not tree or not tree.current_scene: return
+	
+	var camera_node = tree.current_scene.get_node_or_null("CameraNode") as Node3D
+	if not camera_node: return
+	
+	var crow = CROW_SCENE.instantiate()
+	crow.add_to_group("plague_crows")
+	tree.current_scene.add_child(crow)
+	
+	# Spawn crow around the camera's global focus point
+	var base_pos = camera_node.global_position
+	# Offset it so it starts a bit behind the camera view and flies across
+	var offset_x = randf_range(-40, 40)
+	var offset_z = randf_range(-30, 40)
+	
+	crow.global_position = base_pos + Vector3(offset_x, randf_range(5, 15), offset_z)
+	
+	# Random direction, generally flying across the screen
+	crow.rotation.y = randf_range(0, TAU)
 
 func _handle_time(delta: float) -> void:
 	day_timer += delta
@@ -52,10 +81,41 @@ func _handle_time(delta: float) -> void:
 		current_day += 1
 		_on_new_day()
 
-
 func _on_new_day() -> void:
 	print("A new day has started! Current Day: ", current_day)
+	current_weather = WEATHERS[randi() % WEATHERS.size()]
+	_apply_weather()
 
+func _apply_weather() -> void:
+	var tree := get_tree()
+	if not tree: return
+	var main_scene = tree.current_scene
+	if not main_scene: return
+	
+	# Handle fog via WorldEnvironment
+	var we := main_scene.get_node_or_null("WorldEnvironment") as WorldEnvironment
+	if we and we.environment:
+		if current_weather == "rain":
+			we.environment.volumetric_fog_enabled = false
+			we.environment.fog_enabled = true
+			we.environment.fog_density = 0.02
+			we.environment.fog_light_color = Color(0.6, 0.6, 0.6)
+		elif current_weather == "plague":
+			we.environment.volumetric_fog_enabled = false
+			we.environment.fog_enabled = true
+			we.environment.fog_density = 0.03
+			we.environment.fog_light_color = Color(0.3, 0.4, 0.3) # sickly green/gray
+		else:
+			we.environment.fog_enabled = false
+			
+	# Handle Rain Node
+	var rain_node = main_scene.get_node_or_null("CameraNode/Rain")
+	if rain_node:
+		rain_node.visible = (current_weather == "rain")
+		
+	# Handle Plague Crows - remove existing on state change
+	for c in tree.get_nodes_in_group("plague_crows"):
+		c.queue_free()
 
 func has_ingredients(costs: Dictionary) -> bool:
 	for k in costs.keys():
@@ -138,3 +198,6 @@ static func resource_display_name(key: String) -> String:
 			return "Electricity"
 		_:
 			return key.capitalize()
+
+const CROW_SCENE = preload("res://scenes/crow.tscn")
+
