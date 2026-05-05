@@ -1,6 +1,7 @@
 extends Node
 
 signal inventory_changed
+signal weather_changed(new_weather: String)
 
 # ---- Player Stats ----
 var inventory: Dictionary = {
@@ -38,7 +39,7 @@ var day_timer: float = 0.0
 var current_weather: String = "clear"
 var _crow_spawn_timer: float = 0.0
 
-const WEATHERS = ["clear", "rain", "plague"]
+const WEATHERS = ["clear", "rain", "plague", "crimson"]
 
 func _ready() -> void:
 	call_deferred("_apply_weather")
@@ -84,6 +85,7 @@ func _handle_time(delta: float) -> void:
 func _on_new_day() -> void:
 	print("A new day has started! Current Day: ", current_day)
 	current_weather = WEATHERS[randi() % WEATHERS.size()]
+	weather_changed.emit(current_weather)
 	_apply_weather()
 
 func _apply_weather() -> void:
@@ -94,19 +96,32 @@ func _apply_weather() -> void:
 	
 	# Handle fog via WorldEnvironment
 	var we := main_scene.get_node_or_null("WorldEnvironment") as WorldEnvironment
+	var dl := main_scene.get_node_or_null("DirectionalLight3D") as DirectionalLight3D
 	if we and we.environment:
 		if current_weather == "rain":
 			we.environment.volumetric_fog_enabled = false
 			we.environment.fog_enabled = true
 			we.environment.fog_density = 0.02
 			we.environment.fog_light_color = Color(0.6, 0.6, 0.6)
+			dl.light_color = Color8(255, 255, 255, 0.8)
 		elif current_weather == "plague":
 			we.environment.volumetric_fog_enabled = false
 			we.environment.fog_enabled = true
 			we.environment.fog_density = 0.03
-			we.environment.fog_light_color = Color(0.3, 0.4, 0.3) # sickly green/gray
-		else:
+			we.environment.fog_light_color = Color8(51, 151, 44, 204) # 204 is roughly 0.8 alpha # sickly green/gray
+			dl.light_color = Color8(255, 255, 255, 0.8)
+		elif current_weather == "crimson":
+			we.environment.volumetric_fog_enabled = false
+			we.environment.fog_enabled = true
+			we.environment.fog_density = 0.03
+			we.environment.fog_light_color = Color8(94, 15, 15, 0.8)
+			dl.light_color = Color8(247, 0, 0, 0.8)
+		elif current_weather == "clear":
+			we.environment.volumetric_fog_enabled = false
 			we.environment.fog_enabled = false
+			dl.light_color = Color8(255, 255, 255, 0.8)
+		# else:
+		# 	dl.light_color = Color8(247, 0, 0, 0.8)
 			
 	# Handle Rain Node
 	var rain_node = main_scene.get_node_or_null("CameraNode/Rain")

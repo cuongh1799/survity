@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://duxak6wf4n284" path="res://scenes/rock_scene.tscn" id="5_jegvk"]
 [ext_resource type="Script" uid="uid://cm3ttbnsbnvxj" path="res://scenes/inventory_UI.gd" id="5_rsucf"]
 [ext_resource type="PackedScene" uid="uid://brecipegrow01" path="res://scenes/recipe_row.tscn" id="7_gx5h2"]
+[ext_resource type="Script" uid="uid://b7cpi80fr3b40" path="res://scenes/weather_label.gd" id="11_v3ni1"]
 [ext_resource type="PackedScene" uid="uid://c8woodpile01" path="res://scenes/world_wood_pile.tscn" id="17_wp"]
 [ext_resource type="PackedScene" uid="uid://c8oilpuddle01" path="res://scenes/world_oil_puddle.tscn" id="18_op"]
 [ext_resource type="PackedScene" uid="uid://c8stream001" path="res://scenes/world_stream.tscn" id="19_st"]
@@ -40,6 +41,7 @@ sky_material = SubResource("ProceduralSkyMaterial_8nkht")
 [sub_resource type="Environment" id="Environment_tv723"]
 background_mode = 2
 sky = SubResource("Sky_eafes")
+fog_light_color = Color(3.0563026e-06, 0.66691166, 0.12698123, 1)
 fog_light_energy = 0.35
 
 [sub_resource type="LabelSettings" id="LabelSettings_t8xqk"]
@@ -56,6 +58,9 @@ font_size = 30
 
 [sub_resource type="LabelSettings" id="LabelSettings_rsucf"]
 font_size = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_jsn8g"]
+font_size = 30
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
 radius = 0.95
@@ -355,6 +360,15 @@ theme_override_constants/outline_size = 6
 theme_override_font_sizes/font_size = 28
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="WeatherLabel" type="Label" parent="CanvasLayer" unique_id=2145975689]
+offset_left = 20.0
+offset_top = 196.0
+offset_right = 280.0
+offset_bottom = 246.0
+text = "Current Weather: "
+label_settings = SubResource("LabelSettings_jsn8g")
+script = ExtResource("11_v3ni1")
 
 [node name="Player" type="CharacterBody3D" parent="." unique_id=500000040]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.075, 0)
