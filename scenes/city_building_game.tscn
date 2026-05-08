@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dtg4yfgjwyd0t" path="res://grass_floor/Grass005_1K-PNG_NormalDX.png" id="3_dwo8u"]
 [ext_resource type="Script" uid="uid://egus0nlclyhs" path="res://scenes/shop_ui.gd" id="3_gpoqn"]
 [ext_resource type="Script" uid="uid://38mkp5tlww8m" path="res://scripts/prop_spawner.gd" id="3_jrpe6"]
-[ext_resource type="Script" path="res://scenes/budget_ui.gd" id="3_t8xqk"]
+[ext_resource type="Script" uid="uid://b8kcrjjy7qt03" path="res://scenes/budget_ui.gd" id="3_t8xqk"]
 [ext_resource type="Texture2D" uid="uid://dogut1n2e11pp" path="res://grass_floor/Grass005_1K-PNG_Roughness.png" id="4_ujfux"]
 [ext_resource type="Script" uid="uid://dtvpsrplqjnt0" path="res://scripts/floor_mesh.gd" id="5_4uwmp"]
 [ext_resource type="PackedScene" uid="uid://jkjc46o7w3vh" path="res://scenes/tree_scene.tscn" id="5_gpoqn"]
@@ -64,8 +64,154 @@ font_size = 30
 [sub_resource type="LabelSettings" id="LabelSettings_mnokt"]
 font_size = 30
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v3ni1"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.99607843)
+shadow_size = 3
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jsn8g"]
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.99215686)
+shadow_size = 3
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_481fm"]
+bg_color = Color(0.8324741, 0.8324741, 0.832474, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.98039216)
+shadow_size = 3
+shadow_offset = Vector2(1, 1)
+
 [sub_resource type="LabelSettings" id="LabelSettings_rsucf"]
 font_size = 50
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dsn3l"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.99607843)
+shadow_size = 3
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oku7j"]
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.99215686)
+shadow_size = 3
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_henqq"]
+bg_color = Color(0.781407, 0.781407, 0.7814069, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.96862745)
+shadow_size = 3
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2b3fr"]
+bg_color = Color(0.9977897, 0.9977897, 0.9977897, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 1)
+shadow_size = 3
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rpdi3"]
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 1)
+shadow_size = 3
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3arlb"]
+bg_color = Color(0.8175212, 0.81752133, 0.8175211, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.9764706)
+shadow_size = 3
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_drmtj"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.99215686)
+shadow_size = 3
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w6dyv"]
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.99607843)
+shadow_size = 3
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_skknc"]
+bg_color = Color(0.7877592, 0.78775924, 0.787759, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.9490196)
+shadow_size = 3
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fj8of"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.9764706)
+shadow_size = 3
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jrrf3"]
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.95686275)
+shadow_size = 3
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2535b"]
+bg_color = Color(0.8196545, 0.8196545, 0.8196543, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.99607843)
+shadow_size = 3
+shadow_offset = Vector2(1, 1)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
 radius = 0.95
@@ -167,7 +313,6 @@ text = "Budget: $0"
 label_settings = SubResource("LabelSettings_mnokt")
 
 [node name="SelectionBox" type="ColorRect" parent="CanvasLayer" unique_id=1273919934]
-visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
@@ -222,10 +367,13 @@ cameraPath = NodePath("../../CameraNode")
 
 [node name="ShopButton" type="Button" parent="CanvasLayer/ShopUI" unique_id=1839595508]
 layout_mode = 0
-offset_left = 13.0
+offset_left = 9.0
 offset_top = 25.0
-offset_right = 397.0
+offset_right = 422.0
 offset_bottom = 116.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_v3ni1")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jsn8g")
+theme_override_styles/hover = SubResource("StyleBoxFlat_481fm")
 
 [node name="ShopLabel" type="Label" parent="CanvasLayer/ShopUI" unique_id=1092992470]
 layout_mode = 0
@@ -245,15 +393,21 @@ offset_bottom = -2.0
 
 [node name="CloseShopButton" type="Button" parent="CanvasLayer/ShopUI/ShopPanel" unique_id=1998175648]
 layout_mode = 0
-offset_left = 1123.0
+offset_left = 1140.0
 offset_top = 3.0
 offset_right = 1235.0
-offset_bottom = 84.0
+offset_bottom = 70.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_dsn3l")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_oku7j")
+theme_override_styles/hover = SubResource("StyleBoxFlat_henqq")
 
 [node name="Label" type="Label" parent="CanvasLayer/ShopUI/ShopPanel/CloseShopButton" unique_id=2045288711]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 20.0
+offset_top = 10.0
+offset_right = 70.0
+offset_bottom = 59.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "CLOSE
 SHOP"
 
@@ -280,6 +434,9 @@ offset_left = 2.0
 offset_top = 19.0
 offset_right = 423.0
 offset_bottom = 119.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_2b3fr")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_rpdi3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3arlb")
 
 [node name="Inventory" type="Label" parent="CanvasLayer/Inventory" unique_id=226156253]
 layout_mode = 0
@@ -302,12 +459,18 @@ layout_mode = 0
 offset_left = 1123.0
 offset_top = 3.0
 offset_right = 1235.0
-offset_bottom = 84.0
+offset_bottom = 72.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_drmtj")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_w6dyv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_skknc")
 
 [node name="Label" type="Label" parent="CanvasLayer/Inventory/InventoryPanel/CloseInventoryButton" unique_id=1346617911]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 11.0
+offset_top = 6.0
+offset_right = 102.0
+offset_bottom = 55.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "CLOSE 
 INVENTORY"
 
@@ -339,10 +502,15 @@ offset_left = 801.0
 offset_top = 10.0
 offset_right = 960.0
 offset_bottom = 81.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.0011974451, 0.0011974451, 0.0011974451, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_fj8of")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jrrf3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2535b")
 text = "MODE: TOP DOWN"
 
 [node name="InteractionPrompt" type="Control" parent="CanvasLayer" unique_id=500000050]
-visible = false
 z_index = 24
 layout_mode = 3
 anchors_preset = 0
