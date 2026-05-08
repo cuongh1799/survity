@@ -1,27 +1,20 @@
-[gd_scene format=3 uid="uid://c8sand001"]
+[gd_scene format=3 uid="uid://bjv8ltg1gm5h0"]
 
 [ext_resource type="PackedScene" uid="uid://3jmo64dlvn5m" path="res://scenes/base_prop.tscn" id="1_base"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m"]
-albedo_color = Color(0.86, 0.75, 0.48, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_m"]
-size = Vector3(2.0, 1.1, 2.0)
-material = SubResource("StandardMaterial3D_m")
+[ext_resource type="PackedScene" uid="uid://0jhah5nx4qmj" path="res://glb/collected_material/sand/photoscan_low-poly_construction_sand_pile.glb" id="2_cnmdc"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_m"]
-size = Vector3(2.0, 1.1, 2.0)
+size = Vector3(2, 1.1, 2)
 
-[node name="world_sand_pile" instance=ExtResource("1_base")]
+[node name="world_sand_pile" unique_id=1633033892 instance=ExtResource("1_base")]
 cost = 0.0
 drop_type = "sand"
 drop_amount = 2
 
-[node name="MeshInstance3D" parent="." index="0"]
-mesh = SubResource("BoxMesh_m")
+[node name="Sketchfab_Scene" parent="MeshInstance3D" parent_id_path=PackedInt32Array(1077949620) index="0" unique_id=2083153879 instance=ExtResource("2_cnmdc")]
 
-[node name="CollisionShape3D" parent="." index="1"]
+[node name="CollisionShape3D" parent="." index="1" unique_id=1411538431]
 shape = SubResource("BoxShape3D_m")
 
-[node name="SelectionVisual" parent="." index="2"]
+[node name="SelectionVisual" parent="." index="2" unique_id=407129122]
 transform = Transform3D(2.3, 0, 0, 0, 1.3, 0, 0, 0, 2.3, 0, 0.55, 0)
