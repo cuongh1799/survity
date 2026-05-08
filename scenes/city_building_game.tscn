@@ -15,14 +15,15 @@
 [ext_resource type="PackedScene" uid="uid://duxak6wf4n284" path="res://scenes/rock_scene.tscn" id="5_jegvk"]
 [ext_resource type="Script" uid="uid://cm3ttbnsbnvxj" path="res://scenes/inventory_UI.gd" id="5_rsucf"]
 [ext_resource type="PackedScene" path="res://scenes/recipe_row.tscn" id="7_gx5h2"]
-[ext_resource type="PackedScene" path="res://scenes/world_wood_pile.tscn" id="17_wp"]
-[ext_resource type="PackedScene" path="res://scenes/world_oil_puddle.tscn" id="18_op"]
-[ext_resource type="PackedScene" path="res://scenes/world_stream.tscn" id="19_st"]
-[ext_resource type="PackedScene" path="res://scenes/world_dirt_mound.tscn" id="20_dm"]
-[ext_resource type="PackedScene" path="res://scenes/world_sand_pile.tscn" id="21_sp"]
-[ext_resource type="PackedScene" path="res://scenes/world_gold_ore.tscn" id="22_go"]
-[ext_resource type="PackedScene" path="res://scenes/world_silver_ore.tscn" id="23_so"]
-[ext_resource type="PackedScene" path="res://scenes/world_coal_ore.tscn" id="24_co"]
+[ext_resource type="PackedScene" uid="uid://d1dthoixcrw0c" path="res://scenes/main_menu.tscn" id="11_v3ni1"]
+[ext_resource type="PackedScene" uid="uid://dvlrw4ykqojls" path="res://scenes/world_wood_pile.tscn" id="17_wp"]
+[ext_resource type="PackedScene" uid="uid://dbkhe7axggrsp" path="res://scenes/world_oil_puddle.tscn" id="18_op"]
+[ext_resource type="PackedScene" uid="uid://4c6mti76kwrv" path="res://scenes/world_stream.tscn" id="19_st"]
+[ext_resource type="PackedScene" uid="uid://k338fbwr0of0" path="res://scenes/world_dirt_mound.tscn" id="20_dm"]
+[ext_resource type="PackedScene" uid="uid://bjv8ltg1gm5h0" path="res://scenes/world_sand_pile.tscn" id="21_sp"]
+[ext_resource type="PackedScene" uid="uid://c55lcq61plkg4" path="res://scenes/world_gold_ore.tscn" id="22_go"]
+[ext_resource type="PackedScene" uid="uid://dbk4ahhy28xc5" path="res://scenes/world_silver_ore.tscn" id="23_so"]
+[ext_resource type="PackedScene" uid="uid://d1cf3oy5ysajw" path="res://scenes/world_coal_ore.tscn" id="24_co"]
 [ext_resource type="Script" path="res://scenes/mission_ui.gd" id="25_mui"]
 [ext_resource type="Script" path="res://scripts/player_city.gd" id="26_pc"]
 [ext_resource type="PackedScene" path="res://scenes/minimap_ui.tscn" id="27_mm"]
@@ -340,16 +341,6 @@ offset_right = 960.0
 offset_bottom = 81.0
 text = "MODE: TOP DOWN"
 
-[node name="HarvestButton" type="Button" parent="CanvasLayer" unique_id=500000020]
-visible = false
-z_index = 10
-offset_left = 8.0
-offset_top = 720.0
-offset_right = 300.0
-offset_bottom = 792.0
-theme_override_font_sizes/font_size = 26
-text = "HARVEST"
-
 [node name="InteractionPrompt" type="Control" parent="CanvasLayer" unique_id=500000050]
 visible = false
 z_index = 24
@@ -369,6 +360,8 @@ theme_override_constants/outline_size = 6
 theme_override_font_sizes/font_size = 28
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Main_menu" parent="CanvasLayer" unique_id=258386567 instance=ExtResource("11_v3ni1")]
 
 [node name="Player" type="CharacterBody3D" parent="." unique_id=500000040]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.075, 0)
