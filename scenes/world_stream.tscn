@@ -1,28 +1,23 @@
-[gd_scene format=3 uid="uid://c8stream001"]
+[gd_scene format=3 uid="uid://4c6mti76kwrv"]
 
 [ext_resource type="PackedScene" uid="uid://3jmo64dlvn5m" path="res://scenes/base_prop.tscn" id="1_base"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m"]
-albedo_color = Color(0.2, 0.45, 0.75, 1)
-roughness = 0.2
-
-[sub_resource type="BoxMesh" id="BoxMesh_m"]
-size = Vector3(6, 0.1, 2)
-material = SubResource("StandardMaterial3D_m")
+[ext_resource type="PackedScene" uid="uid://y3otiubnmvkq" path="res://glb/collected_material/water/cartoon_pond.glb" id="2_0o7ng"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_m"]
-size = Vector3(6, 0.25, 2)
+size = Vector3(4.698517, 0.430542, 4.631531)
 
-[node name="world_stream" instance=ExtResource("1_base")]
+[node name="world_stream" unique_id=2123601056 instance=ExtResource("1_base")]
 cost = 0.0
 drop_type = "water"
 drop_amount = 3
 
-[node name="MeshInstance3D" parent="." index="0"]
-mesh = SubResource("BoxMesh_m")
+[node name="Sketchfab_Scene" parent="MeshInstance3D" parent_id_path=PackedInt32Array(1077949620) index="0" unique_id=979638691 instance=ExtResource("2_0o7ng")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 
-[node name="CollisionShape3D" parent="." index="1"]
+[node name="CollisionShape3D" parent="." index="1" unique_id=1411538431]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.01512146, 0.195202, -0.029754639)
 shape = SubResource("BoxShape3D_m")
 
-[node name="SelectionVisual" parent="." index="2"]
-transform = Transform3D(6.2, 0, 0, 0, 0.3, 0, 0, 0, 2.2, 0, 0.12, 0)
+[node name="SelectionVisual" parent="." index="2" unique_id=407129122]
+transform = Transform3D(4.5, 0, 0, 0, 0.3, 0, 0, 0, 4.5, 0, 0.12, 0)
+visible = true

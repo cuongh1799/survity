@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bynrfneeb4rjf" path="res://glb/collected_material/silver_ore/silver_ore.glb" id="2_uxt7i"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_m"]
-size = Vector3(1.5, 1.3, 1.5)
+size = Vector3(3.8890991, 2.5188568, 2.972412)
 
 [node name="world_silver_ore" unique_id=1895544780 instance=ExtResource("1_base")]
 cost = 0.0
@@ -12,10 +12,13 @@ drop_type = "silver"
 drop_amount = 1
 
 [node name="Sketchfab_Scene" parent="MeshInstance3D" parent_id_path=PackedInt32Array(1077949620) index="0" unique_id=850091415 instance=ExtResource("2_uxt7i")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.527989, 0.06828117, -1.7297482)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 16.970684, 0.06828117, -1.7297482)
 
 [node name="CollisionShape3D" parent="." index="1" unique_id=1411538431]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.10610962, 0.011631966, -1.6700761)
+visible = false
 shape = SubResource("BoxShape3D_m")
 
 [node name="SelectionVisual" parent="." index="2" unique_id=407129122]
-transform = Transform3D(1.75, 0, 0, 0, 1.45, 0, 0, 0, 1.75, 0, 0.65, 0)
+transform = Transform3D(3.62, 0, 0, 0, 3, 0, 0, 0, 3.62, 0, -0.010205388, -1.5086565)
+visible = true

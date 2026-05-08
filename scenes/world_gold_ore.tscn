@@ -1,29 +1,24 @@
-[gd_scene format=3 uid="uid://c8gold001"]
+[gd_scene format=3 uid="uid://c55lcq61plkg4"]
 
 [ext_resource type="PackedScene" uid="uid://3jmo64dlvn5m" path="res://scenes/base_prop.tscn" id="1_base"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m"]
-albedo_color = Color(0.92, 0.78, 0.2, 1)
-metallic = 0.6
-roughness = 0.35
-
-[sub_resource type="BoxMesh" id="BoxMesh_m"]
-size = Vector3(1.6, 1.4, 1.6)
-material = SubResource("StandardMaterial3D_m")
+[ext_resource type="PackedScene" uid="uid://c7jn1d1r4mprn" path="res://glb/collected_material/gold/gold_nugget.glb" id="2_d6ewe"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_m"]
-size = Vector3(1.6, 1.4, 1.6)
+size = Vector3(2.9703126, 3.0409179, 4.043555)
 
-[node name="world_gold_ore" instance=ExtResource("1_base")]
+[node name="world_gold_ore" unique_id=545110335 instance=ExtResource("1_base")]
 cost = 0.0
 drop_type = "gold"
 drop_amount = 1
 
-[node name="MeshInstance3D" parent="." index="0"]
-mesh = SubResource("BoxMesh_m")
+[node name="Sketchfab_Scene" parent="MeshInstance3D" parent_id_path=PackedInt32Array(1077949620) index="0" unique_id=1748378856 instance=ExtResource("2_d6ewe")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
-[node name="CollisionShape3D" parent="." index="1"]
+[node name="CollisionShape3D" parent="." index="1" unique_id=1411538431]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13250601, 0.26176763, -0.25908205)
+visible = false
 shape = SubResource("BoxShape3D_m")
 
-[node name="SelectionVisual" parent="." index="2"]
-transform = Transform3D(1.85, 0, 0, 0, 1.55, 0, 0, 0, 1.85, 0, 0.7, 0)
+[node name="SelectionVisual" parent="." index="2" unique_id=407129122]
+transform = Transform3D(3, 0, 0, 0, 2.5, 0, 0, 0, 3.5, 0.13456821, 0.38606113, -0.18152523)
+visible = true
