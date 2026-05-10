@@ -16,6 +16,10 @@
 [ext_resource type="Script" uid="uid://cm3ttbnsbnvxj" path="res://scenes/inventory_UI.gd" id="5_rsucf"]
 [ext_resource type="PackedScene" path="res://scenes/recipe_row.tscn" id="7_gx5h2"]
 [ext_resource type="PackedScene" uid="uid://d1dthoixcrw0c" path="res://scenes/main_menu.tscn" id="11_v3ni1"]
+[ext_resource type="Script" uid="uid://dv8dxp8l3dclf" path="res://scenes/quit_button.gd" id="12_jsn8g"]
+[ext_resource type="FontFile" uid="uid://dfxfqh7m3hw0e" path="res://assets/font/GrapeSoda.ttf" id="13_481fm"]
+[ext_resource type="Script" uid="uid://bmli2fykthrf5" path="res://scenes/game_manual_button.gd" id="13_rpdi3"]
+[ext_resource type="Script" uid="uid://ebhmdsdgw55d" path="res://scenes/back_button_manual.gd" id="15_3arlb"]
 [ext_resource type="PackedScene" uid="uid://dvlrw4ykqojls" path="res://scenes/world_wood_pile.tscn" id="17_wp"]
 [ext_resource type="PackedScene" uid="uid://dbkhe7axggrsp" path="res://scenes/world_oil_puddle.tscn" id="18_op"]
 [ext_resource type="PackedScene" uid="uid://4c6mti76kwrv" path="res://scenes/world_stream.tscn" id="19_st"]
@@ -213,6 +217,65 @@ shadow_color = Color(0, 0, 0, 0.99607843)
 shadow_size = 3
 shadow_offset = Vector2(1, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tbmww"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 1)
+shadow_size = 3
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dxdyp"]
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.99215686)
+shadow_size = 3
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_flhdu"]
+bg_color = Color(0.87545645, 0.8754566, 0.8754564, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 1)
+shadow_size = 3
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aueuc"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 1)
+shadow_size = 3
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8rg56"]
+bg_color = Color(0.83033526, 0.8303351, 0.830335, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.99215686)
+shadow_size = 3
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hu8sj"]
+bg_color = Color(0.95815676, 0.9581569, 0.95815665, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.9843137)
+shadow_size = 3
+shadow_offset = Vector2(1, 1)
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
 radius = 0.95
 height = 3.4
@@ -272,8 +335,8 @@ shadow_enabled = true
 [node name="BudgetUI" type="Control" parent="CanvasLayer" unique_id=1184198994]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 45.0
+offset_bottom = 43.0
 script = ExtResource("3_t8xqk")
 
 [node name="TimeLabel" type="Label" parent="CanvasLayer/BudgetUI" unique_id=1185102169]
@@ -287,17 +350,19 @@ label_settings = SubResource("LabelSettings_t8xqk")
 
 [node name="SelectionCount" type="Label" parent="CanvasLayer/BudgetUI" unique_id=914295955]
 layout_mode = 0
-offset_right = 256.0
-offset_bottom = 87.0
+offset_left = 12.0
+offset_top = 8.0
+offset_right = 268.0
+offset_bottom = 95.0
 text = "Object selected: 0
 "
 label_settings = SubResource("LabelSettings_jegvk")
 
 [node name="RemovalCost" type="Label" parent="CanvasLayer/BudgetUI" unique_id=979098327]
 layout_mode = 0
-offset_left = 7.0
+offset_left = 13.0
 offset_top = 51.0
-offset_right = 260.0
+offset_right = 266.0
 offset_bottom = 138.0
 text = "Removal Cost: $0
 "
@@ -306,9 +371,9 @@ label_settings = SubResource("LabelSettings_gpoqn")
 [node name="BudgetLabel" type="Label" parent="CanvasLayer/BudgetUI" unique_id=1883416583]
 layout_mode = 0
 offset_left = 12.0
-offset_top = 108.0
+offset_top = 95.0
 offset_right = 166.0
-offset_bottom = 150.0
+offset_bottom = 137.0
 text = "Budget: $0"
 label_settings = SubResource("LabelSettings_mnokt")
 
@@ -531,6 +596,112 @@ vertical_alignment = 1
 
 [node name="Main_menu" parent="CanvasLayer" unique_id=258386567 instance=ExtResource("11_v3ni1")]
 
+[node name="Quit_button" type="Button" parent="CanvasLayer" unique_id=1344369976]
+offset_left = 982.0
+offset_top = 12.0
+offset_right = 1124.0
+offset_bottom = 81.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_tbmww")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dxdyp")
+theme_override_styles/hover = SubResource("StyleBoxFlat_flhdu")
+text = "Quit"
+script = ExtResource("12_jsn8g")
+
+[node name="Game_manual_button" type="Button" parent="CanvasLayer" unique_id=1349036156]
+offset_left = 1145.0
+offset_top = 10.0
+offset_right = 1287.0
+offset_bottom = 79.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_tbmww")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dxdyp")
+theme_override_styles/hover = SubResource("StyleBoxFlat_flhdu")
+text = "Manual"
+script = ExtResource("13_rpdi3")
+
+[node name="InGameManual" type="Panel" parent="CanvasLayer" unique_id=1262954559]
+anchors_preset = -1
+offset_left = 455.0
+offset_top = 314.0
+offset_right = 1460.0
+offset_bottom = 955.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameManualTitle" type="Label" parent="CanvasLayer/InGameManual" unique_id=1367733482]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.11100001
+anchor_right = 0.5
+anchor_bottom = 0.11100001
+offset_left = -276.5
+offset_top = -150.151
+offset_right = 287.5
+offset_bottom = 149.849
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("13_481fm")
+theme_override_font_sizes/font_size = 50
+text = "Game Manual"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="GameManualDescr" type="Label" parent="CanvasLayer/InGameManual" unique_id=883214831]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.606
+anchor_top = -0.62
+anchor_right = -0.606
+anchor_bottom = -0.62
+offset_left = 698.03
+offset_top = 515.42004
+offset_right = 1557.03
+offset_bottom = 850.42004
+text = "Welcome to Survity! We challenge you to build a city that can survive the hardest challenge. You will be a 
+creator collecting the material, designing a city with a large variety of building type. Your mission is moving 
+around the map, collect the materials needed to craft a building, and complete the quest on the right corner of 
+the screen.
+
+How to move around in the game
+- Scoll up the mouse wheel for zoom in
+- Scroll down the mouse for zoom out
+-Click the button at the middle to change the world view
+- Move around the map using A- for left, D - for right, W - for up, S - for down
+- Hold the left-click and drag to select material, press delete to collect the material
+- Press F to harvest the material
+- Press T or Inventory Button to check the collected material
+- Press R to choose available type of building to build upon
+"
+
+[node name="BackButtonManual" type="Button" parent="CanvasLayer/InGameManual" unique_id=959151144]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.50199
+anchor_top = 0.9666834
+anchor_right = 0.50199
+anchor_bottom = 0.9666834
+offset_left = -100.5
+offset_top = -75.64404
+offset_right = 93.5
+offset_bottom = 10.355957
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_aueuc")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_8rg56")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hu8sj")
+text = "Back"
+script = ExtResource("15_3arlb")
+metadata/_edit_use_anchors_ = true
+
 [node name="Player" type="CharacterBody3D" parent="." unique_id=500000040]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.075, 0)
 collision_layer = 2
@@ -584,3 +755,6 @@ shape = SubResource("BoxShape3D_floor")
 [connection signal="pressed" from="CanvasLayer/Inventory/InventoryButton" to="CanvasLayer/Inventory" method="_on_inventory_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Inventory/InventoryPanel/CloseInventoryButton" to="CanvasLayer/Inventory" method="_on_close_inventory_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/TopViewButton" to="CameraNode" method="toggle_top_down_mode"]
+[connection signal="pressed" from="CanvasLayer/Quit_button" to="CanvasLayer/Quit_button" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/Game_manual_button" to="CanvasLayer/Game_manual_button" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/InGameManual/BackButtonManual" to="CanvasLayer/InGameManual/BackButtonManual" method="_on_pressed"]

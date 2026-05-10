@@ -13,7 +13,9 @@ extends Control
 @onready var harvest_button: Button = $"../HarvestButton"
 @onready var interaction_prompt: Control = $"../InteractionPrompt"
 @onready var minimap_ui: Control = $"../MinimapUI"
-
+@onready var quit_button: Button = $"../Quit_button"
+@onready var in_game_manual: Panel = $"../InGameManual"
+@onready var game_manual_button: Button = $"../Game_manual_button"
 
 
 # Called when the node enters the scene tree for the first time.
@@ -31,6 +33,9 @@ func _ready() -> void:
 	top_view_button.visible = false
 	interaction_prompt.visible = false
 	minimap_ui.visible = false
+	quit_button.visible = false
+	in_game_manual.visible = false
+	game_manual_button.visible = false
 
 
 func _on_play_button_pressed() -> void:
@@ -45,6 +50,9 @@ func _on_play_button_pressed() -> void:
 	top_view_button.visible = true
 	interaction_prompt.visible = true
 	minimap_ui.visible = true
+	quit_button.visible = true
+	game_manual_button.visible = true
+
 
 func _on_option_button_pressed() -> void:
 	option_setting.visible = true
