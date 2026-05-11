@@ -2,6 +2,7 @@ extends Node
 
 signal inventory_changed
 signal weather_changed(new_weather: String)
+signal next_weather_determined(next_weather: String)
 
 # ---- Player Stats ----
 var inventory: Dictionary = {
@@ -37,15 +38,19 @@ const SECONDS_PER_DAY: float = 1 * 60.0
 var current_day: int = 1
 var day_timer: float = 0.0
 var current_weather: String = "clear"
+var next_weather: String = "clear"
 var _crow_spawn_timer: float = 0.0
 
 const WEATHERS = ["clear", "rain", "plague", "crimson"]
 
 func _ready() -> void:
+	next_weather = WEATHERS[randi() % WEATHERS.size()]
+	next_weather_determined.emit(next_weather)
 	call_deferred("_apply_weather")
 
 func _process(delta: float) -> void:
 	_handle_time(delta)
+	_update_weather_bars(delta)
 	
 	if current_weather == "plague":
 		_crow_spawn_timer -= delta
@@ -84,8 +89,10 @@ func _handle_time(delta: float) -> void:
 
 func _on_new_day() -> void:
 	print("A new day has started! Current Day: ", current_day)
-	current_weather = WEATHERS[randi() % WEATHERS.size()]
+	current_weather = next_weather
+	next_weather = WEATHERS[randi() % WEATHERS.size()]
 	weather_changed.emit(current_weather)
+	next_weather_determined.emit(next_weather)
 	_apply_weather()
 
 func _apply_weather() -> void:
@@ -97,6 +104,12 @@ func _apply_weather() -> void:
 	# Handle fog via WorldEnvironment
 	var we := main_scene.get_node_or_null("WorldEnvironment") as WorldEnvironment
 	var dl := main_scene.get_node_or_null("DirectionalLight3D") as DirectionalLight3D
+
+	# Handle progress bar
+	var corrosionBar := main_scene.get_node_or_null("CanvasLayer/corrosionBar") as ProgressBar
+	var crimeBar := main_scene.get_node_or_null("CanvasLayer/crimebar") as ProgressBar
+	var toxicBar := main_scene.get_node_or_null("CanvasLayer/toxicBar") as ProgressBar
+
 	if we and we.environment:
 		if current_weather == "rain":
 			we.environment.volumetric_fog_enabled = false
@@ -131,6 +144,42 @@ func _apply_weather() -> void:
 	# Handle Plague Crows - remove existing on state change
 	for c in tree.get_nodes_in_group("plague_crows"):
 		c.queue_free()
+
+func _update_weather_bars(delta: float) -> void:
+	var tree := get_tree()
+	if not tree: return
+	var main_scene = tree.current_scene
+	if not main_scene: return
+	
+	# Get progress bars
+	var corrosionBar := main_scene.get_node_or_null("CanvasLayer/corrosionBar") as ProgressBar
+	var crimeBar := main_scene.get_node_or_null("CanvasLayer/crimeBar") as ProgressBar
+	var toxicBar := main_scene.get_node_or_null("CanvasLayer/toxicBar") as ProgressBar
+
+	var INCREASE_VALUE = 5.0
+	
+	# Scale factor based on day (higher on matching weather day, lower on others)
+	var day_scale: float = float(current_day)
+	var off_day_scale: float = 0.1  # 10% of day scale when not the matching weather
+	
+	# Update bars based on weather
+	if current_weather == "rain" and corrosionBar:
+		# corrosionBar.value += delta * 10.0 * day_scale
+		corrosionBar.value += delta * INCREASE_VALUE
+	elif corrosionBar:
+		corrosionBar.value -= delta * INCREASE_VALUE * off_day_scale
+	
+	if current_weather == "crimson" and crimeBar:
+		# crimeBar.value += delta * 10.0 * day_scale
+		crimeBar.value += delta * INCREASE_VALUE
+	elif crimeBar:
+		crimeBar.value -= delta * INCREASE_VALUE * off_day_scale
+	
+	if current_weather == "plague" and toxicBar:
+		# toxicBar.value += delta * 10.0 * day_scale
+		toxicBar.value += delta * INCREASE_VALUE
+	elif toxicBar:
+		toxicBar.value -= delta * INCREASE_VALUE * off_day_scale
 
 func has_ingredients(costs: Dictionary) -> bool:
 	for k in costs.keys():
