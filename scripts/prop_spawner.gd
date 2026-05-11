@@ -7,8 +7,13 @@ extends Node3D
 @export var spawn_count: int = 50
 @export var area_size: float = 40.0
 
+var last_respawn_day: int = 0
+var respawn_interval: int = 2  # Respawn every 2 days
+
 func _ready():
 	spawn_props()
+	last_respawn_day = PlayerManager.current_day
+	PlayerManager.weather_changed.connect(_on_day_changed)
 
 func spawn_props():
 	# Combine all scenes into one big list of possibilities
@@ -40,10 +45,21 @@ func spawn_props():
 			# Force it into the "props" group
 			instance.add_to_group("props")
 
+func _on_day_changed(_new_weather: String) -> void:
+	# Check if it's time to respawn (every 2 days)
+	if PlayerManager.current_day - last_respawn_day >= respawn_interval:
+		last_respawn_day = PlayerManager.current_day
+		_respawn_props()
+
+func _respawn_props() -> void:
+	# Remove all current props
+	for child in get_children():
+		child.queue_free()
+	# Spawn new ones
+	call_deferred("spawn_props")
+	print("Props respawned! (Day %d)" % PlayerManager.current_day)
+
 # F3: reset and respawn props (R opens Craft)
 func _input(event):
 	if event is InputEventKey and event.pressed and event.keycode == KEY_F3:
-		for child in get_children():
-			child.queue_free()
-		# Use 'call_deferred' to ensure old props are deleted before spawning new ones
-		spawn_props.call_deferred()
+		_respawn_props()
