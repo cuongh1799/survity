@@ -45,22 +45,22 @@ func _build_recipes() -> void:
 	_recipes.clear()
 	_recipes.append_array([
 		_recipe(
-			"hut",
-			"Housing",
+			"maintenance_building",
+			"Maintenance Building",
 			"res://assets/ui/png/building.png",
 			"res://scenes/building_scene.tscn",
 			{"wood": 8, "stone": 4, "dirt": 3}
 		),
 		_recipe(
-			"lodge",
-			"Wood lodge",
+			"police_station",
+			"Police Station",
 			"res://assets/ui/png/building.png",
 			"res://scenes/buildingb.tscn",
 			{"wood": 14, "sand": 6, "dirt": 2}
 		),
 		_recipe(
-			"workshop",
-			"Small workshop",
+			"filtration_plant",
+			"Filtration Plant",
 			"res://assets/ui/png/building.png",
 			"res://scenes/buildingc.tscn",
 			{"wood": 10, "stone": 10, "coal": 5}

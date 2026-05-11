@@ -40,6 +40,7 @@ var day_timer: float = 0.0
 var current_weather: String = "clear"
 var next_weather: String = "clear"
 var _crow_spawn_timer: float = 0.0
+var _effect_timer: float = 0.0
 
 const WEATHERS = ["clear", "rain", "plague", "crimson"]
 
@@ -51,6 +52,11 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	_handle_time(delta)
 	_update_weather_bars(delta)
+	_effect_timer += delta
+	if _effect_timer >= 1.0:
+		_effect_timer -= 1.0
+		_apply_building_effects()
+		print("Applying effects")
 	
 	if current_weather == "plague":
 		_crow_spawn_timer -= delta
@@ -156,30 +162,75 @@ func _update_weather_bars(delta: float) -> void:
 	var crimeBar := main_scene.get_node_or_null("CanvasLayer/crimeBar") as ProgressBar
 	var toxicBar := main_scene.get_node_or_null("CanvasLayer/toxicBar") as ProgressBar
 
-	var INCREASE_VALUE = 5.0
+	var INCREASE_VALUE = 1.0
 	
 	# Scale factor based on day (higher on matching weather day, lower on others)
 	var day_scale: float = float(current_day)
 	var off_day_scale: float = 0.1  # 10% of day scale when not the matching weather
 	
-	# Update bars based on weather
+	# Update corrosion bar
 	if current_weather == "rain" and corrosionBar:
-		# corrosionBar.value += delta * 10.0 * day_scale
 		corrosionBar.value += delta * INCREASE_VALUE
 	elif corrosionBar:
 		corrosionBar.value -= delta * INCREASE_VALUE * off_day_scale
 	
+	# Update crime bar
 	if current_weather == "crimson" and crimeBar:
-		# crimeBar.value += delta * 10.0 * day_scale
 		crimeBar.value += delta * INCREASE_VALUE
 	elif crimeBar:
 		crimeBar.value -= delta * INCREASE_VALUE * off_day_scale
 	
+	# Update toxic bar
 	if current_weather == "plague" and toxicBar:
-		# toxicBar.value += delta * 10.0 * day_scale
 		toxicBar.value += delta * INCREASE_VALUE
 	elif toxicBar:
 		toxicBar.value -= delta * INCREASE_VALUE * off_day_scale
+
+func _apply_building_effects() -> void:
+	var tree := get_tree()
+	if not tree: return
+	var main_scene = tree.current_scene
+	if not main_scene: return
+	
+	# Get progress bars
+	var corrosionBar := main_scene.get_node_or_null("CanvasLayer/corrosionBar") as ProgressBar
+	var crimeBar := main_scene.get_node_or_null("CanvasLayer/crimeBar") as ProgressBar
+	var toxicBar := main_scene.get_node_or_null("CanvasLayer/toxicBar") as ProgressBar
+	
+	# Get building effects
+	var building_effects = _calculate_building_effects()
+	
+	# Apply building effects every second
+	if corrosionBar and building_effects["corrosion_decrease"] > 0:
+		corrosionBar.value -= building_effects["corrosion_decrease"]
+		print("Applying corrosion decrease: %.1f" % building_effects["corrosion_decrease"])
+	
+	if crimeBar and building_effects["crime_decrease"] > 0:
+		crimeBar.value -= building_effects["crime_decrease"]
+		print("Applying crime decrease: %.1f" % building_effects["crime_decrease"])
+	
+	if toxicBar and building_effects["toxic_decrease"] > 0:
+		toxicBar.value -= building_effects["toxic_decrease"]
+		print("Applying toxic decrease: %.1f" % building_effects["toxic_decrease"])
+
+func _calculate_building_effects() -> Dictionary:
+	var effects = {
+		"crime_decrease": 0.0,
+		"toxic_decrease": 0.0,
+		"corrosion_decrease": 0.0
+	}
+	
+	# Get all props/buildings in the scene
+	var tree := get_tree()
+	if not tree: return effects
+	
+	for prop in tree.get_nodes_in_group("props"):
+		if prop is Prop:
+			effects["crime_decrease"] += prop.crime_decrease
+			effects["toxic_decrease"] += prop.toxic_decrease
+			effects["corrosion_decrease"] += prop.corrosion_decrease
+	
+	return effects
 
 func has_ingredients(costs: Dictionary) -> bool:
 	for k in costs.keys():

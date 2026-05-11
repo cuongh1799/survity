@@ -5,6 +5,11 @@ class_name Prop
 @export var profitPerSecond: float = 0
 @export var attraction: float = 0
 
+@export_group("City Effects")
+@export var crime_decrease: float = 0.0
+@export var toxic_decrease: float = 0.0
+@export var corrosion_decrease: float = 0.0
+
 @export_group("Harvesting / Drops")
 # We match the spelling of the keys in PlayerManager.inventory
 @export_enum(

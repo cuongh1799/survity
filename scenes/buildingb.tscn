@@ -5,7 +5,8 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_w8ulc"]
 
-[node name="buildingb" unique_id=1629872540 instance=ExtResource("1_klgkp")]
+[node name="police_station" unique_id=1629872540 instance=ExtResource("1_klgkp")]
+crime_decrease = 2.0
 
 [node name="MeshInstance3D" parent="." index="0" unique_id=1077949620]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
