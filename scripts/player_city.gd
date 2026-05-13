@@ -45,25 +45,18 @@ func _snap_feet_to_floor() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	var cam := get_viewport().get_camera_3d()
 	var dir := Vector3.ZERO
-	if cam:
-		var f := cam.global_transform.basis.z
-		f.y = 0
-		var r := cam.global_transform.basis.x
-		r.y = 0
-		if f.length_squared() > 0.0001:
-			f = f.normalized()
-		if r.length_squared() > 0.0001:
-			r = r.normalized()
-		if Input.is_key_pressed(KEY_W):
-			dir -= f
-		if Input.is_key_pressed(KEY_S):
-			dir += f
-		if Input.is_key_pressed(KEY_A):
-			dir -= r
-		if Input.is_key_pressed(KEY_D):
-			dir += r
+	
+	# Direct WASD input mapped to cardinal directions
+	if Input.is_key_pressed(KEY_W):
+		dir.z -= 1
+	if Input.is_key_pressed(KEY_S):
+		dir.z += 1
+	if Input.is_key_pressed(KEY_A):
+		dir.x -= 1
+	if Input.is_key_pressed(KEY_D):
+		dir.x += 1
+	
 	dir.y = 0
 	
 	var current_speed := MOVE_SPEED
@@ -74,13 +67,58 @@ func _physics_process(_delta: float) -> void:
 		dir = dir.normalized()
 		velocity.x = dir.x * current_speed
 		velocity.z = dir.z * current_speed
+		_rotate_player_to_direction(dir)
 	else:
 		velocity.x = 0.0
 		velocity.z = 0.0
+	
 	velocity.y = 0.0
 	move_and_slide()
 	_correct_vertical_to_floor()
 	_update_interaction_prompt()
+
+
+func _rotate_player_to_direction(direction: Vector3) -> void:
+	# Set rotation based on cardinal/diagonal directions
+	# North: -Z, East: +X, South: +Z, West: -X
+	# if direction.x > 0.1:  # Moving East
+	# 	if direction.z > 0.1:  # SE
+	# 		rotation.y = -3 * PI / 4
+	# 	elif direction.z < -0.1:  # NE
+	# 		rotation.y = -PI / 4
+	# 	else:  # E
+	# 		rotation.y = PI / 2
+	# elif direction.x < -0.1:  # Moving West
+	# 	if direction.z > 0.1:  # SW
+	# 		rotation.y = 3 * PI / 4
+	# 	elif direction.z < -0.1:  # NW
+	# 		rotation.y = PI / 4
+	# 	else:  # W
+	# 		rotation.y = -PI / 2
+	# else:  # X is neutral
+	# 	if direction.z > 0.1:  # S
+	# 		rotation.y = 0
+	# 	elif direction.z < -0.1:  # N
+	# 		rotation.y = PI
+	if direction.x > 0.1:  # Moving East
+		if direction.z > 0.1:  # SE
+			rotation.y = PI / 4
+		elif direction.z < -0.1:  # NE
+			rotation.y =  3 * PI / 4
+		else:  # E
+			rotation.y = PI / 2
+	elif direction.x < -0.1:  # Moving West
+		if direction.z > 0.1:  # SW
+			rotation.y =  -PI / 4
+		elif direction.z < -0.1:  # NW
+			rotation.y = -3 * PI / 4
+		else:  # W
+			rotation.y = -PI / 2
+	else:  # X is neutral
+		if direction.z > 0.1:  # S
+			rotation.y = 0
+		elif direction.z < -0.1:  # N
+			rotation.y = PI
 
 
 func _unhandled_input(event: InputEvent) -> void:

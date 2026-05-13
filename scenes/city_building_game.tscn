@@ -16,6 +16,7 @@
 [ext_resource type="Script" uid="uid://cm3ttbnsbnvxj" path="res://scenes/inventory_UI.gd" id="5_rsucf"]
 [ext_resource type="PackedScene" uid="uid://brecipegrow01" path="res://scenes/recipe_row.tscn" id="7_gx5h2"]
 [ext_resource type="Script" uid="uid://b7cpi80fr3b40" path="res://scenes/weather_label.gd" id="11_v3ni1"]
+[ext_resource type="ArrayMesh" uid="uid://d057moxrttl0f" path="res://tres/oiiacat.res" id="13_jsn8g"]
 [ext_resource type="PackedScene" uid="uid://c8woodpile01" path="res://scenes/world_wood_pile.tscn" id="17_wp"]
 [ext_resource type="PackedScene" uid="uid://c8oilpuddle01" path="res://scenes/world_oil_puddle.tscn" id="18_op"]
 [ext_resource type="PackedScene" uid="uid://c8stream001" path="res://scenes/world_stream.tscn" id="19_st"]
@@ -62,17 +63,12 @@ font_size = 50
 [sub_resource type="LabelSettings" id="LabelSettings_jsn8g"]
 font_size = 30
 
+[sub_resource type="LabelSettings" id="LabelSettings_481fm"]
+font_size = 222
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
 radius = 0.95
 height = 3.4
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_player"]
-radius = 0.95
-height = 3.4
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_player_red"]
-albedo_color = Color(0.9, 0.16, 0.12, 1)
-roughness = 0.42
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_744bo"]
 albedo_texture = ExtResource("1_xclp7")
@@ -388,6 +384,20 @@ offset_top = 275.0
 offset_right = 301.0
 offset_bottom = 331.0
 
+[node name="youlostpanel" type="Panel" parent="CanvasLayer" unique_id=325283810]
+visible = false
+offset_left = 474.0
+offset_top = 244.0
+offset_right = 1554.0
+offset_bottom = 751.0
+
+[node name="Label" type="Label" parent="CanvasLayer/youlostpanel" unique_id=574132618]
+layout_mode = 0
+offset_right = 1082.0
+offset_bottom = 482.0
+text = "YOU LOST"
+label_settings = SubResource("LabelSettings_481fm")
+
 [node name="Player" type="CharacterBody3D" parent="." unique_id=500000040]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.075, 0)
 collision_layer = 2
@@ -400,9 +410,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 shape = SubResource("CapsuleShape3D_player")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=500000042]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
-mesh = SubResource("CapsuleMesh_player")
-surface_material_override/0 = SubResource("StandardMaterial3D_player_red")
+transform = Transform3D(0.13, 0, 0, 0, 0.13, 0, 0, 0, 0.13, 0, 0.046239182, 0)
+mesh = ExtResource("13_jsn8g")
+blend_shapes/morph_0 = 0.0
 
 [node name="HarvestWorldPrompt" type="Node3D" parent="." unique_id=500000060]
 visible = false

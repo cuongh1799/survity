@@ -116,6 +116,9 @@ func _apply_weather() -> void:
 	var crimeBar := main_scene.get_node_or_null("CanvasLayer/crimebar") as ProgressBar
 	var toxicBar := main_scene.get_node_or_null("CanvasLayer/toxicBar") as ProgressBar
 
+	# Handle lost
+	var youlostpanel := main_scene.get_node_or_null("CanvasLayer/youlostpanel") as Panel
+
 	if we and we.environment:
 		if current_weather == "rain":
 			we.environment.volumetric_fog_enabled = false
@@ -185,6 +188,26 @@ func _update_weather_bars(delta: float) -> void:
 		toxicBar.value += delta * INCREASE_VALUE
 	elif toxicBar:
 		toxicBar.value -= delta * INCREASE_VALUE * off_day_scale
+	
+	# Check if any progress bar reached 100%
+	if (corrosionBar and corrosionBar.value >= 100) or \
+	   (crimeBar and crimeBar.value >= 100) or \
+	   (toxicBar and toxicBar.value >= 100):
+		_trigger_game_over()
+
+func _trigger_game_over() -> void:
+	var tree := get_tree()
+	if not tree: return
+	var main_scene = tree.current_scene
+	if not main_scene: return
+	
+	# Show the you lost panel
+	var youlostpanel := main_scene.get_node_or_null("CanvasLayer/youlostpanel") as Panel
+	if youlostpanel:
+		youlostpanel.visible = true
+	
+	# Pause the game to stop all processing
+	tree.paused = true
 
 func _apply_building_effects() -> void:
 	var tree := get_tree()

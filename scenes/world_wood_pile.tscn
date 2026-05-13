@@ -1,27 +1,22 @@
 [gd_scene format=3 uid="uid://c8woodpile01"]
 
 [ext_resource type="PackedScene" uid="uid://3jmo64dlvn5m" path="res://scenes/base_prop.tscn" id="1_base"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m"]
-albedo_color = Color(0.55, 0.33, 0.15, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_m"]
-size = Vector3(1.4, 1.0, 1.4)
-material = SubResource("StandardMaterial3D_m")
+[ext_resource type="ArrayMesh" uid="uid://de7xa88nu6n7u" path="res://tres/wood.res" id="2_ytfst"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_m"]
-size = Vector3(1.4, 1.0, 1.4)
+size = Vector3(1.4, 1, 1.4)
 
-[node name="world_wood_pile" instance=ExtResource("1_base")]
+[node name="world_wood_pile" unique_id=1083001083 instance=ExtResource("1_base")]
 cost = 0.0
 drop_type = "wood"
 drop_amount = 2
 
-[node name="MeshInstance3D" parent="." index="0"]
-mesh = SubResource("BoxMesh_m")
+[node name="MeshInstance3D" parent="." index="0" unique_id=1077949620]
+transform = Transform3D(1.54, 0, 0, 0, 1.54, 0, 0, 0, 2.83, 0, 0.9973291, 0)
+mesh = ExtResource("2_ytfst")
 
-[node name="CollisionShape3D" parent="." index="1"]
+[node name="CollisionShape3D" parent="." index="1" unique_id=1411538431]
 shape = SubResource("BoxShape3D_m")
 
-[node name="SelectionVisual" parent="." index="2"]
-transform = Transform3D(1.6, 0, 0, 0, 1.2, 0, 0, 0, 1.6, 0, 0.5, 0)
+[node name="SelectionVisual" parent="." index="2" unique_id=407129122]
+transform = Transform3D(1.93, 0, 0, 0, 1.448, 0, 0, 0, 1.93, 0, 1.0630794, 0)

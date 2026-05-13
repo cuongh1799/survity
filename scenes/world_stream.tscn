@@ -1,28 +1,118 @@
 [gd_scene format=3 uid="uid://c8stream001"]
 
 [ext_resource type="PackedScene" uid="uid://3jmo64dlvn5m" path="res://scenes/base_prop.tscn" id="1_base"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m"]
-albedo_color = Color(0.2, 0.45, 0.75, 1)
-roughness = 0.2
-
-[sub_resource type="BoxMesh" id="BoxMesh_m"]
-size = Vector3(6, 0.1, 2)
-material = SubResource("StandardMaterial3D_m")
+[ext_resource type="ArrayMesh" uid="uid://l1ov08h4411q" path="res://tres/water.res" id="2_0o7ng"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_m"]
 size = Vector3(6, 0.25, 2)
 
-[node name="world_stream" instance=ExtResource("1_base")]
+[node name="world_stream" unique_id=720844292 instance=ExtResource("1_base")]
 cost = 0.0
 drop_type = "water"
 drop_amount = 3
 
-[node name="MeshInstance3D" parent="." index="0"]
-mesh = SubResource("BoxMesh_m")
+[node name="MeshInstance3D" parent="." index="0" unique_id=1077949620]
+transform = Transform3D(0.315, 0, 0, 0, 0.315, 0, 0, 0, 0.315, 0, 0.04691291, 0)
+mesh = ExtResource("2_0o7ng")
+blend_shapes/frame_0000 = 0.0
+blend_shapes/frame_0001 = 0.0
+blend_shapes/frame_0002 = 0.0
+blend_shapes/frame_0003 = 0.0
+blend_shapes/frame_0004 = 0.0
+blend_shapes/frame_0005 = 0.0
+blend_shapes/frame_0006 = 0.0
+blend_shapes/frame_0007 = 0.0
+blend_shapes/frame_0008 = 0.0
+blend_shapes/frame_0009 = 0.0
+blend_shapes/frame_0010 = 0.0
+blend_shapes/frame_0011 = 0.0
+blend_shapes/frame_0012 = 0.0
+blend_shapes/frame_0013 = 0.0
+blend_shapes/frame_0014 = 0.0
+blend_shapes/frame_0015 = 0.0
+blend_shapes/frame_0016 = 0.0
+blend_shapes/frame_0017 = 0.0
+blend_shapes/frame_0018 = 0.0
+blend_shapes/frame_0019 = 0.0
+blend_shapes/frame_0020 = 0.0
+blend_shapes/frame_0021 = 0.0
+blend_shapes/frame_0022 = 0.0
+blend_shapes/frame_0023 = 0.0
+blend_shapes/frame_0024 = 0.0
+blend_shapes/frame_0025 = 0.0
+blend_shapes/frame_0026 = 0.0
+blend_shapes/frame_0027 = 0.0
+blend_shapes/frame_0028 = 0.0
+blend_shapes/frame_0029 = 0.0
+blend_shapes/frame_0030 = 0.0
+blend_shapes/frame_0031 = 0.0
+blend_shapes/frame_0032 = 0.0
+blend_shapes/frame_0033 = 0.0
+blend_shapes/frame_0034 = 0.0
+blend_shapes/frame_0035 = 0.0
+blend_shapes/frame_0036 = 0.0
+blend_shapes/frame_0037 = 0.0
+blend_shapes/frame_0038 = 0.0
+blend_shapes/frame_0039 = 0.0
+blend_shapes/frame_0040 = 0.0
+blend_shapes/frame_0041 = 0.0
+blend_shapes/frame_0042 = 0.0
+blend_shapes/frame_0043 = 0.0
+blend_shapes/frame_0044 = 0.0
+blend_shapes/frame_0045 = 0.0
+blend_shapes/frame_0046 = 0.0
+blend_shapes/frame_0047 = 0.0
+blend_shapes/frame_0048 = 0.0
+blend_shapes/frame_0049 = 0.0
+blend_shapes/frame_0050 = 0.0
+blend_shapes/frame_0051 = 0.0
+blend_shapes/frame_0052 = 0.0
+blend_shapes/frame_0053 = 0.0
+blend_shapes/frame_0054 = 0.0
+blend_shapes/frame_0055 = 0.0
+blend_shapes/frame_0056 = 0.0
+blend_shapes/frame_0057 = 0.0
+blend_shapes/frame_0058 = 0.0
+blend_shapes/frame_0059 = 0.0
+blend_shapes/frame_0060 = 0.0
+blend_shapes/frame_0061 = 0.0
+blend_shapes/frame_0062 = 0.0
+blend_shapes/frame_0063 = 0.0
+blend_shapes/frame_0064 = 0.0
+blend_shapes/frame_0065 = 0.0
+blend_shapes/frame_0066 = 0.0
+blend_shapes/frame_0067 = 0.0
+blend_shapes/frame_0068 = 0.0
+blend_shapes/frame_0069 = 0.0
+blend_shapes/frame_0070 = 0.0
+blend_shapes/frame_0071 = 0.0
+blend_shapes/frame_0072 = 0.0
+blend_shapes/frame_0073 = 0.0
+blend_shapes/frame_0074 = 0.0
+blend_shapes/frame_0075 = 0.0
+blend_shapes/frame_0076 = 0.0
+blend_shapes/frame_0077 = 0.0
+blend_shapes/frame_0078 = 0.0
+blend_shapes/frame_0079 = 0.0
+blend_shapes/frame_0080 = 0.0
+blend_shapes/frame_0081 = 0.0
+blend_shapes/frame_0082 = 0.0
+blend_shapes/frame_0083 = 0.0
+blend_shapes/frame_0084 = 0.0
+blend_shapes/frame_0085 = 0.0
+blend_shapes/frame_0086 = 0.0
+blend_shapes/frame_0087 = 0.0
+blend_shapes/frame_0088 = 0.0
+blend_shapes/frame_0089 = 0.0
+blend_shapes/frame_0090 = 0.0
+blend_shapes/frame_0091 = 0.0
+blend_shapes/frame_0092 = 0.0
+blend_shapes/frame_0093 = 0.0
+blend_shapes/frame_0094 = 0.0
+blend_shapes/frame_0095 = 0.0
 
-[node name="CollisionShape3D" parent="." index="1"]
+[node name="CollisionShape3D" parent="." index="1" unique_id=1411538431]
 shape = SubResource("BoxShape3D_m")
 
-[node name="SelectionVisual" parent="." index="2"]
-transform = Transform3D(6.2, 0, 0, 0, 0.3, 0, 0, 0, 2.2, 0, 0.12, 0)
+[node name="SelectionVisual" parent="." index="2" unique_id=407129122]
+transform = Transform3D(15.87, 0, 0, 0, 0.768, 0, 0, 0, 16.016, 0, 0.12, 0)

@@ -1,28 +1,22 @@
 [gd_scene format=3 uid="uid://c8coal001"]
 
 [ext_resource type="PackedScene" uid="uid://3jmo64dlvn5m" path="res://scenes/base_prop.tscn" id="1_base"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m"]
-albedo_color = Color(0.12, 0.12, 0.14, 1)
-roughness = 0.9
-
-[sub_resource type="BoxMesh" id="BoxMesh_m"]
-size = Vector3(1.8, 1.2, 1.8)
-material = SubResource("StandardMaterial3D_m")
+[ext_resource type="ArrayMesh" uid="uid://beiwe4g6uk1rn" path="res://tres/coal_ore.res" id="2_fa4ah"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_m"]
 size = Vector3(1.8, 1.2, 1.8)
 
-[node name="world_coal_ore" instance=ExtResource("1_base")]
+[node name="world_coal_ore" unique_id=1553386798 instance=ExtResource("1_base")]
 cost = 0.0
 drop_type = "coal"
 drop_amount = 2
 
-[node name="MeshInstance3D" parent="." index="0"]
-mesh = SubResource("BoxMesh_m")
+[node name="MeshInstance3D" parent="." index="0" unique_id=1077949620]
+transform = Transform3D(1.935, 0, 0, 0, 1.935, 0, 0, 0, 1.935, 0, -0.00046914816, 0)
+mesh = ExtResource("2_fa4ah")
 
-[node name="CollisionShape3D" parent="." index="1"]
+[node name="CollisionShape3D" parent="." index="1" unique_id=1411538431]
 shape = SubResource("BoxShape3D_m")
 
-[node name="SelectionVisual" parent="." index="2"]
-transform = Transform3D(2.0, 0, 0, 0, 1.35, 0, 0, 0, 2.0, 0, 0.6, 0)
+[node name="SelectionVisual" parent="." index="2" unique_id=407129122]
+transform = Transform3D(2, 0, 0, 0, 1.35, 0, 0, 0, 2, 0, 0.6, 0)
