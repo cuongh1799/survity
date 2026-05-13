@@ -8,6 +8,8 @@
 [node name="rockScene" unique_id=1629872540 instance=ExtResource("1_c5bxk")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 cost = 2.0
+drop_type = "stone"
+drop_amount = 1
 
 [node name="MeshInstance3D" parent="." index="0" unique_id=1077949620]
 mesh = ExtResource("2_nvplc")

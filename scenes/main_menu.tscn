@@ -4,7 +4,6 @@
 [ext_resource type="AudioStream" uid="uid://phum7v4uk0gi" path="res://assets/sound/1Phantazia.wav" id="2_ekxnf"]
 [ext_resource type="FontFile" uid="uid://dfxfqh7m3hw0e" path="res://assets/font/GrapeSoda.ttf" id="2_wu84c"]
 [ext_resource type="Script" uid="uid://1v7ebbpt7jff" path="res://scripts/music_slider.gd" id="3_bqqt6"]
-[ext_resource type="Script" uid="uid://belpcnxl0ce40" path="res://scripts/sfx_slider.gd" id="5_8ln24"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ekxnf"]
 bg_color = Color(1, 1, 1, 1)
@@ -12,7 +11,9 @@ corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
-shadow_offset = Vector2(0, 5)
+shadow_color = Color(0, 0, 0, 1)
+shadow_size = 3
+shadow_offset = Vector2(1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bqqt6"]
 bg_color = Color(0.83033526, 0.8303351, 0.830335, 1)
@@ -20,6 +21,9 @@ corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.99215686)
+shadow_size = 3
+shadow_offset = Vector2(1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wu84c"]
 bg_color = Color(0.95815676, 0.9581569, 0.95815665, 1)
@@ -27,6 +31,9 @@ corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.9843137)
+shadow_size = 3
+shadow_offset = Vector2(1, 1)
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_ekxnf"]
 color = Color(1, 1, 1, 1)
@@ -42,9 +49,10 @@ thickness = 10
 
 [node name="Main_menu" type="Control" unique_id=258386567]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_right = 1.217
+anchor_bottom = 1.268
+offset_right = -2259.6401
+offset_bottom = -1298.4401
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_l6cm7")
@@ -54,9 +62,10 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -275.0
-offset_right = 275.0
-offset_bottom = 277.0
+offset_left = 662.5
+offset_top = 20.0
+offset_right = 1212.5
+offset_bottom = 320.0
 grow_horizontal = 2
 theme_override_fonts/font = ExtResource("2_wu84c")
 theme_override_font_sizes/font_size = 300
@@ -68,15 +77,11 @@ autowrap_mode = 2
 [node name="Main_button" type="VBoxContainer" parent="." unique_id=294202213]
 visible = false
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -319.9375
-offset_top = -190.0
-offset_right = 319.9375
-offset_bottom = 190.0
+anchors_preset = -1
+offset_left = 631.0
+offset_top = 386.0
+offset_right = 1270.875
+offset_bottom = 766.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 8
@@ -130,17 +135,12 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_wu84c")
 text = "Quit"
 
 [node name="GameManual" type="Panel" parent="." unique_id=1744238345]
-visible = false
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.60700005
-anchor_right = 0.5
-anchor_bottom = 0.60700005
-offset_left = -501.0
-offset_top = -320.56006
-offset_right = 504.0
-offset_bottom = 320.43994
+offset_left = 455.0
+offset_top = 314.0
+offset_right = 1460.0
+offset_bottom = 955.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -164,26 +164,39 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="GameManualDescr" type="Label" parent="GameManual" unique_id=1121235214]
-layout_mode = 0
-offset_left = 202.0
-offset_top = 181.0
-offset_right = 768.0
-offset_bottom = 541.0
-text = "Game manual
-- Scroll up for zoom in
-- Scroll down for zoom out
-etc
-etc
-etc
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.606
+anchor_top = -0.62
+anchor_right = -0.606
+anchor_bottom = -0.62
+offset_left = 698.03
+offset_top = 515.42004
+offset_right = 1557.03
+offset_bottom = 850.42004
+text = "Welcome to Survity! We challenge you to build a city that can survive the hardest challenge. You will be a 
+creator collecting the material, designing a city with a large variety of building type. Your mission is moving 
+around the map, collect the materials needed to craft a building, and complete the quest on the right corner of 
+the screen.
+
+How to move around in the game
+- Scoll up the mouse wheel for zoom in
+- Scroll down the mouse for zoom out
+-Click the button at the middle to change the world view
+- Move around the map using A- for left, D - for right, W - for up, S - for down
+- Hold the left-click and drag to select material, press delete to collect the material
+- Press F to harvest the material
+- Press T or Inventory Button to check the collected material
+- Press R to choose available type of building to build upon
 "
 
 [node name="BackButtonManual" type="Button" parent="GameManual" unique_id=426904077]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.88400006
-anchor_right = 0.5
-anchor_bottom = 0.88400006
+anchor_left = 0.50199
+anchor_top = 0.9666834
+anchor_right = 0.50199
+anchor_bottom = 0.9666834
 offset_left = -100.5
 offset_top = -75.64404
 offset_right = 93.5
@@ -200,16 +213,12 @@ text = "Back"
 metadata/_edit_use_anchors_ = true
 
 [node name="Option_Setting" type="Panel" parent="." unique_id=1874324230]
+visible = false
 layout_mode = 0
 offset_left = 529.0
 offset_top = 284.0
 offset_right = 1400.0
-offset_bottom = 946.0
-
-[node name="1Phantazia" type="AudioStreamPlayer" parent="Option_Setting" unique_id=1792463116]
-stream = ExtResource("2_ekxnf")
-autoplay = true
-bus = &"BackgroundMusic"
+offset_bottom = 637.0
 
 [node name="BackButon" type="Button" parent="Option_Setting" unique_id=1802628687]
 layout_mode = 1
@@ -238,57 +247,33 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 117.0
-offset_top = -206.0
-offset_right = 268.0
-offset_bottom = -127.0
+offset_left = 115.0
+offset_top = -64.0
+offset_right = 266.0
+offset_bottom = 15.0
 grow_vertical = 2
 theme_override_font_sizes/font_size = 50
 text = "Music"
 
-[node name="SFX" type="Label" parent="Option_Setting" unique_id=2006229351]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 117.0
-offset_top = -62.0
-offset_right = 268.0
-offset_bottom = 79.0
-grow_vertical = 2
-theme_override_font_sizes/font_size = 50
-text = "SFX
-"
-
 [node name="MusicSlider" type="HSlider" parent="Option_Setting" unique_id=2101768010]
 layout_mode = 0
-offset_left = 370.0
-offset_top = 116.0
-offset_right = 689.0
-offset_bottom = 225.0
+offset_left = 417.0
+offset_top = 96.0
+offset_right = 736.0
+offset_bottom = 205.0
 theme_override_styles/slider = SubResource("StyleBoxLine_ekxnf")
 theme_override_styles/grabber_area = SubResource("StyleBoxLine_bqqt6")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_wu84c")
-max_value = 3.0
-step = 0.5
-value = 0.5
+min_value = -30.0
+max_value = 15.0
+step = 10.0
 script = ExtResource("3_bqqt6")
 audio_bus_name = "BackgroundMusic"
 
-[node name="SFXSlider" type="HSlider" parent="Option_Setting" unique_id=2090464414]
-layout_mode = 0
-offset_left = 386.0
-offset_top = 261.0
-offset_right = 705.0
-offset_bottom = 370.0
-theme_override_styles/slider = SubResource("StyleBoxLine_ekxnf")
-theme_override_styles/grabber_area = SubResource("StyleBoxLine_bqqt6")
-theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_wu84c")
-max_value = 3.0
-step = 0.5
-value = 0.5
-script = ExtResource("5_8ln24")
-sfx_bus_name = "SFX"
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Option_Setting" unique_id=453596400]
+stream = ExtResource("2_ekxnf")
+autoplay = true
+bus = &"BackgroundMusic"
 
 [connection signal="pressed" from="Main_button/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="Main_button/Manual" to="." method="_on_manual_pressed"]
@@ -297,4 +282,3 @@ sfx_bus_name = "SFX"
 [connection signal="pressed" from="GameManual/BackButtonManual" to="." method="_on_back_button_manual_pressed"]
 [connection signal="pressed" from="Option_Setting/BackButon" to="." method="_on_back_buton_pressed"]
 [connection signal="value_changed" from="Option_Setting/MusicSlider" to="Option_Setting/MusicSlider" method="_on_value_changed"]
-[connection signal="value_changed" from="Option_Setting/SFXSlider" to="Option_Setting/MusicSlider" method="_on_sfx_slider_value_changed"]

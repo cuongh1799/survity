@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://cmu0x0qfr31nk"]
+
+[ext_resource type="Script" uid="uid://blggdod1sth7a" path="res://scenes/crowscript.gd" id="1_n3e2n"]
+[ext_resource type="ArrayMesh" uid="uid://dukejg6ftpp6v" path="res://tres/crow.tres" id="2_n3e2n"]
+
+[node name="Crow" type="Node3D" unique_id=1448299992]
+transform = Transform3D(0.135, 0, 0, 0, 0.135, 0, 0, 0, 0.135, 0, 2.2879276, 0)
+script = ExtResource("1_n3e2n")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=119296690]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 0.234362, 0.972149, 8.74228e-08, 0.972149, -0.234362, 0, 0, 0)
+mesh = ExtResource("2_n3e2n")

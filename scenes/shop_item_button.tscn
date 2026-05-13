@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://b2687vha7j4tf"]
+
+[node name="ShopItemButton" type="Button" unique_id=618325932]
+custom_minimum_size = Vector2(100, 100)
+offset_right = 8.0
+offset_bottom = 8.0

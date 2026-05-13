@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://csnrbpa18gf0j"]
+
+[ext_resource type="PackedScene" uid="uid://3jmo64dlvn5m" path="res://scenes/base_prop.tscn" id="1_wbtn4"]
+[ext_resource type="ArrayMesh" uid="uid://de42kpts8242e" path="res://tres/buildingc.res" id="2_ysfbv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_y6yux"]
+size = Vector3(1, 1.7889404, 1)
+
+[node name="filtration_plant" unique_id=1629872540 instance=ExtResource("1_wbtn4")]
+toxic_decrease = 2.0
+
+[node name="MeshInstance3D" parent="." index="0" unique_id=1077949620]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+mesh = ExtResource("2_ysfbv")
+
+[node name="CollisionShape3D" parent="." index="1" unique_id=1411538431]
+transform = Transform3D(9.63, 0, 0, 0, 3.955, 0, 0, 0, 9.8, 0, 3.6901422, 0)
+shape = SubResource("BoxShape3D_y6yux")
+
+[node name="SelectionVisual" parent="." index="2" unique_id=407129122]
+transform = Transform3D(10, 0, 0, 0, 6.983, 0, 0, 0, 10, 0, 3.49467, 0)

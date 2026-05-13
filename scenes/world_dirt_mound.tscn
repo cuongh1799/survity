@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://k338fbwr0of0"]
+
+[ext_resource type="PackedScene" uid="uid://3jmo64dlvn5m" path="res://scenes/base_prop.tscn" id="1_base"]
+[ext_resource type="ArrayMesh" uid="uid://1s1mcj1ybkkl" path="res://tres/dirt_pile.res" id="2_sivsw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_m"]
+size = Vector3(2.2, 0.9, 2.2)
+
+[node name="world_dirt_mound" unique_id=1197555928 instance=ExtResource("1_base")]
+cost = 0.0
+drop_type = "dirt"
+drop_amount = 2
+
+[node name="MeshInstance3D" parent="." index="0" unique_id=1077949620]
+transform = Transform3D(-7.212379e-09, -0.085, 0, 1.9676054e-09, -4.430651e-17, 0.292, -0.165, 3.715468e-09, 3.482065e-09, 0, 0, 0)
+mesh = ExtResource("2_sivsw")
+
+[node name="CollisionShape3D" parent="." index="1" unique_id=1411538431]
+shape = SubResource("BoxShape3D_m")
+
+[node name="SelectionVisual" parent="." index="2" unique_id=407129122]
+transform = Transform3D(2.5, 0, 0, 0, 1.1, 0, 0, 0, 2.5, 0, 0.45, 0)
