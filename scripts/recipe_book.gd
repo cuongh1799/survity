@@ -68,21 +68,21 @@ func _build_recipes() -> void:
 		_recipe(
 			"mine_station",
 			"Mining station",
-			"res://assets/ui/png/building.png",
+			"res://assets/ui/png/coal-factory.png",
 			"res://scenes/building_scene.tscn",
 			{"gold": 4, "silver": 4, "stone": 12, "wood": 8}
 		),
 		_recipe(
 			"oil_tower",
 			"Oil refinery tower",
-			"res://assets/ui/png/building.png",
+			"res://assets/ui/png/oil-industry.png",
 			"res://scenes/buildingc.tscn",
 			{"oil": 8, "water": 10, "coal": 6, "stone": 8}
 		),
 		_recipe(
 			"city_hall",
 			"City Hall",
-			"res://assets/ui/png/building.png",
+			"res://assets/ui/png/town-hall.png",
 			"res://scenes/buildingb.tscn",
 			{"gold": 6, "silver": 6, "wood": 18, "stone": 16, "coal": 8, "oil": 4, "sand": 8}
 		),

@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://c8dirt001"]
+[gd_scene format=3 uid="uid://k338fbwr0of0"]
 
 [ext_resource type="PackedScene" uid="uid://3jmo64dlvn5m" path="res://scenes/base_prop.tscn" id="1_base"]
 [ext_resource type="ArrayMesh" uid="uid://1s1mcj1ybkkl" path="res://tres/dirt_pile.res" id="2_sivsw"]

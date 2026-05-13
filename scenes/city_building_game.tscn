@@ -57,8 +57,213 @@ font_size = 30
 [sub_resource type="LabelSettings" id="LabelSettings_mnokt"]
 font_size = 30
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v3ni1"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.99607843)
+shadow_size = 3
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jsn8g"]
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.99215686)
+shadow_size = 3
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_481fm"]
+bg_color = Color(0.8324741, 0.8324741, 0.832474, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.98039216)
+shadow_size = 3
+shadow_offset = Vector2(1, 1)
+
 [sub_resource type="LabelSettings" id="LabelSettings_rsucf"]
 font_size = 50
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dsn3l"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.99607843)
+shadow_size = 3
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oku7j"]
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.99215686)
+shadow_size = 3
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_henqq"]
+bg_color = Color(0.781407, 0.781407, 0.7814069, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.96862745)
+shadow_size = 3
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2b3fr"]
+bg_color = Color(0.9977897, 0.9977897, 0.9977897, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 1)
+shadow_size = 3
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rpdi3"]
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 1)
+shadow_size = 3
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3arlb"]
+bg_color = Color(0.8175212, 0.81752133, 0.8175211, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.9764706)
+shadow_size = 3
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_drmtj"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.99215686)
+shadow_size = 3
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w6dyv"]
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.99607843)
+shadow_size = 3
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_skknc"]
+bg_color = Color(0.7877592, 0.78775924, 0.787759, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.9490196)
+shadow_size = 3
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fj8of"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.9764706)
+shadow_size = 3
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jrrf3"]
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.95686275)
+shadow_size = 3
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2535b"]
+bg_color = Color(0.8196545, 0.8196545, 0.8196543, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.99607843)
+shadow_size = 3
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tbmww"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 1)
+shadow_size = 3
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dxdyp"]
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.99215686)
+shadow_size = 3
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_flhdu"]
+bg_color = Color(0.87545645, 0.8754566, 0.8754564, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 1)
+shadow_size = 3
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aueuc"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 1)
+shadow_size = 3
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8rg56"]
+bg_color = Color(0.83033526, 0.8303351, 0.830335, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.99215686)
+shadow_size = 3
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hu8sj"]
+bg_color = Color(0.95815676, 0.9581569, 0.95815665, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.9843137)
+shadow_size = 3
+shadow_offset = Vector2(1, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_jsn8g"]
 font_size = 30
@@ -112,8 +317,8 @@ shadow_enabled = true
 [node name="BudgetUI" type="Control" parent="CanvasLayer" unique_id=1184198994]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 45.0
+offset_bottom = 43.0
 script = ExtResource("3_t8xqk")
 
 [node name="TimeLabel" type="Label" parent="CanvasLayer/BudgetUI" unique_id=1185102169]
@@ -127,17 +332,19 @@ label_settings = SubResource("LabelSettings_t8xqk")
 
 [node name="SelectionCount" type="Label" parent="CanvasLayer/BudgetUI" unique_id=914295955]
 layout_mode = 0
-offset_right = 256.0
-offset_bottom = 87.0
+offset_left = 12.0
+offset_top = 8.0
+offset_right = 268.0
+offset_bottom = 95.0
 text = "Object selected: 0
 "
 label_settings = SubResource("LabelSettings_jegvk")
 
 [node name="RemovalCost" type="Label" parent="CanvasLayer/BudgetUI" unique_id=979098327]
 layout_mode = 0
-offset_left = 7.0
+offset_left = 13.0
 offset_top = 51.0
-offset_right = 260.0
+offset_right = 266.0
 offset_bottom = 138.0
 text = "Removal Cost: $0
 "
@@ -146,14 +353,13 @@ label_settings = SubResource("LabelSettings_gpoqn")
 [node name="BudgetLabel" type="Label" parent="CanvasLayer/BudgetUI" unique_id=1883416583]
 layout_mode = 0
 offset_left = 12.0
-offset_top = 108.0
+offset_top = 95.0
 offset_right = 166.0
-offset_bottom = 150.0
+offset_bottom = 137.0
 text = "Budget: $0"
 label_settings = SubResource("LabelSettings_mnokt")
 
 [node name="SelectionBox" type="ColorRect" parent="CanvasLayer" unique_id=1273919934]
-visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
@@ -208,10 +414,13 @@ cameraPath = NodePath("../../CameraNode")
 
 [node name="ShopButton" type="Button" parent="CanvasLayer/ShopUI" unique_id=1839595508]
 layout_mode = 0
-offset_left = 13.0
+offset_left = 9.0
 offset_top = 25.0
-offset_right = 397.0
+offset_right = 422.0
 offset_bottom = 116.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_v3ni1")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jsn8g")
+theme_override_styles/hover = SubResource("StyleBoxFlat_481fm")
 
 [node name="ShopLabel" type="Label" parent="CanvasLayer/ShopUI" unique_id=1092992470]
 layout_mode = 0
@@ -231,15 +440,21 @@ offset_bottom = -2.0
 
 [node name="CloseShopButton" type="Button" parent="CanvasLayer/ShopUI/ShopPanel" unique_id=1998175648]
 layout_mode = 0
-offset_left = 1123.0
+offset_left = 1140.0
 offset_top = 3.0
 offset_right = 1235.0
-offset_bottom = 84.0
+offset_bottom = 70.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_dsn3l")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_oku7j")
+theme_override_styles/hover = SubResource("StyleBoxFlat_henqq")
 
 [node name="Label" type="Label" parent="CanvasLayer/ShopUI/ShopPanel/CloseShopButton" unique_id=2045288711]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 20.0
+offset_top = 10.0
+offset_right = 70.0
+offset_bottom = 59.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "CLOSE
 SHOP"
 
@@ -266,6 +481,9 @@ offset_left = 2.0
 offset_top = 19.0
 offset_right = 423.0
 offset_bottom = 119.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_2b3fr")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_rpdi3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3arlb")
 
 [node name="Inventory" type="Label" parent="CanvasLayer/Inventory" unique_id=226156253]
 layout_mode = 0
@@ -288,12 +506,18 @@ layout_mode = 0
 offset_left = 1123.0
 offset_top = 3.0
 offset_right = 1235.0
-offset_bottom = 84.0
+offset_bottom = 72.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_drmtj")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_w6dyv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_skknc")
 
 [node name="Label" type="Label" parent="CanvasLayer/Inventory/InventoryPanel/CloseInventoryButton" unique_id=1346617911]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 11.0
+offset_top = 6.0
+offset_right = 102.0
+offset_bottom = 55.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "CLOSE 
 INVENTORY"
 
@@ -325,20 +549,15 @@ offset_left = 801.0
 offset_top = 10.0
 offset_right = 960.0
 offset_bottom = 81.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.0011974451, 0.0011974451, 0.0011974451, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_fj8of")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jrrf3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2535b")
 text = "MODE: TOP DOWN"
 
-[node name="HarvestButton" type="Button" parent="CanvasLayer" unique_id=500000020]
-visible = false
-z_index = 10
-offset_left = 8.0
-offset_top = 720.0
-offset_right = 300.0
-offset_bottom = 792.0
-theme_override_font_sizes/font_size = 26
-text = "HARVEST"
-
 [node name="InteractionPrompt" type="Control" parent="CanvasLayer" unique_id=500000050]
-visible = false
 z_index = 24
 layout_mode = 3
 anchors_preset = 0
@@ -451,3 +670,6 @@ shape = SubResource("BoxShape3D_floor")
 [connection signal="pressed" from="CanvasLayer/Inventory/InventoryButton" to="CanvasLayer/Inventory" method="_on_inventory_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Inventory/InventoryPanel/CloseInventoryButton" to="CanvasLayer/Inventory" method="_on_close_inventory_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/TopViewButton" to="CameraNode" method="toggle_top_down_mode"]
+[connection signal="pressed" from="CanvasLayer/Quit_button" to="CanvasLayer/Quit_button" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/Game_manual_button" to="CanvasLayer/Game_manual_button" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/InGameManual/BackButtonManual" to="CanvasLayer/InGameManual/BackButtonManual" method="_on_pressed"]
