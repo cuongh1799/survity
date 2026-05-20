@@ -1,22 +1,18 @@
-[gd_scene format=3 uid="uid://brecipegrow01"]
+[gd_scene format=3 uid="uid://78cyn4ys2fcu"]
 
 [ext_resource type="Script" path="res://scenes/recipe_row.gd" id="1_script"]
 
-[node name="RecipeRow" type="PanelContainer"]
+[node name="RecipeRow" type="PanelContainer" unique_id=1518910550]
 custom_minimum_size = Vector2(900, 96)
 offset_right = 900.0
 offset_bottom = 96.0
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 6
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 6
 script = ExtResource("1_script")
 
-[node name="HBox" type="HBoxContainer" parent="."]
+[node name="HBox" type="HBoxContainer" parent="." unique_id=2065680196]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="Icon" type="TextureRect" parent="HBox"]
+[node name="Icon" type="TextureRect" parent="HBox" unique_id=184206011]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(72, 72)
 layout_mode = 2
@@ -24,24 +20,24 @@ size_flags_vertical = 4
 expand_mode = 1
 stretch_mode = 5
 
-[node name="VBox" type="VBoxContainer" parent="HBox"]
+[node name="VBox" type="VBoxContainer" parent="HBox" unique_id=1840659633]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="NameLabel" type="Label" parent="HBox/VBox"]
+[node name="NameLabel" type="Label" parent="HBox/VBox" unique_id=1846916374]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
 text = "Building"
 
-[node name="IngredientsLabel" type="Label" parent="HBox/VBox"]
+[node name="IngredientsLabel" type="Label" parent="HBox/VBox" unique_id=14219259]
 unique_name_in_owner = true
 layout_mode = 2
-autowrap_mode = 2
 theme_override_font_sizes/font_size = 16
 text = "Ingredients"
+autowrap_mode = 2
 
-[node name="CraftButton" type="Button" parent="HBox"]
+[node name="CraftButton" type="Button" parent="HBox" unique_id=2039692164]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(140, 0)
 layout_mode = 2

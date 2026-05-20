@@ -338,4 +338,3 @@ static func resource_display_name(key: String) -> String:
 			return key.capitalize()
 
 const CROW_SCENE = preload("res://scenes/crow.tscn")
-

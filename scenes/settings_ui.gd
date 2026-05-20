@@ -111,3 +111,7 @@ func _load_settings() -> void:
 		# Default values if no config exists
 		volume_slider.value = 80.0
 		mute_toggle.button_pressed = false
+
+
+func _on_quit_button_pressed() -> void:
+	get_tree().quit()

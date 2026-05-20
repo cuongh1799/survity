@@ -14,9 +14,14 @@
 [ext_resource type="PackedScene" uid="uid://jkjc46o7w3vh" path="res://scenes/tree_scene.tscn" id="5_gpoqn"]
 [ext_resource type="PackedScene" uid="uid://duxak6wf4n284" path="res://scenes/rock_scene.tscn" id="5_jegvk"]
 [ext_resource type="Script" uid="uid://cm3ttbnsbnvxj" path="res://scenes/inventory_UI.gd" id="5_rsucf"]
-[ext_resource type="PackedScene" uid="uid://brecipegrow01" path="res://scenes/recipe_row.tscn" id="7_gx5h2"]
+[ext_resource type="PackedScene" uid="uid://78cyn4ys2fcu" path="res://scenes/recipe_row.tscn" id="7_gx5h2"]
+[ext_resource type="Texture2D" uid="uid://cpjhi5su7j58y" path="res://assets/ui/background/UI and tools.png" id="7_oku7j"]
+[ext_resource type="FontFile" uid="uid://dfxfqh7m3hw0e" path="res://assets/font/GrapeSoda.ttf" id="8_drmtj"]
 [ext_resource type="Script" uid="uid://b7cpi80fr3b40" path="res://scenes/weather_label.gd" id="11_v3ni1"]
-[ext_resource type="ArrayMesh" uid="uid://d057moxrttl0f" path="res://tres/oiiacat.res" id="13_jsn8g"]
+[ext_resource type="ArrayMesh" uid="uid://bxvro33ngu6is" path="res://tres/oiiacat.res" id="13_jsn8g"]
+[ext_resource type="StyleBox" uid="uid://l3cql1o2qag7" path="res://assets/ui/button format/button.tres" id="14_skknc"]
+[ext_resource type="StyleBox" uid="uid://byh48cq28yqbg" path="res://assets/ui/button format/button_press.tres" id="15_fj8of"]
+[ext_resource type="StyleBox" uid="uid://4kco8da7umyk" path="res://assets/ui/button format/button_hover.tres" id="16_jrrf3"]
 [ext_resource type="PackedScene" uid="uid://c8woodpile01" path="res://scenes/world_wood_pile.tscn" id="17_wp"]
 [ext_resource type="PackedScene" uid="uid://c8oilpuddle01" path="res://scenes/world_oil_puddle.tscn" id="18_op"]
 [ext_resource type="PackedScene" uid="uid://c8stream001" path="res://scenes/world_stream.tscn" id="19_st"]
@@ -25,12 +30,12 @@
 [ext_resource type="PackedScene" uid="uid://c8gold001" path="res://scenes/world_gold_ore.tscn" id="22_go"]
 [ext_resource type="PackedScene" uid="uid://c8silver01" path="res://scenes/world_silver_ore.tscn" id="23_so"]
 [ext_resource type="PackedScene" uid="uid://c8coal001" path="res://scenes/world_coal_ore.tscn" id="24_co"]
-[ext_resource type="Script" uid="uid://m50pon6nyvqb" path="res://scenes/mission_ui.gd" id="25_mui"]
+[ext_resource type="Script" path="res://scenes/mission_ui.gd" id="25_mui"]
 [ext_resource type="Script" uid="uid://bveteawcfsuxm" path="res://scripts/player_city.gd" id="26_pc"]
-[ext_resource type="PackedScene" uid="uid://bminimapui01" path="res://scenes/minimap_ui.tscn" id="27_mm"]
-[ext_resource type="Script" uid="uid://cc303xn054oko" path="res://scripts/canvas_shortcuts.gd" id="28_sc"]
-[ext_resource type="AudioStream" uid="uid://cc56ifr8q0xcb" path="res://assets/Meatball Parade - Kevin MacLeod.mp3" id="30_481fm"]
-[ext_resource type="AudioStream" uid="uid://cbbbofh363mn7" path="res://assets/Item Pick up (Counter Strike Source) - Sound Effect for editing - Sound Library.mp3" id="31_2b3fr"]
+[ext_resource type="PackedScene" uid="uid://082q7fovwr8s" path="res://scenes/minimap_ui.tscn" id="27_mm"]
+[ext_resource type="Script" path="res://scripts/canvas_shortcuts.gd" id="28_sc"]
+[ext_resource type="AudioStream" uid="uid://cc56ifr8q0xcb" path="res://assets/sound/Meatball Parade - Kevin MacLeod.mp3" id="30_481fm"]
+[ext_resource type="AudioStream" uid="uid://cbbbofh363mn7" path="res://assets/sound/Item Pick up (Counter Strike Source) - Sound Effect for editing - Sound Library.mp3" id="31_2b3fr"]
 [ext_resource type="Script" uid="uid://d1dgspohejkw6" path="res://scripts/background_music.gd" id="32_bgm"]
 [ext_resource type="Script" uid="uid://cetupnlry75v6" path="res://scenes/settings_ui.gd" id="33_settings"]
 [ext_resource type="Script" uid="uid://dsln8h6n3savr" path="res://scenes/lose_screen.gd" id="34_lose"]
@@ -50,6 +55,10 @@ sky = SubResource("Sky_eafes")
 fog_light_color = Color(3.0563026e-06, 0.66691166, 0.12698123, 1)
 fog_light_energy = 0.35
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_skknc"]
+atlas = ExtResource("7_oku7j")
+region = Rect2(248.5, 7.25, 47.5, 106.5)
+
 [sub_resource type="LabelSettings" id="LabelSettings_t8xqk"]
 font_size = 30
 
@@ -62,14 +71,88 @@ font_size = 30
 [sub_resource type="LabelSettings" id="LabelSettings_mnokt"]
 font_size = 30
 
-[sub_resource type="LabelSettings" id="LabelSettings_rsucf"]
-font_size = 50
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2535b"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2535b"]
+atlas = ExtResource("7_oku7j")
+region = Rect2(125.5, 0, 125, 115.25)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tbmww"]
+bg_color = Color(0.796243, 0.796243, 0.796243, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.9843137)
+shadow_offset = Vector2(0.5, 0.5)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tbmww"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fj8of"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2535b"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 1)
+shadow_size = 1
+shadow_offset = Vector2(0.5, 0.5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dxdyp"]
+bg_color = Color(0.79624295, 0.796243, 0.7962429, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 1)
+shadow_size = 1
+shadow_offset = Vector2(0.5, 0.5)
 
 [sub_resource type="LabelSettings" id="LabelSettings_jsn8g"]
 font_size = 30
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_flhdu"]
+bg_color = Color(0.6, 0.6, 0.6, 0.27058825)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fj8of"]
+bg_color = Color(0.44414982, 0.65955514, 0.5068687, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_skknc"]
+bg_color = Color(0.93075204, 0.41889575, 0.35668936, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 1)
+shadow_size = 1
+shadow_offset = Vector2(0.5, 0.5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jrrf3"]
+bg_color = Color(0.43070307, 0.6021644, 0.8805066, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 1)
+shadow_size = 1
+shadow_offset = Vector2(0.5, 0)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jrrf3"]
+
 [sub_resource type="LabelSettings" id="LabelSettings_481fm"]
 font_size = 222
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_skknc"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
 radius = 0.95
@@ -127,39 +210,67 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("3_t8xqk")
 
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/BudgetUI" unique_id=346615671]
+layout_mode = 0
+offset_left = 649.19104
+offset_top = 26.000004
+offset_right = 702.6218
+offset_bottom = 226.05255
+rotation = 1.5707964
+texture = SubResource("AtlasTexture_skknc")
+
+[node name="TextureRect3" type="TextureRect" parent="CanvasLayer/BudgetUI" unique_id=1580501335]
+layout_mode = 0
+offset_left = 382.66943
+offset_top = 5.000004
+offset_right = 608.6792
+offset_bottom = 368.8832
+rotation = 1.5707964
+texture = SubResource("AtlasTexture_skknc")
+
 [node name="TimeLabel" type="Label" parent="CanvasLayer/BudgetUI" unique_id=1185102169]
 layout_mode = 0
-offset_left = 459.0
-offset_top = 10.0
-offset_right = 571.0
-offset_bottom = 52.0
+offset_left = 471.0
+offset_top = 36.0
+offset_right = 583.0
+offset_bottom = 78.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_drmtj")
 text = "DAY: 0"
 label_settings = SubResource("LabelSettings_t8xqk")
 
 [node name="SelectionCount" type="Label" parent="CanvasLayer/BudgetUI" unique_id=914295955]
 layout_mode = 0
-offset_right = 256.0
-offset_bottom = 87.0
+offset_left = 30.0
+offset_top = 31.0
+offset_right = 286.0
+offset_bottom = 96.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_drmtj")
 text = "Object selected: 0
 "
 label_settings = SubResource("LabelSettings_jegvk")
 
 [node name="RemovalCost" type="Label" parent="CanvasLayer/BudgetUI" unique_id=979098327]
 layout_mode = 0
-offset_left = 7.0
-offset_top = 51.0
-offset_right = 260.0
-offset_bottom = 138.0
+offset_left = 29.0
+offset_top = 69.0
+offset_right = 282.0
+offset_bottom = 156.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_drmtj")
 text = "Removal Cost: $0
 "
 label_settings = SubResource("LabelSettings_gpoqn")
 
 [node name="BudgetLabel" type="Label" parent="CanvasLayer/BudgetUI" unique_id=1883416583]
 layout_mode = 0
-offset_left = 12.0
-offset_top = 108.0
-offset_right = 166.0
-offset_bottom = 150.0
+offset_left = 30.0
+offset_top = 107.0
+offset_right = 184.0
+offset_bottom = 149.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_drmtj")
 text = "Budget: $0"
 label_settings = SubResource("LabelSettings_mnokt")
 
@@ -180,28 +291,45 @@ offset_bottom = 460.0
 grow_horizontal = 0
 script = ExtResource("25_mui")
 
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/MissionUI" unique_id=1392604691]
+layout_mode = 0
+offset_left = 1900.853
+offset_top = -173.99998
+offset_right = 2284.271
+offset_bottom = 188.85304
+rotation = 1.5707964
+texture = SubResource("AtlasTexture_skknc")
+
 [node name="MissionText" type="RichTextLabel" parent="CanvasLayer/MissionUI" unique_id=500000012]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 1589.0
-offset_top = -165.0
-offset_right = 1569.0
-offset_bottom = -185.0
+offset_left = 1570.853
+offset_top = -127.999985
+offset_right = 1510.853
+offset_bottom = -147.99998
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("8_drmtj")
 theme_override_font_sizes/normal_font_size = 15
 bbcode_enabled = true
 text = "Missions"
 
 [node name="MinimapUI" parent="CanvasLayer" unique_id=500000030 instance=ExtResource("27_mm")]
-offset_left = -256.0
-offset_top = 798.0
-offset_right = -32.0
-offset_bottom = 1022.0
-grow_vertical = 1
+offset_left = -253.13855
+offset_top = 811.24524
+offset_right = -29.13855
+offset_bottom = 1035.2452
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer" unique_id=1643668231]
+offset_left = 1905.353
+offset_top = 789.0
+offset_right = 2174.4395
+offset_bottom = 1036.353
+rotation = 1.5707964
+texture = SubResource("AtlasTexture_skknc")
 
 [node name="CanvasShortcuts" type="Node" parent="CanvasLayer" unique_id=500000031]
 script = ExtResource("28_sc")
@@ -211,8 +339,8 @@ layout_mode = 3
 anchors_preset = 0
 offset_left = 8.0
 offset_top = 840.0
-offset_right = 288.0
-offset_bottom = 940.0
+offset_right = 417.0
+offset_bottom = 968.0
 script = ExtResource("3_gpoqn")
 recipe_row_scene = ExtResource("7_gx5h2")
 cameraPath = NodePath("../../CameraNode")
@@ -220,44 +348,56 @@ cameraPath = NodePath("../../CameraNode")
 [node name="ShopButton" type="Button" parent="CanvasLayer/ShopUI" unique_id=1839595508]
 layout_mode = 0
 offset_left = 13.0
-offset_top = 25.0
-offset_right = 397.0
-offset_bottom = 116.0
-
-[node name="ShopLabel" type="Label" parent="CanvasLayer/ShopUI" unique_id=1092992470]
-layout_mode = 0
-offset_left = 63.0
-offset_top = 34.0
-offset_right = 351.0
-offset_bottom = 129.0
+offset_top = 17.0
+offset_right = 248.0
+offset_bottom = 117.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_drmtj")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = ExtResource("14_skknc")
+theme_override_styles/pressed = ExtResource("15_fj8of")
+theme_override_styles/hover = ExtResource("16_jrrf3")
 text = "CRAFT (R)"
-label_settings = SubResource("LabelSettings_rsucf")
 
 [node name="ShopPanel" type="Panel" parent="CanvasLayer/ShopUI" unique_id=783887283]
 layout_mode = 0
-offset_left = 387.0
-offset_top = -673.0
-offset_right = 1628.0
-offset_bottom = -2.0
+offset_left = 374.0
+offset_top = -360.0
+offset_right = 1615.0
+offset_bottom = 148.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_2535b")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/ShopUI/ShopPanel" unique_id=1799300754]
+layout_mode = 0
+offset_left = -26.0
+offset_top = -84.0
+offset_right = 1167.0
+offset_bottom = 429.0
+texture = SubResource("AtlasTexture_2535b")
 
 [node name="CloseShopButton" type="Button" parent="CanvasLayer/ShopUI/ShopPanel" unique_id=1998175648]
 layout_mode = 0
-offset_left = 1123.0
-offset_top = 3.0
-offset_right = 1235.0
-offset_bottom = 84.0
-
-[node name="Label" type="Label" parent="CanvasLayer/ShopUI/ShopPanel/CloseShopButton" unique_id=2045288711]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-text = "CLOSE
-SHOP"
+offset_left = 947.0
+offset_top = 9.0
+offset_right = 1086.0
+offset_bottom = 65.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_drmtj")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = ExtResource("14_skknc")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_tbmww")
+text = "Close Shop"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/ShopUI/ShopPanel" unique_id=1427477929]
 layout_mode = 0
-offset_right = 1120.0
-offset_bottom = 671.0
+offset_left = 98.0
+offset_top = 46.0
+offset_right = 921.0
+offset_bottom = 331.0
 
 [node name="ItemGrid" type="GridContainer" parent="CanvasLayer/ShopUI/ShopPanel/ScrollContainer" unique_id=504471404]
 layout_mode = 2
@@ -273,47 +413,59 @@ script = ExtResource("5_rsucf")
 
 [node name="InventoryButton" type="Button" parent="CanvasLayer/Inventory" unique_id=1857319218]
 layout_mode = 0
-offset_left = 2.0
-offset_top = 19.0
-offset_right = 423.0
-offset_bottom = 119.0
-
-[node name="Inventory" type="Label" parent="CanvasLayer/Inventory" unique_id=226156253]
-layout_mode = 0
-offset_left = 35.0
-offset_top = 34.0
-offset_right = 390.0
-offset_bottom = 103.0
+offset_left = 11.0
+offset_top = 17.0
+offset_right = 246.0
+offset_bottom = 117.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_drmtj")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = ExtResource("14_skknc")
+theme_override_styles/pressed = ExtResource("15_fj8of")
+theme_override_styles/hover = ExtResource("16_jrrf3")
 text = "INVENTORY (T)"
-label_settings = SubResource("LabelSettings_rsucf")
 
 [node name="InventoryPanel" type="Panel" parent="CanvasLayer/Inventory" unique_id=953436822]
 layout_mode = 0
-offset_left = 408.0
-offset_top = -783.0
-offset_right = 1649.0
-offset_bottom = -112.0
+offset_left = 368.0
+offset_top = -624.0
+offset_right = 1609.0
+offset_bottom = 47.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_tbmww")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Inventory/InventoryPanel" unique_id=1596141430]
+layout_mode = 0
+offset_left = 162.0
+offset_top = -84.0
+offset_right = 1034.0
+offset_bottom = 665.0
+texture = SubResource("AtlasTexture_2535b")
 
 [node name="CloseInventoryButton" type="Button" parent="CanvasLayer/Inventory/InventoryPanel" unique_id=717079871]
 layout_mode = 0
-offset_left = 1123.0
-offset_top = 3.0
-offset_right = 1235.0
-offset_bottom = 84.0
-
-[node name="Label" type="Label" parent="CanvasLayer/Inventory/InventoryPanel/CloseInventoryButton" unique_id=1346617911]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-text = "CLOSE 
-INVENTORY"
+offset_left = 846.0
+offset_top = 16.0
+offset_right = 988.0
+offset_bottom = 77.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_drmtj")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = ExtResource("14_skknc")
+theme_override_styles/pressed = ExtResource("15_fj8of")
+theme_override_styles/hover = ExtResource("16_jrrf3")
+text = "Close 
+Invetory"
 
 [node name="InventoryScroll" type="ScrollContainer" parent="CanvasLayer/Inventory/InventoryPanel" unique_id=500000001]
 layout_mode = 0
-offset_left = 12.0
+offset_left = 279.0
 offset_top = 92.0
-offset_right = 1220.0
-offset_bottom = 640.0
+offset_right = 927.0
+offset_bottom = 573.0
 
 [node name="ResourceGrid" type="GridContainer" parent="CanvasLayer/Inventory/InventoryPanel/InventoryScroll" unique_id=500000002]
 layout_mode = 2
@@ -322,11 +474,20 @@ theme_override_constants/h_separation = 8
 theme_override_constants/v_separation = 8
 columns = 5
 
+[node name="TextureRect3" type="TextureRect" parent="CanvasLayer" unique_id=442429400]
+offset_left = 1483.0
+offset_top = 31.000004
+offset_right = 1561.0542
+offset_bottom = 137.0
+rotation = 1.5707964
+texture = SubResource("AtlasTexture_skknc")
+
 [node name="CoordsLabel" type="Label" parent="CanvasLayer" unique_id=1306763300]
-offset_left = 1433.0
-offset_top = 6.0
-offset_right = 1595.0
-offset_bottom = 82.0
+offset_left = 1385.8616
+offset_top = 40.658512
+offset_right = 1469.8616
+offset_bottom = 97.65851
+theme_override_fonts/font = ExtResource("8_drmtj")
 text = "X: 
 Y:
 Z:"
@@ -336,92 +497,144 @@ offset_left = 801.0
 offset_top = 10.0
 offset_right = 960.0
 offset_bottom = 81.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_drmtj")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = ExtResource("14_skknc")
+theme_override_styles/pressed = ExtResource("15_fj8of")
+theme_override_styles/hover = ExtResource("16_jrrf3")
 text = "MODE: TOP DOWN"
 
 [node name="HarvestButton" type="Button" parent="CanvasLayer" unique_id=500000020]
-visible = false
 z_index = 10
-offset_left = 8.0
-offset_top = 720.0
-offset_right = 300.0
-offset_bottom = 792.0
+offset_left = 21.0
+offset_top = 747.0
+offset_right = 256.0
+offset_bottom = 847.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_drmtj")
 theme_override_font_sizes/font_size = 26
+theme_override_styles/normal = ExtResource("14_skknc")
+theme_override_styles/pressed = ExtResource("15_fj8of")
+theme_override_styles/hover = ExtResource("16_jrrf3")
 text = "HARVEST"
 
 [node name="SettingsButton" type="Button" parent="CanvasLayer" unique_id=500000070]
-offset_left = 1400.0
-offset_top = 935.0
-offset_right = 1595.0
-offset_bottom = 1005.0
+offset_left = 981.0
+offset_top = 10.0
+offset_right = 1140.0
+offset_bottom = 81.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_drmtj")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = ExtResource("14_skknc")
+theme_override_styles/pressed = ExtResource("15_fj8of")
+theme_override_styles/hover = ExtResource("16_jrrf3")
 text = "SETTINGS"
 
 [node name="SettingsPanel" type="Panel" parent="CanvasLayer" unique_id=500000071]
-visible = false
 z_index = 100
 offset_left = 650.0
 offset_top = 350.0
 offset_right = 1330.0
-offset_bottom = 650.0
+offset_bottom = 594.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_fj8of")
 script = ExtResource("33_settings")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/SettingsPanel" unique_id=1496901398]
+layout_mode = 0
+offset_left = -32.0
+offset_top = -47.0
+offset_right = 719.0
+offset_bottom = 280.0
+texture = SubResource("AtlasTexture_2535b")
 
 [node name="Title" type="Label" parent="CanvasLayer/SettingsPanel" unique_id=500000072]
 layout_mode = 0
-offset_left = 20.0
-offset_top = 10.0
-offset_right = 660.0
-offset_bottom = 50.0
-theme_override_font_sizes/font_size = 32
+offset_left = 38.0
+offset_top = 49.0
+offset_right = 678.0
+offset_bottom = 89.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_drmtj")
+theme_override_font_sizes/font_size = 40
 text = "SETTINGS"
 
 [node name="VolumeLabel" type="Label" parent="CanvasLayer/SettingsPanel" unique_id=500000073]
 layout_mode = 0
-offset_left = 20.0
-offset_top = 60.0
-offset_right = 300.0
-offset_bottom = 100.0
-theme_override_font_sizes/font_size = 20
+offset_left = 32.0
+offset_top = 104.0
+offset_right = 206.0
+offset_bottom = 141.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_drmtj")
+theme_override_font_sizes/font_size = 24
 text = "Master Volume:"
 
 [node name="VolumeSlider" type="HSlider" parent="CanvasLayer/SettingsPanel" unique_id=500000074]
 layout_mode = 0
-offset_left = 300.0
-offset_top = 70.0
-offset_right = 600.0
-offset_bottom = 100.0
+offset_left = 295.0
+offset_top = 103.0
+offset_right = 595.0
+offset_bottom = 133.0
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_2535b")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_dxdyp")
 value = 80.0
 
 [node name="MuteLabel" type="Label" parent="CanvasLayer/SettingsPanel" unique_id=500000075]
 layout_mode = 0
-offset_left = 20.0
-offset_top = 120.0
-offset_right = 300.0
-offset_bottom = 160.0
-theme_override_font_sizes/font_size = 20
+offset_left = 31.0
+offset_top = 143.0
+offset_right = 311.0
+offset_bottom = 183.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("8_drmtj")
+theme_override_font_sizes/font_size = 24
 text = "Mute:"
 
 [node name="MuteToggle" type="CheckButton" parent="CanvasLayer/SettingsPanel" unique_id=500000076]
 layout_mode = 0
-offset_left = 300.0
-offset_top = 120.0
-offset_right = 400.0
-offset_bottom = 160.0
+offset_left = 230.0
+offset_top = 132.0
+offset_right = 330.0
+offset_bottom = 172.0
 
 [node name="RestartButton" type="Button" parent="CanvasLayer/SettingsPanel" unique_id=500000077]
 layout_mode = 0
-offset_left = 20.0
-offset_top = 180.0
-offset_right = 200.0
-offset_bottom = 220.0
+offset_left = 167.0
+offset_top = 197.0
+offset_right = 326.0
+offset_bottom = 237.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_drmtj")
 theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("14_skknc")
+theme_override_styles/pressed = ExtResource("15_fj8of")
+theme_override_styles/hover = ExtResource("16_jrrf3")
 text = "RESTART GAME"
 
 [node name="CloseButton" type="Button" parent="CanvasLayer/SettingsPanel" unique_id=500000078]
 layout_mode = 0
-offset_left = 500.0
-offset_top = 180.0
-offset_right = 660.0
-offset_bottom = 220.0
+offset_left = 364.0
+offset_top = 198.0
+offset_right = 497.0
+offset_bottom = 238.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_drmtj")
 theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("14_skknc")
+theme_override_styles/pressed = ExtResource("15_fj8of")
+theme_override_styles/hover = ExtResource("16_jrrf3")
 text = "CLOSE"
 
 [node name="InteractionPrompt" type="Control" parent="CanvasLayer" unique_id=500000050]
@@ -445,48 +658,77 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="WeatherLabel" type="Label" parent="CanvasLayer" unique_id=2145975689]
-offset_left = 6.0
-offset_top = 165.0
-offset_right = 266.0
-offset_bottom = 252.0
+offset_left = 32.0
+offset_top = 147.0
+offset_right = 292.0
+offset_bottom = 234.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.99607843)
+theme_override_fonts/font = ExtResource("8_drmtj")
 text = "Current Weather: "
 label_settings = SubResource("LabelSettings_jsn8g")
 script = ExtResource("11_v3ni1")
 
 [node name="toxicBar" type="ProgressBar" parent="CanvasLayer" unique_id=371604347]
-offset_left = 3.0
-offset_top = 436.0
-offset_right = 303.0
-offset_bottom = 492.0
+offset_left = 30.0
+offset_top = 448.0
+offset_right = 330.0
+offset_bottom = 504.0
+theme_override_fonts/font = ExtResource("8_drmtj")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/background = SubResource("StyleBoxFlat_flhdu")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fj8of")
 
 [node name="Label" type="Label" parent="CanvasLayer/toxicBar" unique_id=1408010044]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 18.0
+offset_top = 1.0
+offset_right = 110.0
+offset_bottom = 25.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("8_drmtj")
+theme_override_font_sizes/font_size = 24
 text = "Toxic bar"
 
 [node name="crimeBar" type="ProgressBar" parent="CanvasLayer" unique_id=1316913579]
-offset_left = 3.0
-offset_top = 354.0
-offset_right = 303.0
-offset_bottom = 410.0
+offset_left = 30.0
+offset_top = 366.0
+offset_right = 330.0
+offset_bottom = 422.0
+theme_override_fonts/font = ExtResource("8_drmtj")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/background = SubResource("StyleBoxFlat_flhdu")
+theme_override_styles/fill = SubResource("StyleBoxFlat_skknc")
 
 [node name="Label" type="Label" parent="CanvasLayer/crimeBar" unique_id=865243654]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 19.0
+offset_top = -2.0
+offset_right = 115.0
+offset_bottom = 22.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_drmtj")
+theme_override_font_sizes/font_size = 24
 text = "Crime bar"
 
 [node name="corrosionBar" type="ProgressBar" parent="CanvasLayer" unique_id=1929625967]
-offset_left = 1.0
-offset_top = 275.0
-offset_right = 301.0
-offset_bottom = 331.0
+offset_left = 28.0
+offset_top = 287.0
+offset_right = 328.0
+offset_bottom = 343.0
+theme_override_fonts/font = ExtResource("8_drmtj")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/background = SubResource("StyleBoxFlat_flhdu")
+theme_override_styles/fill = SubResource("StyleBoxFlat_jrrf3")
 
 [node name="Label" type="Label" parent="CanvasLayer/corrosionBar" unique_id=1618473654]
 layout_mode = 0
-offset_right = 40.0
+offset_left = 16.0
+offset_top = -1.0
+offset_right = 151.0
 offset_bottom = 23.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_drmtj")
+theme_override_font_sizes/font_size = 24
 text = "Corrosion bar"
 
 [node name="youlostpanel" type="Panel" parent="CanvasLayer" unique_id=325283810]
@@ -495,15 +737,26 @@ offset_left = 474.0
 offset_top = 244.0
 offset_right = 1554.0
 offset_bottom = 751.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_jrrf3")
 script = ExtResource("34_lose")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/youlostpanel" unique_id=1920816659]
+layout_mode = 0
+offset_left = -32.0
+offset_top = -56.0
+offset_right = 1195.0
+offset_bottom = 653.0
+texture = SubResource("AtlasTexture_2535b")
 
 [node name="Label" type="Label" parent="CanvasLayer/youlostpanel" unique_id=574132618]
 layout_mode = 0
 offset_right = 1082.0
 offset_bottom = 482.0
+theme_override_fonts/font = ExtResource("8_drmtj")
 text = "YOU LOST
 UR SO BAD"
 label_settings = SubResource("LabelSettings_481fm")
+horizontal_alignment = 1
 
 [node name="RestartButton" type="Button" parent="CanvasLayer/youlostpanel" unique_id=500000079]
 layout_mode = 0
@@ -511,7 +764,14 @@ offset_left = 350.0
 offset_top = 500.0
 offset_right = 600.0
 offset_bottom = 580.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_drmtj")
 theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = ExtResource("14_skknc")
+theme_override_styles/pressed = ExtResource("15_fj8of")
+theme_override_styles/hover = ExtResource("16_jrrf3")
 text = "RESTART"
 
 [node name="MainMenuButton" type="Button" parent="CanvasLayer/youlostpanel" unique_id=500000080]
@@ -520,24 +780,61 @@ offset_left = 650.0
 offset_top = 500.0
 offset_right = 900.0
 offset_bottom = 580.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_drmtj")
 theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = ExtResource("14_skknc")
+theme_override_styles/pressed = ExtResource("15_fj8of")
+theme_override_styles/hover = ExtResource("16_jrrf3")
 text = "MAIN MENU"
 
-[node name="Panel" type="Panel" parent="CanvasLayer" unique_id=1426760159]
+[node name="Hint" type="Panel" parent="CanvasLayer" unique_id=1426760159]
 offset_left = 1756.0
 offset_top = 532.0
 offset_right = 1905.0
 offset_bottom = 770.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_skknc")
 
-[node name="Label" type="Label" parent="CanvasLayer/Panel" unique_id=1370152543]
+[node name="TextureRect3" type="TextureRect" parent="CanvasLayer/Hint" unique_id=1173173213]
 layout_mode = 0
-offset_left = 4.0
-offset_top = 8.0
-offset_right = 165.0
-offset_bottom = 243.0
-text = "T : INVENTORY
+offset_left = 139.0
+offset_top = -65.0
+offset_right = 372.67883
+offset_bottom = 170.05884
+rotation = 1.5707964
+texture = SubResource("AtlasTexture_skknc")
+
+[node name="Label" type="Label" parent="CanvasLayer/Hint" unique_id=1370152543]
+layout_mode = 0
+offset_left = -74.0
+offset_top = -27.0
+offset_right = 110.0
+offset_bottom = 124.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.99215686)
+theme_override_fonts/font = ExtResource("8_drmtj")
+theme_override_font_sizes/font_size = 24
+text = "Reminder
+
+T : INVENTORY
 R : SHOP
 Objective: SURVIVE"
+
+[node name="QuitButton" type="Button" parent="CanvasLayer" unique_id=516262930]
+offset_left = 1160.0
+offset_top = 10.0
+offset_right = 1319.0
+offset_bottom = 81.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_drmtj")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = ExtResource("14_skknc")
+theme_override_styles/pressed = ExtResource("15_fj8of")
+theme_override_styles/hover = ExtResource("16_jrrf3")
+text = "QUIT"
 
 [node name="Player" type="CharacterBody3D" parent="." unique_id=500000040]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.075, 0)
@@ -603,3 +900,4 @@ volume_db = -11.605
 [connection signal="pressed" from="CanvasLayer/SettingsPanel/CloseButton" to="CanvasLayer/SettingsPanel" method="_on_close_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/youlostpanel/RestartButton" to="CanvasLayer/youlostpanel" method="_on_restart_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/youlostpanel/MainMenuButton" to="CanvasLayer/youlostpanel" method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/QuitButton" to="CanvasLayer/SettingsPanel" method="_on_quit_button_pressed"]

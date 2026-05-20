@@ -5,7 +5,6 @@ extends Control
 
 @onready var shop_panel = $ShopPanel
 @onready var shop_button = $ShopButton
-@onready var shop_label = $ShopLabel
 @onready var item_grid = $ShopPanel/ScrollContainer/ItemGrid
 
 var _camera: Node
@@ -56,7 +55,6 @@ func _on_craft_requested(recipe: BuildingRecipe) -> void:
 func _on_shop_button_pressed() -> void:
 	shop_panel.visible = true
 	shop_button.visible = false
-	shop_label.visible = false
 	_refresh_all_rows()
 
 
@@ -67,8 +65,6 @@ func _on_close_shop_button_pressed() -> void:
 func close_shop() -> void:
 	shop_panel.visible = false
 	shop_button.visible = true
-	shop_label.visible = true
-
 
 func toggle_shop_panel() -> void:
 	if shop_panel.visible:
