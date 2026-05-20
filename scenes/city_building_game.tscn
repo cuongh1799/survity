@@ -379,10 +379,10 @@ texture = SubResource("AtlasTexture_2535b")
 
 [node name="CloseShopButton" type="Button" parent="CanvasLayer/ShopUI/ShopPanel" unique_id=1998175648]
 layout_mode = 0
-offset_left = 947.0
-offset_top = 9.0
-offset_right = 1086.0
-offset_bottom = 65.0
+offset_left = 964.0
+offset_top = -7.0
+offset_right = 1103.0
+offset_bottom = 49.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
@@ -396,7 +396,7 @@ text = "Close Shop"
 layout_mode = 0
 offset_left = 98.0
 offset_top = 46.0
-offset_right = 921.0
+offset_right = 1068.0
 offset_bottom = 331.0
 
 [node name="ItemGrid" type="GridContainer" parent="CanvasLayer/ShopUI/ShopPanel/ScrollContainer" unique_id=504471404]
@@ -428,6 +428,7 @@ theme_override_styles/hover = ExtResource("16_jrrf3")
 text = "INVENTORY (T)"
 
 [node name="InventoryPanel" type="Panel" parent="CanvasLayer/Inventory" unique_id=953436822]
+visible = false
 layout_mode = 0
 offset_left = 368.0
 offset_top = -624.0
