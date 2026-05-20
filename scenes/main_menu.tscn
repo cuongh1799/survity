@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://d1dthoixcrw0c"]
 
 [ext_resource type="Script" uid="uid://c315jum2s4jms" path="res://scripts/main_menu.gd" id="1_l6cm7"]
-[ext_resource type="AudioStream" uid="uid://phum7v4uk0gi" path="res://assets/sound/1Phantazia.wav" id="2_ekxnf"]
-[ext_resource type="FontFile" uid="uid://dfxfqh7m3hw0e" path="res://assets/font/GrapeSoda.ttf" id="2_wu84c"]
+[ext_resource type="AudioStream" uid="uid://blay6ukm844ts" path="res://assets/sound/1Phantazia.wav" id="2_ekxnf"]
+[ext_resource type="FontFile" uid="uid://depblqkclae6q" path="res://assets/font/GrapeSoda.ttf" id="2_wu84c"]
 [ext_resource type="Script" uid="uid://1v7ebbpt7jff" path="res://scripts/music_slider.gd" id="3_bqqt6"]
 [ext_resource type="Script" uid="uid://belpcnxl0ce40" path="res://scripts/sfx_slider.gd" id="5_8ln24"]
 
@@ -208,6 +208,7 @@ offset_bottom = 946.0
 
 [node name="1Phantazia" type="AudioStreamPlayer" parent="Option_Setting" unique_id=1792463116]
 stream = ExtResource("2_ekxnf")
+volume_db = -13.077
 autoplay = true
 bus = &"BackgroundMusic"
 

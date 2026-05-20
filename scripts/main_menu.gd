@@ -19,11 +19,11 @@ func _process(delta: float) -> void:
 
 
 func _on_play_button_pressed() -> void:
-	get_tree().scene_changed
 	option_setting.visible = false
 	main_button.visible = false
 	title.visible = false
 	game_manual.visible = false
+	get_tree().change_scene_to_file("res://scenes/city_building_game.tscn")
 
 func _on_option_button_pressed() -> void:
 	option_setting.visible = true

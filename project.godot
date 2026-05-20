@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Survity Hoang-dev"
-run/main_scene="uid://caln1aqtymcxd"
+run/main_scene="uid://d1dthoixcrw0c"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -25,6 +25,10 @@ MissionManager="*res://scripts/mission_manager.gd"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+
+[dotnet]
+
+project/assembly_name="Survity Hoang-dev"
 
 [global_group]
 

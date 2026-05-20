@@ -10,7 +10,9 @@ const FLOOR_COLLISION_MASK := 128
 var _world_prompt: Node3D
 var _name_label_3d: Label3D
 var _hint_label_3d: Label3D
-
+# export_group("Audio")
+@export var pickup_sound_path: String = "res://assets/Item Pick up (Counter Strike Source) - Sound Effect for editing - Sound Library.mp3"
+@export var placement_sound_path: String = "res://assets/Item Pick up (Counter Strike Source) - Sound Effect for editing - Sound Library.mp3"
 
 func _ready() -> void:
 	add_to_group("player_city")
@@ -124,8 +126,35 @@ func _rotate_player_to_direction(direction: Vector3) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_F:
 		_try_harvest_nearest()
+		_play_pickup_sound()
+
+func _play_sound(sound_path: String) -> void:
+	if sound_path.is_empty():
+		return
+	
+	# Load the audio file
+	var audio_stream = load(sound_path) as AudioStream
+	if not audio_stream:
+		push_error("Could not load sound: " + sound_path)
+		return
+	
+	# Create a temporary AudioStreamPlayer
+	var player = AudioStreamPlayer.new()
+	player.stream = audio_stream
+	player.bus = "sfx"  # Use the sfx bus for sound effects
+	add_child(player)
+	player.play()
+	
+	# Clean up the player when done
+	await player.finished
+	player.queue_free()
+
+func _play_pickup_sound() -> void:
+	_play_sound(pickup_sound_path)
 
 
+func _play_placement_sound() -> void:
+	_play_sound(placement_sound_path)
 func _correct_vertical_to_floor() -> void:
 	var ws := get_world_3d().direct_space_state
 	var from := global_position + Vector3(0.0, 3.0, 0.0)

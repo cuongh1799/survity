@@ -29,6 +29,11 @@
 [ext_resource type="Script" uid="uid://bveteawcfsuxm" path="res://scripts/player_city.gd" id="26_pc"]
 [ext_resource type="PackedScene" uid="uid://bminimapui01" path="res://scenes/minimap_ui.tscn" id="27_mm"]
 [ext_resource type="Script" uid="uid://cc303xn054oko" path="res://scripts/canvas_shortcuts.gd" id="28_sc"]
+[ext_resource type="AudioStream" uid="uid://cc56ifr8q0xcb" path="res://assets/Meatball Parade - Kevin MacLeod.mp3" id="30_481fm"]
+[ext_resource type="AudioStream" uid="uid://cbbbofh363mn7" path="res://assets/Item Pick up (Counter Strike Source) - Sound Effect for editing - Sound Library.mp3" id="31_2b3fr"]
+[ext_resource type="Script" uid="uid://d1dgspohejkw6" path="res://scripts/background_music.gd" id="32_bgm"]
+[ext_resource type="Script" uid="uid://cetupnlry75v6" path="res://scenes/settings_ui.gd" id="33_settings"]
+[ext_resource type="Script" uid="uid://dsln8h6n3savr" path="res://scenes/lose_screen.gd" id="34_lose"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8nkht"]
 sky_top_color = Color(0.4745702, 0.7086191, 1, 1)
@@ -91,9 +96,15 @@ size = Vector3(1000, 0.15, 1000)
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1991621675]
 environment = SubResource("Environment_tv723")
 
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="." unique_id=1678803121]
+stream = ExtResource("30_481fm")
+volume_db = -21.422
+autoplay = true
+bus = &"BackgroundMusic"
+script = ExtResource("32_bgm")
+
 [node name="CameraNode" type="Node3D" parent="." unique_id=1591830951]
 script = ExtResource("1_15bo5")
-grid_size = 10.0
 
 [node name="Rain" parent="CameraNode" unique_id=1632662406 instance=ExtResource("2_phayl")]
 transform = Transform3D(1, 0, 0, 0, 0.25881907, -0.9659258, 0, 0.9659258, 0.25881907, 0, 5, 0)
@@ -337,6 +348,82 @@ offset_bottom = 792.0
 theme_override_font_sizes/font_size = 26
 text = "HARVEST"
 
+[node name="SettingsButton" type="Button" parent="CanvasLayer" unique_id=500000070]
+offset_left = 1400.0
+offset_top = 935.0
+offset_right = 1595.0
+offset_bottom = 1005.0
+text = "SETTINGS"
+
+[node name="SettingsPanel" type="Panel" parent="CanvasLayer" unique_id=500000071]
+visible = false
+z_index = 100
+offset_left = 650.0
+offset_top = 350.0
+offset_right = 1330.0
+offset_bottom = 650.0
+script = ExtResource("33_settings")
+
+[node name="Title" type="Label" parent="CanvasLayer/SettingsPanel" unique_id=500000072]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 10.0
+offset_right = 660.0
+offset_bottom = 50.0
+theme_override_font_sizes/font_size = 32
+text = "SETTINGS"
+
+[node name="VolumeLabel" type="Label" parent="CanvasLayer/SettingsPanel" unique_id=500000073]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 60.0
+offset_right = 300.0
+offset_bottom = 100.0
+theme_override_font_sizes/font_size = 20
+text = "Master Volume:"
+
+[node name="VolumeSlider" type="HSlider" parent="CanvasLayer/SettingsPanel" unique_id=500000074]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 70.0
+offset_right = 600.0
+offset_bottom = 100.0
+value = 80.0
+
+[node name="MuteLabel" type="Label" parent="CanvasLayer/SettingsPanel" unique_id=500000075]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 120.0
+offset_right = 300.0
+offset_bottom = 160.0
+theme_override_font_sizes/font_size = 20
+text = "Mute:"
+
+[node name="MuteToggle" type="CheckButton" parent="CanvasLayer/SettingsPanel" unique_id=500000076]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 120.0
+offset_right = 400.0
+offset_bottom = 160.0
+
+[node name="RestartButton" type="Button" parent="CanvasLayer/SettingsPanel" unique_id=500000077]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 180.0
+offset_right = 200.0
+offset_bottom = 220.0
+theme_override_font_sizes/font_size = 18
+text = "RESTART GAME"
+
+[node name="CloseButton" type="Button" parent="CanvasLayer/SettingsPanel" unique_id=500000078]
+layout_mode = 0
+offset_left = 500.0
+offset_top = 180.0
+offset_right = 660.0
+offset_bottom = 220.0
+theme_override_font_sizes/font_size = 18
+text = "CLOSE"
+
 [node name="InteractionPrompt" type="Control" parent="CanvasLayer" unique_id=500000050]
 visible = false
 z_index = 24
@@ -372,11 +459,23 @@ offset_top = 436.0
 offset_right = 303.0
 offset_bottom = 492.0
 
+[node name="Label" type="Label" parent="CanvasLayer/toxicBar" unique_id=1408010044]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Toxic bar"
+
 [node name="crimeBar" type="ProgressBar" parent="CanvasLayer" unique_id=1316913579]
 offset_left = 3.0
 offset_top = 354.0
 offset_right = 303.0
 offset_bottom = 410.0
+
+[node name="Label" type="Label" parent="CanvasLayer/crimeBar" unique_id=865243654]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Crime bar"
 
 [node name="corrosionBar" type="ProgressBar" parent="CanvasLayer" unique_id=1929625967]
 offset_left = 1.0
@@ -384,19 +483,61 @@ offset_top = 275.0
 offset_right = 301.0
 offset_bottom = 331.0
 
+[node name="Label" type="Label" parent="CanvasLayer/corrosionBar" unique_id=1618473654]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Corrosion bar"
+
 [node name="youlostpanel" type="Panel" parent="CanvasLayer" unique_id=325283810]
 visible = false
 offset_left = 474.0
 offset_top = 244.0
 offset_right = 1554.0
 offset_bottom = 751.0
+script = ExtResource("34_lose")
 
 [node name="Label" type="Label" parent="CanvasLayer/youlostpanel" unique_id=574132618]
 layout_mode = 0
 offset_right = 1082.0
 offset_bottom = 482.0
-text = "YOU LOST"
+text = "YOU LOST
+UR SO BAD"
 label_settings = SubResource("LabelSettings_481fm")
+
+[node name="RestartButton" type="Button" parent="CanvasLayer/youlostpanel" unique_id=500000079]
+layout_mode = 0
+offset_left = 350.0
+offset_top = 500.0
+offset_right = 600.0
+offset_bottom = 580.0
+theme_override_font_sizes/font_size = 32
+text = "RESTART"
+
+[node name="MainMenuButton" type="Button" parent="CanvasLayer/youlostpanel" unique_id=500000080]
+layout_mode = 0
+offset_left = 650.0
+offset_top = 500.0
+offset_right = 900.0
+offset_bottom = 580.0
+theme_override_font_sizes/font_size = 32
+text = "MAIN MENU"
+
+[node name="Panel" type="Panel" parent="CanvasLayer" unique_id=1426760159]
+offset_left = 1756.0
+offset_top = 532.0
+offset_right = 1905.0
+offset_bottom = 770.0
+
+[node name="Label" type="Label" parent="CanvasLayer/Panel" unique_id=1370152543]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 8.0
+offset_right = 165.0
+offset_bottom = 243.0
+text = "T : INVENTORY
+R : SHOP
+Objective: SURVIVE"
 
 [node name="Player" type="CharacterBody3D" parent="." unique_id=500000040]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.075, 0)
@@ -446,8 +587,19 @@ script = ExtResource("5_4uwmp")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FloorBody" unique_id=1306689345]
 shape = SubResource("BoxShape3D_floor")
 
+[node name="pickupsound" type="AudioStreamPlayer3D" parent="." unique_id=1857439487]
+stream = ExtResource("31_2b3fr")
+volume_db = -11.605
+
 [connection signal="pressed" from="CanvasLayer/ShopUI/ShopButton" to="CanvasLayer/ShopUI" method="_on_shop_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/ShopUI/ShopPanel/CloseShopButton" to="CanvasLayer/ShopUI" method="_on_close_shop_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Inventory/InventoryButton" to="CanvasLayer/Inventory" method="_on_inventory_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Inventory/InventoryPanel/CloseInventoryButton" to="CanvasLayer/Inventory" method="_on_close_inventory_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/TopViewButton" to="CameraNode" method="toggle_top_down_mode"]
+[connection signal="pressed" from="CanvasLayer/SettingsButton" to="CanvasLayer/SettingsPanel" method="_on_settings_button_pressed"]
+[connection signal="value_changed" from="CanvasLayer/SettingsPanel/VolumeSlider" to="CanvasLayer/SettingsPanel" method="_on_volume_changed"]
+[connection signal="toggled" from="CanvasLayer/SettingsPanel/MuteToggle" to="CanvasLayer/SettingsPanel" method="_on_mute_toggled"]
+[connection signal="pressed" from="CanvasLayer/SettingsPanel/RestartButton" to="CanvasLayer/SettingsPanel" method="_on_restart_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/SettingsPanel/CloseButton" to="CanvasLayer/SettingsPanel" method="_on_close_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/youlostpanel/RestartButton" to="CanvasLayer/youlostpanel" method="_on_restart_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/youlostpanel/MainMenuButton" to="CanvasLayer/youlostpanel" method="_on_main_menu_button_pressed"]

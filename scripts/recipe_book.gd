@@ -45,47 +45,47 @@ func _build_recipes() -> void:
 	_recipes.clear()
 	_recipes.append_array([
 		_recipe(
-			"maintenance_building",
-			"Maintenance Building",
+			"maintenance_building -1%/sec corrosion",
+			"Maintenance Building -1%/sec corrosion",
 			"res://assets/ui/png/building.png",
 			"res://scenes/building_scene.tscn",
-			{"wood": 8, "stone": 4, "dirt": 3}
+			{"wood": 3, "stone": 1, "dirt": 1}
 		),
 		_recipe(
-			"police_station",
-			"Police Station",
+			"police_station -1%/sec crime",
+			"Police Station -1%/sec crime",
 			"res://assets/ui/png/building.png",
 			"res://scenes/buildingb.tscn",
-			{"wood": 14, "sand": 6, "dirt": 2}
+			{"wood": 1, "sand": 4, "dirt": 3}
 		),
 		_recipe(
-			"filtration_plant",
-			"Filtration Plant",
+			"filtration_plant -1%/sec toxic",
+			"Filtration Plant -1%/sec toxic",
 			"res://assets/ui/png/building.png",
 			"res://scenes/buildingc.tscn",
-			{"wood": 10, "stone": 10, "coal": 5}
+			{"wood": 2, "stone": 1, "coal": 5}
 		),
-		_recipe(
-			"mine_station",
-			"Mining station",
-			"res://assets/ui/png/building.png",
-			"res://scenes/building_scene.tscn",
-			{"gold": 4, "silver": 4, "stone": 12, "wood": 8}
-		),
-		_recipe(
-			"oil_tower",
-			"Oil refinery tower",
-			"res://assets/ui/png/building.png",
-			"res://scenes/buildingc.tscn",
-			{"oil": 8, "water": 10, "coal": 6, "stone": 8}
-		),
-		_recipe(
-			"city_hall",
-			"City Hall",
-			"res://assets/ui/png/building.png",
-			"res://scenes/buildingb.tscn",
-			{"gold": 6, "silver": 6, "wood": 18, "stone": 16, "coal": 8, "oil": 4, "sand": 8}
-		),
+		# _recipe(
+		# 	"mine_station",
+		# 	"Mining station",
+		# 	"res://assets/ui/png/building.png",
+		# 	"res://scenes/building_scene.tscn",
+		# 	{"gold": 4, "silver": 4, "stone": 12, "wood": 8}
+		# ),
+		# _recipe(
+		# 	"oil_tower",
+		# 	"Oil refinery tower",
+		# 	"res://assets/ui/png/building.png",
+		# 	"res://scenes/buildingc.tscn",
+		# 	{"oil": 8, "water": 10, "coal": 6, "stone": 8}
+		# ),
+		# _recipe(
+		# 	"city_hall",
+		# 	"City Hall",
+		# 	"res://assets/ui/png/building.png",
+		# 	"res://scenes/buildingb.tscn",
+		# 	{"gold": 6, "silver": 6, "wood": 18, "stone": 16, "coal": 8, "oil": 4, "sand": 8}
+		# ),
 	])
 
 

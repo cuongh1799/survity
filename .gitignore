@@ -2,6 +2,8 @@
 .godot/
 *.import
 export_presets.cfg
+*.png
+*.jpg
 
 # Mono/C# ignores
 .mono/
@@ -11,3 +13,4 @@ obj/
 # General OS files
 .DS_Store
 Thumbs.db
+

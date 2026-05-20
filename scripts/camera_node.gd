@@ -26,6 +26,10 @@ var skip_next_budget_deduction: bool = false
 var pending_craft_recipe: BuildingRecipe = null
 @onready var spawn_parent: Node3D = get_node_or_null("../PropSpawner")
 
+@export_group("Audio")
+@export var pickup_sound_path: String = "res://assets/Item Pick up (Counter Strike Source) - Sound Effect for editing - Sound Library.mp3"
+@export var placement_sound_path: String = "res://assets/Item Pick up (Counter Strike Source) - Sound Effect for editing - Sound Library.mp3"
+
 @onready var camera = $Camera3D
 
 var top_down_mode: bool = false
@@ -123,16 +127,16 @@ func spawn_object_at_mouse(mouse_pos: Vector2):
 		var instance = test_spawn.instantiate()
 		
 		var current_grid_size = grid_size
-		# Try to auto-scale grid size based on model limits
-		if instance.has_node("MeshInstance3D"):
-			var mesh = instance.get_node("MeshInstance3D")
-			if mesh is MeshInstance3D and mesh.mesh:
-				var aabb = mesh.get_aabb()
-				# Use max of X/Z dimension, default to at least 1.0 to avoid 0 div
-				var mesh_scale = mesh.scale
-				current_grid_size = max(max(aabb.size.x * mesh_scale.x, aabb.size.z * mesh_scale.z), 1.0)
-				# Snap the grid size to the nearest whole number to keep grid clean
-				current_grid_size = ceil(current_grid_size)
+		# # Try to auto-scale grid size based on model limits
+		# if instance.has_node("MeshInstance3D"):
+		# 	var mesh = instance.get_node("MeshInstance3D")
+		# 	if mesh is MeshInstance3D and mesh.mesh:
+		# 		var aabb = mesh.get_aabb()
+		# 		# Use max of X/Z dimension, default to at least 1.0 to avoid 0 div
+		# 		var mesh_scale = mesh.scale
+		# 		current_grid_size = max(max(aabb.size.x * mesh_scale.x, aabb.size.z * mesh_scale.z), 1.0)
+		# 		# Snap the grid size to the nearest whole number to keep grid clean
+		# 		current_grid_size = ceil(current_grid_size)
 				
 		# Calculate the Snapped Position
 		var snapped_x = round(result.position.x / current_grid_size) * current_grid_size
@@ -165,6 +169,7 @@ func spawn_object_at_mouse(mouse_pos: Vector2):
 			update_budget_ui()
 		
 		MissionManager.on_building_placed(recipe_id)
+		_play_placement_sound()
 
 		test_spawn = null
 		if ghost_instance:
@@ -254,6 +259,8 @@ func harvest_selected_props() -> void:
 				prop.harvest()
 			else:
 				prop.queue_free()
+	if selected_props.size() > 0:
+		_play_pickup_sound()
 	selected_props.clear()
 	for p in get_tree().get_nodes_in_group("props"):
 		if p is Prop and is_instance_valid(p):
@@ -279,6 +286,7 @@ func raycast_delete(mouse_pos: Vector2) -> void:
 				prop_node.harvest()
 			else:
 				prop_node.queue_free()
+			_play_pickup_sound()
 			update_budget_ui()
 
 func update_budget_ui() -> void:
@@ -389,3 +397,33 @@ func set_ghost_color(node: Node, is_valid: bool) -> void:
 			node.material_overlay = invalid_material
 	for child in node.get_children():
 		set_ghost_color(child, is_valid)
+
+
+func _play_pickup_sound() -> void:
+	_play_sound(pickup_sound_path)
+
+
+func _play_placement_sound() -> void:
+	_play_sound(placement_sound_path)
+
+
+func _play_sound(sound_path: String) -> void:
+	if sound_path.is_empty():
+		return
+	
+	# Load the audio file
+	var audio_stream = load(sound_path) as AudioStream
+	if not audio_stream:
+		push_error("Could not load sound: " + sound_path)
+		return
+	
+	# Create a temporary AudioStreamPlayer
+	var player = AudioStreamPlayer.new()
+	player.stream = audio_stream
+	player.bus = "sfx"  # Use the sfx bus for sound effects
+	add_child(player)
+	player.play()
+	
+	# Clean up the player when done
+	await player.finished
+	player.queue_free()
