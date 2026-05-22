@@ -143,19 +143,19 @@ grow_vertical = 2
 
 [node name="TextureRect" type="TextureRect" parent="GameManual" unique_id=1233887788]
 layout_mode = 0
-offset_left = 77.0
-offset_top = -73.0
-offset_right = 935.0
-offset_bottom = 619.0
+offset_left = -397.0
+offset_top = -321.0
+offset_right = 1387.0
+offset_bottom = 736.0
 texture = SubResource("AtlasTexture_jk1qb")
 
 [node name="GameManualTitle" type="Label" parent="GameManual" unique_id=1618600901]
 layout_mode = 1
 anchors_preset = -1
-offset_left = 194.0
-offset_top = 86.0
-offset_right = 856.0
-offset_bottom = 231.0
+offset_left = 205.0
+offset_top = -328.0
+offset_right = 867.0
+offset_bottom = -183.0
 grow_horizontal = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.99607843)
 theme_override_fonts/font = ExtResource("2_wu84c")
@@ -167,28 +167,44 @@ autowrap_mode = 2
 
 [node name="GameManualDescr" type="Label" parent="GameManual" unique_id=1121235214]
 layout_mode = 0
-offset_left = 236.0
-offset_top = 194.0
-offset_right = 768.0
-offset_bottom = 505.98816
+offset_left = -263.0
+offset_top = -176.0
+offset_right = 1138.0
+offset_bottom = 696.0
 theme_override_fonts/font = ExtResource("2_wu84c")
 theme_override_font_sizes/font_size = 30
-text = "⌨️ Controls Movement & Camera
-		W / A / S / D: Move Up / Left / Down / Right
-		Mouse Wheel Up: Zoom In
-		Mouse Wheel Down: Zoom Out
-	Actions & Menus
-		F: Harvest / Gather materials
-		R: Open Building List & Shop
-		T: Open Inventory"
+text = "Survity is a survival strategy game. Explore the map, craft vital infrastructure, and manage 
+threat bars to keep your settlement alive as long as possible.
+------------------------------
+ 🛑 Win & Lose Conditions
+* Objective: Survive for as many days as possible.
+* Game Over: You lose instantly if Corruption, Toxicity, or Crime reaches 100%.
+------------------------------
+🔄 Core Game Loop
+   1. Gather: Explore the map to collect raw crafting materials.
+   2. Build: Spend resources to construct automated structures.
+   3. Generate: Buildings continuously produce money, materials, and passive defenses.
+   4. Defend: Strategically place buildings to push back threat bars.
+------------------------------
+⚙️ Key Mechanics The 2-Day Reset
+* All unspent raw materials vanish every two in-game days. Craft efficiently!
+
+Random Disasters
+One of three random crises will periodically strike, rapidly spiking your threat bars:
+* ☣️ Acid Rain (Spikes Toxicity)
+* 🩸 Crimson Moon (Spikes Corruption)
+* 🤢 Plague (Spikes Global Threat)
+
+Counter-Measures
+Place specialized buildings to actively lower corresponding threat bars"
 
 [node name="BackButtonManual" type="Button" parent="GameManual" unique_id=426904077]
 layout_mode = 1
 anchors_preset = -1
-offset_left = 750.0
-offset_top = 25.0
-offset_right = 890.0
-offset_bottom = 98.0
+offset_left = 1179.0
+offset_top = -187.0
+offset_right = 1319.0
+offset_bottom = -114.0
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
