@@ -1,14 +1,16 @@
 [gd_scene format=3 uid="uid://d2j2l5iyunhne"]
 
 [ext_resource type="PackedScene" uid="uid://3jmo64dlvn5m" path="res://scenes/base_prop.tscn" id="1_0tix7"]
-[ext_resource type="ArrayMesh" uid="uid://b7tmusff760eb" path="res://tres/building.res" id="2_42hmk"]
+[ext_resource type="ArrayMesh" uid="uid://c88s8wxb0ki1b" path="res://tres/building.res" id="2_42hmk"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7fomq"]
 
-[node name="building_scene" unique_id=1629872540 instance=ExtResource("1_0tix7")]
+[node name="maintenance_building" unique_id=1629872540 instance=ExtResource("1_0tix7")]
+attraction = 1.0
+corrosion_decrease = 2.0
 
 [node name="MeshInstance3D" parent="." index="0" unique_id=1077949620]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, 0, 0, 0)
 mesh = ExtResource("2_42hmk")
 
 [node name="CollisionShape3D" parent="." index="1" unique_id=1411538431]
@@ -16,4 +18,4 @@ transform = Transform3D(5, 0, 0, 0, 7, 0, 0, 0, 5, 0, 3, 0)
 shape = SubResource("BoxShape3D_7fomq")
 
 [node name="SelectionVisual" parent="." index="2" unique_id=407129122]
-transform = Transform3D(6, 0, 0, 0, 6.284, 0, 0, 0, 6, 0, 3, 0)
+transform = Transform3D(13.055, 0, 0, 0, 23.933, 0, 0, 0, 13.055, 0, 9.857807, 0)

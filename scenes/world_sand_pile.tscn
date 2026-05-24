@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://c8sand001"]
+
+[ext_resource type="PackedScene" uid="uid://3jmo64dlvn5m" path="res://scenes/base_prop.tscn" id="1_base"]
+[ext_resource type="PackedScene" uid="uid://0jhah5nx4qmj" path="res://glb/collected_material/sand/photoscan_low-poly_construction_sand_pile.glb" id="2_cnmdc"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_m"]
+size = Vector3(2, 1.1, 2)
+
+[node name="world_sand_pile" unique_id=1463578532 instance=ExtResource("1_base")]
+cost = 0.0
+drop_type = "sand"
+drop_amount = 2
+
+[node name="MeshInstance3D" parent="." index="0" unique_id=1077949620]
+transform = Transform3D(1.969, 0, 0, 0, 2.3480089e-08, 1.969, 0, -1.969, 2.3480089e-08, 0, 0.27049327, 0)
+
+[node name="Sketchfab_Scene" parent="MeshInstance3D" index="0" unique_id=330849420 instance=ExtResource("2_cnmdc")]
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, -0.5, 0, 0.5, -2.1855694e-08, 0, 0, 0)
+
+[node name="CollisionShape3D" parent="." index="1" unique_id=1411538431]
+shape = SubResource("BoxShape3D_m")
+
+[node name="SelectionVisual" parent="." index="2" unique_id=407129122]
+transform = Transform3D(11.51, 0, 0, 0, 1.827, 0, 0, 0, 11.825, 0, 1.474386, 0.775)

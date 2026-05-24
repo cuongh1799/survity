@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://c8oilpuddle01"]
+
+[ext_resource type="PackedScene" uid="uid://3jmo64dlvn5m" path="res://scenes/base_prop.tscn" id="1_base"]
+[ext_resource type="ArrayMesh" uid="uid://b5c6dmevndpd0" path="res://tres/oil_cont.res" id="2_gjsn2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_m"]
+size = Vector3(3.5, 0.2, 3.5)
+
+[node name="world_oil_puddle" unique_id=443708848 instance=ExtResource("1_base")]
+cost = 0.0
+drop_type = "oil"
+drop_amount = 2
+
+[node name="MeshInstance3D" parent="." index="0" unique_id=1077949620]
+transform = Transform3D(0.005, 0, 0, 0, 0.005, 0, 0, 0, 0.005, 0, 1.3822308, 0)
+mesh = ExtResource("2_gjsn2")
+
+[node name="CollisionShape3D" parent="." index="1" unique_id=1411538431]
+shape = SubResource("BoxShape3D_m")
+
+[node name="SelectionVisual" parent="." index="2" unique_id=407129122]
+transform = Transform3D(6.209, 0, 0, 0, 3.967, 0, 0, 0, 9.294, 0, 1.9320017, 0)

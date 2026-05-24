@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://m0ugwfs8lm1q"]
+
+[ext_resource type="PackedScene" uid="uid://3jmo64dlvn5m" path="res://scenes/base_prop.tscn" id="1_klgkp"]
+[ext_resource type="ArrayMesh" uid="uid://dgmy734cpjklu" path="res://tres/buildingb.res" id="2_feqrk"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w8ulc"]
+
+[node name="police_station" unique_id=1629872540 instance=ExtResource("1_klgkp")]
+crime_decrease = 2.0
+
+[node name="MeshInstance3D" parent="." index="0" unique_id=1077949620]
+transform = Transform3D(11.65, 0, 0, 0, 11.65, 0, 0, 0, 11.65, 0, 0, 0)
+mesh = ExtResource("2_feqrk")
+
+[node name="CollisionShape3D" parent="." index="1" unique_id=1411538431]
+transform = Transform3D(10, 0, 0, 0, 7.855, 0, 0, 0, 10.096, 0, 4, 0)
+shape = SubResource("BoxShape3D_w8ulc")
+
+[node name="SelectionVisual" parent="." index="2" unique_id=407129122]
+transform = Transform3D(20, 0, 0, 0, 20.945, 0, 0, 0, 20, 0, 7.746334, 0)

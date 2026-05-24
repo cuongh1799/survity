@@ -1,10 +1,12 @@
 [gd_scene format=3 uid="uid://d1dthoixcrw0c"]
 
 [ext_resource type="Script" uid="uid://c315jum2s4jms" path="res://scripts/main_menu.gd" id="1_l6cm7"]
-[ext_resource type="AudioStream" uid="uid://phum7v4uk0gi" path="res://assets/sound/1Phantazia.wav" id="2_ekxnf"]
+[ext_resource type="Texture2D" uid="uid://dhwq34uh1sluk" path="res://assets/ui/background/8-bit-graphics-pixels-scene-with-village.jpg" id="2_oa1go"]
 [ext_resource type="FontFile" uid="uid://dfxfqh7m3hw0e" path="res://assets/font/GrapeSoda.ttf" id="2_wu84c"]
-[ext_resource type="Script" uid="uid://1v7ebbpt7jff" path="res://scripts/music_slider.gd" id="3_bqqt6"]
-[ext_resource type="Script" uid="uid://belpcnxl0ce40" path="res://scripts/sfx_slider.gd" id="5_8ln24"]
+[ext_resource type="StyleBox" uid="uid://l3cql1o2qag7" path="res://assets/ui/button format/button.tres" id="4_oa1go"]
+[ext_resource type="Texture2D" uid="uid://cpjhi5su7j58y" path="res://assets/ui/background/UI and tools.png" id="4_tbmy8"]
+[ext_resource type="StyleBox" uid="uid://byh48cq28yqbg" path="res://assets/ui/button format/button_press.tres" id="5_tbmy8"]
+[ext_resource type="StyleBox" uid="uid://4kco8da7umyk" path="res://assets/ui/button format/button_hover.tres" id="6_jk1qb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ekxnf"]
 bg_color = Color(1, 1, 1, 1)
@@ -12,7 +14,8 @@ corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
-shadow_offset = Vector2(0, 5)
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(0.5, 0.5)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bqqt6"]
 bg_color = Color(0.83033526, 0.8303351, 0.830335, 1)
@@ -20,6 +23,8 @@ corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(0.5, 0.5)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wu84c"]
 bg_color = Color(0.95815676, 0.9581569, 0.95815665, 1)
@@ -27,18 +32,12 @@ corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.99215686)
+shadow_offset = Vector2(0.5, 0.5)
 
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_ekxnf"]
-color = Color(1, 1, 1, 1)
-thickness = 10
-
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_bqqt6"]
-color = Color(8.230359e-06, 0.7689349, 7.70092e-07, 1)
-thickness = 10
-
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_wu84c"]
-color = Color(0.065232195, 0.584865, 0.03637857, 1)
-thickness = 10
+[sub_resource type="AtlasTexture" id="AtlasTexture_jk1qb"]
+atlas = ExtResource("4_tbmy8")
+region = Rect2(124.5, 0, 125.5, 113.75)
 
 [node name="Main_menu" type="Control" unique_id=258386567]
 layout_mode = 3
@@ -49,6 +48,13 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_l6cm7")
 
+[node name="TextureRect" type="TextureRect" parent="." unique_id=672015361]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("2_oa1go")
+expand_mode = 1
+
 [node name="Title" type="Label" parent="." unique_id=1108852163]
 layout_mode = 1
 anchors_preset = 5
@@ -58,6 +64,7 @@ offset_left = -275.0
 offset_right = 275.0
 offset_bottom = 277.0
 grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_wu84c")
 theme_override_font_sizes/font_size = 300
 text = "Survity"
@@ -66,7 +73,6 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="Main_button" type="VBoxContainer" parent="." unique_id=294202213]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -87,10 +93,11 @@ size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = SubResource("StyleBoxFlat_ekxnf")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_bqqt6")
-theme_override_styles/hover = SubResource("StyleBoxFlat_wu84c")
+theme_override_fonts/font = ExtResource("2_wu84c")
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = ExtResource("4_oa1go")
+theme_override_styles/pressed = ExtResource("5_tbmy8")
+theme_override_styles/hover = ExtResource("6_jk1qb")
 text = "Play"
 
 [node name="Manual" type="Button" parent="Main_button" unique_id=2047393181]
@@ -99,23 +106,12 @@ size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 30
+theme_override_fonts/font = ExtResource("2_wu84c")
+theme_override_font_sizes/font_size = 60
 theme_override_styles/normal = SubResource("StyleBoxFlat_ekxnf")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_bqqt6")
 theme_override_styles/hover = SubResource("StyleBoxFlat_wu84c")
 text = "Manual"
-
-[node name="OptionButton" type="Button" parent="Main_button" unique_id=454444821]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = SubResource("StyleBoxFlat_ekxnf")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_bqqt6")
-theme_override_styles/hover = SubResource("StyleBoxFlat_wu84c")
-text = "Options"
 
 [node name="QuitButton" type="Button" parent="Main_button" unique_id=768949107]
 layout_mode = 2
@@ -123,7 +119,8 @@ size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 30
+theme_override_fonts/font = ExtResource("2_wu84c")
+theme_override_font_sizes/font_size = 60
 theme_override_styles/normal = SubResource("StyleBoxFlat_ekxnf")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_bqqt6")
 theme_override_styles/hover = SubResource("StyleBoxFlat_wu84c")
@@ -139,162 +136,87 @@ anchor_right = 0.5
 anchor_bottom = 0.60700005
 offset_left = -501.0
 offset_top = -320.56006
-offset_right = 504.0
-offset_bottom = 320.43994
+offset_right = -501.0
+offset_bottom = -320.56006
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="GameManual" unique_id=1233887788]
+layout_mode = 0
+offset_left = -397.0
+offset_top = -321.0
+offset_right = 1387.0
+offset_bottom = 736.0
+texture = SubResource("AtlasTexture_jk1qb")
 
 [node name="GameManualTitle" type="Label" parent="GameManual" unique_id=1618600901]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.11100001
-anchor_right = 0.5
-anchor_bottom = 0.11100001
-offset_left = -276.5
-offset_top = -150.151
-offset_right = 287.5
-offset_bottom = 149.849
+offset_left = 205.0
+offset_top = -328.0
+offset_right = 867.0
+offset_bottom = -183.0
 grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.99607843)
 theme_override_fonts/font = ExtResource("2_wu84c")
-theme_override_font_sizes/font_size = 50
-text = "Game Manual"
+theme_override_font_sizes/font_size = 60
+text = "Survity - Quick Start Guide"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="GameManualDescr" type="Label" parent="GameManual" unique_id=1121235214]
 layout_mode = 0
-offset_left = 202.0
-offset_top = 181.0
-offset_right = 768.0
-offset_bottom = 541.0
-text = "Game manual
-- Scroll up for zoom in
-- Scroll down for zoom out
-etc
-etc
-etc
-"
+offset_left = -263.0
+offset_top = -176.0
+offset_right = 1138.0
+offset_bottom = 696.0
+theme_override_fonts/font = ExtResource("2_wu84c")
+theme_override_font_sizes/font_size = 30
+text = "Survity is a survival strategy game. Explore the map, craft vital infrastructure, and manage 
+threat bars to keep your settlement alive as long as possible.
+------------------------------
+ 🛑 Win & Lose Conditions
+* Objective: Survive for as many days as possible.
+* Game Over: You lose instantly if Corruption, Toxicity, or Crime reaches 100%.
+------------------------------
+🔄 Core Game Loop
+   1. Gather: Explore the map to collect raw crafting materials.
+   2. Build: Spend resources to construct automated structures.
+   3. Generate: Buildings continuously produce money, materials, and passive defenses.
+   4. Defend: Strategically place buildings to push back threat bars.
+------------------------------
+⚙️ Key Mechanics The 2-Day Reset
+* All unspent raw materials vanish every two in-game days. Craft efficiently!
+
+Random Disasters
+One of three random crises will periodically strike, rapidly spiking your threat bars:
+* ☣️ Acid Rain (Spikes Toxicity)
+* 🩸 Crimson Moon (Spikes Corruption)
+* 🤢 Plague (Spikes Global Threat)
+
+Counter-Measures
+Place specialized buildings to actively lower corresponding threat bars"
 
 [node name="BackButtonManual" type="Button" parent="GameManual" unique_id=426904077]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.88400006
-anchor_right = 0.5
-anchor_bottom = 0.88400006
-offset_left = -100.5
-offset_top = -75.64404
-offset_right = 93.5
-offset_bottom = 10.355957
+offset_left = 1179.0
+offset_top = -187.0
+offset_right = 1319.0
+offset_bottom = -114.0
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_wu84c")
 theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = SubResource("StyleBoxFlat_ekxnf")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_bqqt6")
-theme_override_styles/hover = SubResource("StyleBoxFlat_wu84c")
+theme_override_styles/normal = ExtResource("4_oa1go")
+theme_override_styles/pressed = ExtResource("5_tbmy8")
+theme_override_styles/hover = ExtResource("6_jk1qb")
 text = "Back"
-metadata/_edit_use_anchors_ = true
-
-[node name="Option_Setting" type="Panel" parent="." unique_id=1874324230]
-layout_mode = 0
-offset_left = 529.0
-offset_top = 284.0
-offset_right = 1400.0
-offset_bottom = 946.0
-
-[node name="1Phantazia" type="AudioStreamPlayer" parent="Option_Setting" unique_id=1792463116]
-stream = ExtResource("2_ekxnf")
-autoplay = true
-bus = &"BackgroundMusic"
-
-[node name="BackButon" type="Button" parent="Option_Setting" unique_id=1802628687]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.88400006
-anchor_right = 0.5
-anchor_bottom = 0.88400006
-offset_left = -103.5
-offset_top = -43.20807
-offset_right = 90.5
-offset_bottom = 42.79193
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = SubResource("StyleBoxFlat_ekxnf")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_bqqt6")
-theme_override_styles/hover = SubResource("StyleBoxFlat_wu84c")
-text = "Back"
-metadata/_edit_use_anchors_ = true
-
-[node name="Music" type="Label" parent="Option_Setting" unique_id=530028026]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 117.0
-offset_top = -206.0
-offset_right = 268.0
-offset_bottom = -127.0
-grow_vertical = 2
-theme_override_font_sizes/font_size = 50
-text = "Music"
-
-[node name="SFX" type="Label" parent="Option_Setting" unique_id=2006229351]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 117.0
-offset_top = -62.0
-offset_right = 268.0
-offset_bottom = 79.0
-grow_vertical = 2
-theme_override_font_sizes/font_size = 50
-text = "SFX
-"
-
-[node name="MusicSlider" type="HSlider" parent="Option_Setting" unique_id=2101768010]
-layout_mode = 0
-offset_left = 370.0
-offset_top = 116.0
-offset_right = 689.0
-offset_bottom = 225.0
-theme_override_styles/slider = SubResource("StyleBoxLine_ekxnf")
-theme_override_styles/grabber_area = SubResource("StyleBoxLine_bqqt6")
-theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_wu84c")
-max_value = 3.0
-step = 0.5
-value = 0.5
-script = ExtResource("3_bqqt6")
-audio_bus_name = "BackgroundMusic"
-
-[node name="SFXSlider" type="HSlider" parent="Option_Setting" unique_id=2090464414]
-layout_mode = 0
-offset_left = 386.0
-offset_top = 261.0
-offset_right = 705.0
-offset_bottom = 370.0
-theme_override_styles/slider = SubResource("StyleBoxLine_ekxnf")
-theme_override_styles/grabber_area = SubResource("StyleBoxLine_bqqt6")
-theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_wu84c")
-max_value = 3.0
-step = 0.5
-value = 0.5
-script = ExtResource("5_8ln24")
-sfx_bus_name = "SFX"
 
 [connection signal="pressed" from="Main_button/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="Main_button/Manual" to="." method="_on_manual_pressed"]
-[connection signal="pressed" from="Main_button/OptionButton" to="." method="_on_option_button_pressed"]
 [connection signal="pressed" from="Main_button/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="pressed" from="GameManual/BackButtonManual" to="." method="_on_back_button_manual_pressed"]
-[connection signal="pressed" from="Option_Setting/BackButon" to="." method="_on_back_buton_pressed"]
-[connection signal="value_changed" from="Option_Setting/MusicSlider" to="Option_Setting/MusicSlider" method="_on_value_changed"]
-[connection signal="value_changed" from="Option_Setting/SFXSlider" to="Option_Setting/MusicSlider" method="_on_sfx_slider_value_changed"]

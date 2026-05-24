@@ -10,19 +10,30 @@ config_version=5
 
 [application]
 
-config/name="testaround"
-run/main_scene="uid://caln1aqtymcxd"
+config/name="Survity Hoang-dev"
+run/main_scene="uid://d1dthoixcrw0c"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+PlayerManager="*res://scripts/player_manager.gd"
+RecipeBook="*res://scripts/recipe_book.gd"
+MissionManager="*res://scripts/mission_manager.gd"
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
 
+[dotnet]
+
+project/assembly_name="Survity Hoang-dev"
+
 [global_group]
 
 props=""
+world_harvest_prompt=""
 
 [physics]
 
